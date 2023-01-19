@@ -1,17 +1,18 @@
-import { Inter } from '@next/font/google'
 import dynamic from 'next/dynamic'
+import Head from 'next/head'
 
-const DynamicHeader = dynamic(() => import('../components/api-docs'), {
+const AIPDocs = dynamic(() => import('../components/api-docs'), {
   ssr: false,
   loading: () => <span>loading...</span>,
 })
 
-const inter = Inter({ subsets: ['latin'] })
-
 export default function Home() {
   return (
     <div style={{ height: '100vh' }}>
-      <DynamicHeader />
+      <Head>
+        <title>Quran Foundation Documentation</title>
+      </Head>
+      <AIPDocs />
     </div>
   )
 }
