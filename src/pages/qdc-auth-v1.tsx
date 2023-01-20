@@ -13,7 +13,7 @@ export default function Home() {
       </Head>
       <AIPDocs
         basePath="/qdc-auth-v1"
-        apiDescriptionUrl="/qdc-open-api.json "
+        apiDescriptionUrl="/qdc-auth-v1-api.json"
       />
     </div>
   )
