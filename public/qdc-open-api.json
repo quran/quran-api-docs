@@ -1,9 +1,9 @@
 {
     "openapi": "3.0.0",
     "info": {
-        "title": "Quran.com V1 API",
+        "title": "Quran.com Auth V1 API",
         "version": "1.0.0",
-        "description": "This Quran.com V1 APIs contains collections of requests that can be used to integrate your app with Quran.com"
+        "description": "Quran.com Auth V1 APIs allow your app to authenticate and interact with Quran Foundation's users' resources."
     },
     "servers": [
         {
@@ -28,9 +28,9 @@
     "paths": {
         "/v1/collections/": {
             "post": {
-                "description": "Create a new collection under user's account",
+                "description": "Create a new collection under user's account.",
                 "tags": [
-                    "Collection"
+                    "Collections"
                 ],
                 "summary": "Add collection",
                 "parameters": [],
@@ -42,7 +42,7 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "description": "The name of the new collection that you want to create",
+                                        "description": "The name of the new collection to be created.",
                                         "example": "Woman in Quran"
                                     }
                                 },
@@ -56,7 +56,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -76,7 +76,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -106,7 +106,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -136,7 +136,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -166,7 +166,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -199,9 +199,9 @@
             },
             "get": {
                 "tags": [
-                    "Collection"
+                    "Collections"
                 ],
-                "description": "List collections owned by the user \n This api contains pagination read more about [pagination](/#pagination)",
+                "description": "List collections owned by the user. This api contains pagination. Read more about [pagination](/#pagination)",
                 "summary": "Get all collections",
                 "parameters": [
                     {
@@ -213,20 +213,20 @@
                                 "recentlyUpdated",
                                 "alphabetical"
                             ],
-                            "description": "Sort collections list by recentlyUpdated or alphabetical",
+                            "description": "Sort the collections list either by the time they were updated at descendingly or alphabetically.",
                             "example": "recentlyUpdated"
                         },
-                        "description": "Sort collections list by recentlyUpdated or alphabetical"
+                        "description": "Sort the collections list either by the time they were updated at descendingly or alphabetically."
                     },
                     {
                         "in": "query",
                         "name": "last",
                         "schema": {
                             "type": "integer",
-                            "description": "The number of items you want to get. Should be used together with `before`",
+                            "description": "The number of items to be fetched. Should be used together with `before`",
                             "example": 10
                         },
-                        "description": "The number of items you want to get. Should be used together with `before`"
+                        "description": "The number of items to be fetched. Should be used together with `before`"
                     },
                     {
                         "in": "query",
@@ -238,10 +238,10 @@
                                     "type": "integer"
                                 }
                             ],
-                            "description": "The number of items that you want to get",
+                            "description": "The number of items to be fetched.",
                             "example": 10
                         },
-                        "description": "The number of items that you want to get"
+                        "description": "The number of items to be fetched."
                     },
                     {
                         "in": "query",
@@ -254,7 +254,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld2mtxni0001od3h3b5o2ln6"
+                            "example": "cld45vm9i0001lo3h0xl5b2gc"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -268,15 +268,15 @@
                                     "type": "string"
                                 }
                             ],
-                            "description": "The cursor before which you want to get the previous page of items. Should be used together with `last`",
-                            "example": "cld2mtxnj0002od3h355y5nl0"
+                            "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
+                            "example": "cld45vm9i0002lo3h6nsogq72"
                         },
-                        "description": "The cursor before which you want to get the previous page of items. Should be used together with `last`"
+                        "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -296,7 +296,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -326,7 +326,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -356,7 +356,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -386,7 +386,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -420,8 +420,9 @@
         },
         "/v1/collections/{collectionId}/bookmarks": {
             "post": {
+                "description": "Add a bookmark to an existing collection.",
                 "tags": [
-                    "Collection"
+                    "Collections"
                 ],
                 "summary": "Add collection Bookmark",
                 "parameters": [
@@ -430,11 +431,11 @@
                         "name": "collectionId",
                         "schema": {
                             "type": "string",
-                            "description": "The id of the collection that you want to delete",
-                            "example": "cld2mtxpj0003od3hgudu57w8"
+                            "description": "The Id of the collection to be added.",
+                            "example": "cld45vmbl0003lo3haxc562sb"
                         },
                         "required": true,
-                        "description": "The id of the collection that you want to delete"
+                        "description": "The Id of the collection to be added."
                     }
                 ],
                 "requestBody": {
@@ -447,7 +448,7 @@
                                         "properties": {
                                             "key": {
                                                 "type": "integer",
-                                                "description": "Surah number",
+                                                "description": "The Surah number.",
                                                 "example": 2
                                             },
                                             "mushaf": {
@@ -462,7 +463,7 @@
                                                     7,
                                                     11
                                                 ],
-                                                "description": "The id of mushaf that you want to use. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed",
+                                                "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed",
                                                 "example": 4
                                             },
                                             "type": {
@@ -470,7 +471,7 @@
                                                 "enum": [
                                                     "ayah"
                                                 ],
-                                                "description": "Type of bookmark",
+                                                "description": "The bookmark type.",
                                                 "default": "ayah"
                                             },
                                             "verseNumber": {
@@ -491,7 +492,7 @@
                                         "properties": {
                                             "key": {
                                                 "type": "integer",
-                                                "description": "Surah number or juz or page number"
+                                                "description": "Surah, Juz or page number."
                                             },
                                             "mushaf": {
                                                 "type": "integer",
@@ -505,7 +506,7 @@
                                                     7,
                                                     11
                                                 ],
-                                                "description": "The id of mushaf that you want to use. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
+                                                "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
                                             },
                                             "type": {
                                                 "type": "string",
@@ -514,7 +515,7 @@
                                                     "page",
                                                     "surah"
                                                 ],
-                                                "description": "Type of bookmark",
+                                                "description": "The bookmark type.",
                                                 "example": "surah"
                                             }
                                         },
@@ -532,7 +533,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -552,7 +553,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -582,7 +583,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -612,7 +613,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -642,7 +643,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -674,14 +675,15 @@
                 }
             },
             "delete": {
+                "description": "Delete a bookmark from an existing collection by bookmark's details. When successfully deleted, the bookmark itself does not get deleted but rather only detached from the collection.",
                 "tags": [
-                    "Collection"
+                    "Collections"
                 ],
                 "summary": "Delete collection bookmark by details",
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -701,7 +703,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -731,7 +733,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -761,7 +763,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -791,7 +793,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -846,7 +848,7 @@
                                                     7,
                                                     11
                                                 ],
-                                                "description": "The id of mushaf that you want to use. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed",
+                                                "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed",
                                                 "example": 4
                                             },
                                             "type": {
@@ -854,7 +856,7 @@
                                                 "enum": [
                                                     "ayah"
                                                 ],
-                                                "description": "Type of bookmark",
+                                                "description": "The bookmark type.",
                                                 "default": "ayah"
                                             },
                                             "verseNumber": {
@@ -875,7 +877,7 @@
                                         "properties": {
                                             "key": {
                                                 "type": "integer",
-                                                "description": "Surah number or juz or page number"
+                                                "description": "Surah, Juz or page number."
                                             },
                                             "mushaf": {
                                                 "type": "integer",
@@ -889,7 +891,7 @@
                                                     7,
                                                     11
                                                 ],
-                                                "description": "The id of mushaf that you want to use. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
+                                                "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
                                             },
                                             "type": {
                                                 "type": "string",
@@ -898,7 +900,7 @@
                                                     "page",
                                                     "surah"
                                                 ],
-                                                "description": "Type of bookmark",
+                                                "description": "The bookmark type.",
                                                 "example": "surah"
                                             }
                                         },
@@ -918,8 +920,9 @@
         },
         "/v1/collections/{collectionId}": {
             "delete": {
+                "description": "Delete a an existing collection.",
                 "tags": [
-                    "Collection"
+                    "Collections"
                 ],
                 "summary": "Delete collection",
                 "parameters": [
@@ -928,16 +931,16 @@
                         "name": "collectionId",
                         "schema": {
                             "type": "string",
-                            "description": "Id of the collection that you want to delete",
-                            "example": "cld2mtxpp0004od3h1sl9a7oi"
+                            "description": "The Id of the collection to be deleted.",
+                            "example": "cld45vmbq0004lo3h8udo3m1r"
                         },
                         "required": true,
-                        "description": "Id of the collection that you want to delete"
+                        "description": "The Id of the collection to be deleted."
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -957,7 +960,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -987,7 +990,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1017,7 +1020,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1047,7 +1050,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1079,8 +1082,9 @@
                 }
             },
             "get": {
+                "description": "Get all resources that belong to an existing collection by collection id.",
                 "tags": [
-                    "Collection"
+                    "Collections"
                 ],
                 "summary": "Get collection items by id",
                 "parameters": [
@@ -1093,19 +1097,19 @@
                                 "recentlyAdded",
                                 "verseKey"
                             ],
-                            "description": "Sort the collection items result by recentlyAdded or verseKey"
+                            "description": "Sort the collection items either by the time they were added at descendingly or by Ayah key."
                         },
-                        "description": "Sort the collection items result by recentlyAdded or verseKey"
+                        "description": "Sort the collection items either by the time they were added at descendingly or by Ayah key."
                     },
                     {
                         "in": "query",
                         "name": "last",
                         "schema": {
                             "type": "integer",
-                            "description": "The number of items you want to get. Should be used together with `before`",
+                            "description": "The number of items to be fetched. Should be used together with `before`",
                             "example": 10
                         },
-                        "description": "The number of items you want to get. Should be used together with `before`"
+                        "description": "The number of items to be fetched. Should be used together with `before`"
                     },
                     {
                         "in": "query",
@@ -1117,10 +1121,10 @@
                                     "type": "integer"
                                 }
                             ],
-                            "description": "The number of items that you want to get",
+                            "description": "The number of items to be fetched.",
                             "example": 10
                         },
-                        "description": "The number of items that you want to get"
+                        "description": "The number of items to be fetched."
                     },
                     {
                         "in": "query",
@@ -1133,7 +1137,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld2mtxni0001od3h3b5o2ln6"
+                            "example": "cld45vm9i0001lo3h0xl5b2gc"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -1147,15 +1151,15 @@
                                     "type": "string"
                                 }
                             ],
-                            "description": "The cursor before which you want to get the previous page of items. Should be used together with `last`",
-                            "example": "cld2mtxnj0002od3h355y5nl0"
+                            "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
+                            "example": "cld45vm9i0002lo3h6nsogq72"
                         },
-                        "description": "The cursor before which you want to get the previous page of items. Should be used together with `last`"
+                        "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1175,7 +1179,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1205,7 +1209,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1235,7 +1239,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1265,7 +1269,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1297,8 +1301,9 @@
                 }
             },
             "post": {
+                "description": "Update an existing collection.",
                 "tags": [
-                    "Collection"
+                    "Collections"
                 ],
                 "summary": "Update collection",
                 "parameters": [
@@ -1307,10 +1312,10 @@
                         "name": "collectionId",
                         "schema": {
                             "type": "string",
-                            "description": "The id of collection that you want to update"
+                            "description": "The Id of the collection to be updated."
                         },
                         "required": true,
-                        "description": "The id of collection that you want to update"
+                        "description": "The Id of the collection to be updated."
                     }
                 ],
                 "requestBody": {
@@ -1321,7 +1326,7 @@
                                 "properties": {
                                     "name": {
                                         "type": "string",
-                                        "description": "The new name of the collection that you want to update"
+                                        "description": "The new name of the collection to be updated."
                                     }
                                 },
                                 "required": [
@@ -1334,7 +1339,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1354,7 +1359,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1384,7 +1389,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1414,7 +1419,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1444,7 +1449,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1478,8 +1483,9 @@
         },
         "/v1/collections/{collectionId}/bookmarks/{bookmarkId}": {
             "delete": {
+                "description": "Delete a bookmark from an existing collection by bookmark's id. When successfully deleted, the bookmark itself does not get deleted but rather only detached from the collection.",
                 "tags": [
-                    "Collection"
+                    "Collections"
                 ],
                 "summary": "Delete collection bookmark by id",
                 "parameters": [
@@ -1488,27 +1494,27 @@
                         "name": "collectionId",
                         "schema": {
                             "type": "string",
-                            "description": "The id of collection that you want to delete",
-                            "example": "cld2mtxqa0005od3hcb2e7345"
+                            "description": "The Id of the collection to be deleted.",
+                            "example": "cld45vmcc0005lo3h399xgwcn"
                         },
                         "required": true,
-                        "description": "The id of collection that you want to delete"
+                        "description": "The Id of the collection to be deleted."
                     },
                     {
                         "in": "path",
                         "name": "bookmarkId",
                         "schema": {
                             "type": "string",
-                            "description": "The id of bookmark that you want to delete",
-                            "example": "cld2mtxqa0006od3h6ps35lov"
+                            "description": "The Id of the bookmark to be deleted.",
+                            "example": "cld45vmcc0006lo3he3spcpvs"
                         },
                         "required": true,
-                        "description": "The id of bookmark that you want to delete"
+                        "description": "The Id of the bookmark to be deleted."
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1528,7 +1534,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1558,7 +1564,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1588,7 +1594,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1618,7 +1624,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1652,8 +1658,9 @@
         },
         "/v1/collections/all": {
             "get": {
+                "description": "Get all existing collections along with resources that belong to them.",
                 "tags": [
-                    "Collection"
+                    "Collections"
                 ],
                 "summary": "Get all collection items",
                 "parameters": [
@@ -1666,19 +1673,19 @@
                                 "recentlyUpdated",
                                 "alphabetical"
                             ],
-                            "description": "Sort collection items by recentlyUpdated or alphabetical"
+                            "description": "Sort the collection items either by the time they were updated at descendingly or alphabetically."
                         },
-                        "description": "Sort collection items by recentlyUpdated or alphabetical"
+                        "description": "Sort the collection items either by the time they were updated at descendingly or alphabetically."
                     },
                     {
                         "in": "query",
                         "name": "last",
                         "schema": {
                             "type": "integer",
-                            "description": "The number of items you want to get. Should be used together with `before`",
+                            "description": "The number of items to be fetched. Should be used together with `before`",
                             "example": 10
                         },
-                        "description": "The number of items you want to get. Should be used together with `before`"
+                        "description": "The number of items to be fetched. Should be used together with `before`"
                     },
                     {
                         "in": "query",
@@ -1690,10 +1697,10 @@
                                     "type": "integer"
                                 }
                             ],
-                            "description": "The number of items that you want to get",
+                            "description": "The number of items to be fetched.",
                             "example": 10
                         },
-                        "description": "The number of items that you want to get"
+                        "description": "The number of items to be fetched."
                     },
                     {
                         "in": "query",
@@ -1706,7 +1713,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld2mtxni0001od3h3b5o2ln6"
+                            "example": "cld45vm9i0001lo3h0xl5b2gc"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -1720,15 +1727,15 @@
                                     "type": "string"
                                 }
                             ],
-                            "description": "The cursor before which you want to get the previous page of items. Should be used together with `last`",
-                            "example": "cld2mtxnj0002od3h355y5nl0"
+                            "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
+                            "example": "cld45vm9i0002lo3h6nsogq72"
                         },
-                        "description": "The cursor before which you want to get the previous page of items. Should be used together with `last`"
+                        "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1748,7 +1755,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1778,7 +1785,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1808,7 +1815,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1838,7 +1845,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1872,6 +1879,7 @@
         },
         "/v1/bookmarks/": {
             "post": {
+                "description": "Add a bookmark by details.",
                 "tags": [
                     "Bookmarks"
                 ],
@@ -1887,7 +1895,7 @@
                                         "properties": {
                                             "key": {
                                                 "type": "integer",
-                                                "description": "Surah number",
+                                                "description": "The Surah number.",
                                                 "example": 2
                                             },
                                             "mushaf": {
@@ -1902,7 +1910,7 @@
                                                     7,
                                                     11
                                                 ],
-                                                "description": "The id of mushaf that you want to use. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed",
+                                                "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed",
                                                 "example": 4
                                             },
                                             "type": {
@@ -1910,12 +1918,12 @@
                                                 "enum": [
                                                     "ayah"
                                                 ],
-                                                "description": "Type of bookmark",
+                                                "description": "The bookmark type.",
                                                 "default": "ayah"
                                             },
                                             "verseNumber": {
                                                 "type": "integer",
-                                                "description": "The verse number that you want to add",
+                                                "description": "The Ayah number to be added.",
                                                 "example": 3
                                             }
                                         },
@@ -1932,7 +1940,7 @@
                                         "properties": {
                                             "key": {
                                                 "type": "integer",
-                                                "description": "Surah number or juz or page number"
+                                                "description": "Surah, Juz or page number."
                                             },
                                             "mushaf": {
                                                 "type": "integer",
@@ -1946,7 +1954,7 @@
                                                     7,
                                                     11
                                                 ],
-                                                "description": "The id of mushaf that you want to use. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
+                                                "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
                                             },
                                             "type": {
                                                 "type": "string",
@@ -1955,7 +1963,7 @@
                                                     "page",
                                                     "surah"
                                                 ],
-                                                "description": "Type of bookmark",
+                                                "description": "The bookmark type.",
                                                 "example": "surah"
                                             }
                                         },
@@ -1964,7 +1972,7 @@
                                             "mushaf"
                                         ],
                                         "additionalProperties": false,
-                                        "title": "Surah, Juz, Or Page"
+                                        "title": "Surah, Juz, Or page"
                                     }
                                 ]
                             }
@@ -1973,7 +1981,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1993,7 +2001,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2023,7 +2031,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2053,7 +2061,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2083,7 +2091,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2115,6 +2123,7 @@
                 }
             },
             "get": {
+                "description": "Get all bookmarks. This includes bookmarks belonging to a collection.",
                 "tags": [
                     "Bookmarks"
                 ],
@@ -2125,10 +2134,10 @@
                         "name": "mushafId",
                         "schema": {
                             "type": "integer",
-                            "description": "The id of mushaf that you want to use. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
+                            "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
                         },
                         "required": true,
-                        "description": "The id of mushaf that you want to use. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
+                        "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
                     },
                     {
                         "in": "query",
@@ -2150,11 +2159,11 @@
                         "name": "last",
                         "schema": {
                             "type": "integer",
-                            "description": "The number of items you want to get. Should be used together with `before`",
+                            "description": "The number of items to be fetched. Should be used together with `before`",
                             "example": 10
                         },
                         "required": false,
-                        "description": "The number of items you want to get. Should be used together with `before`"
+                        "description": "The number of items to be fetched. Should be used together with `before`"
                     },
                     {
                         "in": "query",
@@ -2166,11 +2175,11 @@
                                     "type": "integer"
                                 }
                             ],
-                            "description": "The number of items that you want to get",
+                            "description": "The number of items to be fetched.",
                             "example": 10
                         },
                         "required": false,
-                        "description": "The number of items that you want to get"
+                        "description": "The number of items to be fetched."
                     },
                     {
                         "in": "query",
@@ -2183,7 +2192,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld2mtxni0001od3h3b5o2ln6"
+                            "example": "cld45vm9i0001lo3h0xl5b2gc"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -2198,16 +2207,16 @@
                                     "type": "string"
                                 }
                             ],
-                            "description": "The cursor before which you want to get the previous page of items. Should be used together with `last`",
-                            "example": "cld2mtxnj0002od3h355y5nl0"
+                            "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
+                            "example": "cld45vm9i0002lo3h6nsogq72"
                         },
                         "required": false,
-                        "description": "The cursor before which you want to get the previous page of items. Should be used together with `last`"
+                        "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2227,7 +2236,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2257,7 +2266,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2287,7 +2296,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2317,7 +2326,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2351,6 +2360,7 @@
         },
         "/v1/bookmarks/{bookmarkId}": {
             "delete": {
+                "description": "Delete a bookmark by id.",
                 "tags": [
                     "Bookmarks"
                 ],
@@ -2361,16 +2371,16 @@
                         "name": "bookmarkId",
                         "schema": {
                             "type": "string",
-                            "description": "The id of bookmark to delete",
-                            "example": "cld2mtxms0000od3h6cg1dfaf"
+                            "description": "The id of the bookmark to be deleted.",
+                            "example": "cld45vm8o0000lo3h17lbdz6q"
                         },
                         "required": true,
-                        "description": "The id of bookmark to delete"
+                        "description": "The id of the bookmark to be deleted."
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2390,7 +2400,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2420,7 +2430,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2450,7 +2460,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2480,7 +2490,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2514,6 +2524,7 @@
         },
         "/v1/bookmarks/ayahs-range": {
             "get": {
+                "description": "Get all bookmarks within a specific Ayahs range.",
                 "tags": [
                     "Bookmarks"
                 ],
@@ -2534,51 +2545,51 @@
                                 7,
                                 11
                             ],
-                            "description": "The id of mushaf that you want to use. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
+                            "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
                         },
                         "required": true,
-                        "description": "The id of mushaf that you want to use. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
+                        "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
                     },
                     {
                         "in": "query",
                         "name": "chapterNumber",
                         "schema": {
                             "type": "integer",
-                            "description": "Chapter number of ayah range"
+                            "description": "The number of the Surah that the Ayahs range belong to."
                         },
                         "required": true,
-                        "description": "Chapter number of ayah range"
+                        "description": "The number of the Surah that the Ayahs range belong to."
                     },
                     {
                         "in": "query",
                         "name": "verseNumber",
                         "schema": {
                             "type": "integer",
-                            "description": "The starting range of the verse number"
+                            "description": "The Ayah number at which the range starts."
                         },
                         "required": true,
-                        "description": "The starting range of the verse number"
+                        "description": "The Ayah number at which the range starts."
                     },
                     {
                         "in": "query",
                         "name": "perPage",
                         "schema": {
                             "type": "integer",
-                            "description": "Number of verse range."
+                            "description": "The number of Ayahs."
                         },
                         "required": true,
-                        "description": "Number of verse range."
+                        "description": "The number of Ayahs."
                     },
                     {
                         "in": "query",
                         "name": "last",
                         "schema": {
                             "type": "integer",
-                            "description": "The number of items you want to get. Should be used together with `before`",
+                            "description": "The number of items to be fetched. Should be used together with `before`",
                             "example": 10
                         },
                         "required": false,
-                        "description": "The number of items you want to get. Should be used together with `before`"
+                        "description": "The number of items to be fetched. Should be used together with `before`"
                     },
                     {
                         "in": "query",
@@ -2590,11 +2601,11 @@
                                     "type": "integer"
                                 }
                             ],
-                            "description": "The number of items that you want to get",
+                            "description": "The number of items to be fetched.",
                             "example": 10
                         },
                         "required": false,
-                        "description": "The number of items that you want to get"
+                        "description": "The number of items to be fetched."
                     },
                     {
                         "in": "query",
@@ -2607,7 +2618,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld2mtxni0001od3h3b5o2ln6"
+                            "example": "cld45vm9i0001lo3h0xl5b2gc"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -2622,16 +2633,16 @@
                                     "type": "string"
                                 }
                             ],
-                            "description": "The cursor before which you want to get the previous page of items. Should be used together with `last`",
-                            "example": "cld2mtxnj0002od3h355y5nl0"
+                            "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
+                            "example": "cld45vm9i0002lo3h6nsogq72"
                         },
                         "required": false,
-                        "description": "The cursor before which you want to get the previous page of items. Should be used together with `last`"
+                        "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2651,7 +2662,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2681,7 +2692,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2711,7 +2722,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2741,7 +2752,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2775,6 +2786,7 @@
         },
         "/v1/bookmarks/bookmark": {
             "get": {
+                "description": "Get a bookmark by details",
                 "tags": [
                     "Bookmarks"
                 ],
@@ -2785,11 +2797,11 @@
                         "name": "key",
                         "schema": {
                             "type": "integer",
-                            "description": "Surah number or page number or juz number",
+                            "description": "Surah, Juz or page number.",
                             "example": 2
                         },
                         "required": true,
-                        "description": "Surah number or page number or juz number"
+                        "description": "Surah, Juz or page number."
                     },
                     {
                         "in": "query",
@@ -2806,11 +2818,11 @@
                                 7,
                                 11
                             ],
-                            "description": "The id of mushaf that you want to use. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed",
+                            "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed",
                             "example": 4
                         },
                         "required": true,
-                        "description": "The id of mushaf that you want to use. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
+                        "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
                     },
                     {
                         "in": "query",
@@ -2823,26 +2835,26 @@
                                 "surah",
                                 "ayah"
                             ],
-                            "description": "Type of bookmark",
+                            "description": "The bookmark type.",
                             "default": "ayah"
                         },
                         "required": false,
-                        "description": "Type of bookmark"
+                        "description": "The bookmark type."
                     },
                     {
                         "in": "query",
                         "name": "verseNumber",
                         "schema": {
                             "type": "integer",
-                            "description": "The verse number of the bookmark"
+                            "description": "The Ayah number of the bookmark"
                         },
                         "required": false,
-                        "description": "The verse number of the bookmark"
+                        "description": "The Ayah number of the bookmark"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2862,7 +2874,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2892,7 +2904,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2922,7 +2934,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2952,7 +2964,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2986,6 +2998,7 @@
         },
         "/v1/bookmarks/collections": {
             "get": {
+                "description": "Get all collections that a bookmark belongs to by bookmark details.",
                 "tags": [
                     "Bookmarks"
                 ],
@@ -3007,10 +3020,10 @@
                                 7,
                                 11
                             ],
-                            "description": "The id of mushaf that you want to use. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
+                            "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
                         },
                         "required": true,
-                        "description": "The id of mushaf that you want to use. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
+                        "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
                     },
                     {
                         "in": "query",
@@ -3018,10 +3031,10 @@
                         "schema": {
                             "type": "number",
                             "format": "float",
-                            "description": "Surah number or page number or juz number"
+                            "description": "Surah, Juz or page number."
                         },
                         "required": true,
-                        "description": "Surah number or page number or juz number"
+                        "description": "Surah, Juz or page number."
                     },
                     {
                         "in": "query",
@@ -3043,11 +3056,11 @@
                         "name": "last",
                         "schema": {
                             "type": "integer",
-                            "description": "The number of items you want to get. Should be used together with `before`",
+                            "description": "The number of items to be fetched. Should be used together with `before`",
                             "example": 10
                         },
                         "required": false,
-                        "description": "The number of items you want to get. Should be used together with `before`"
+                        "description": "The number of items to be fetched. Should be used together with `before`"
                     },
                     {
                         "in": "query",
@@ -3059,11 +3072,11 @@
                                     "type": "integer"
                                 }
                             ],
-                            "description": "The number of items that you want to get",
+                            "description": "The number of items to be fetched.",
                             "example": 10
                         },
                         "required": false,
-                        "description": "The number of items that you want to get"
+                        "description": "The number of items to be fetched."
                     },
                     {
                         "in": "query",
@@ -3076,7 +3089,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld2mtxni0001od3h3b5o2ln6"
+                            "example": "cld45vm9i0001lo3h0xl5b2gc"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -3091,16 +3104,16 @@
                                     "type": "string"
                                 }
                             ],
-                            "description": "The cursor before which you want to get the previous page of items. Should be used together with `last`",
-                            "example": "cld2mtxnj0002od3h355y5nl0"
+                            "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
+                            "example": "cld45vm9i0002lo3h6nsogq72"
                         },
                         "required": false,
-                        "description": "The cursor before which you want to get the previous page of items. Should be used together with `last`"
+                        "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3120,7 +3133,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3150,7 +3163,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3180,7 +3193,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3210,7 +3223,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3244,6 +3257,7 @@
         },
         "/v1/preferences/": {
             "post": {
+                "description": "Add or update one user preferences group like favorite Tafsirs or translations.",
                 "tags": [
                     "Preferences"
                 ],
@@ -3266,17 +3280,17 @@
                                             "reading",
                                             "language"
                                         ],
-                                        "description": "The preference group to add or update",
-                                        "example": "language"
+                                        "description": "The preference group to be added or updated.",
+                                        "example": "tafsirs"
                                     },
                                     "key": {
                                         "type": "string",
-                                        "description": "The preference key to add or update",
-                                        "example": "language"
+                                        "description": "The preference key to be added or updated.",
+                                        "example": "selectedTafsirs"
                                     },
                                     "value": {
-                                        "description": "The preference value to add or update",
-                                        "example": "en"
+                                        "description": "The preference value to be added or updated.",
+                                        "example": "[\"en-tafisr-ibn-kathir\"]"
                                     }
                                 },
                                 "required": [
@@ -3291,7 +3305,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3311,7 +3325,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3341,7 +3355,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3371,7 +3385,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3401,7 +3415,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3433,6 +3447,7 @@
                 }
             },
             "get": {
+                "description": "Get all user preferences like theme, favorite reciter, default language etc.",
                 "tags": [
                     "Preferences"
                 ],
@@ -3440,7 +3455,7 @@
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3460,7 +3475,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3490,7 +3505,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3520,7 +3535,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3550,7 +3565,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3584,10 +3599,11 @@
         },
         "/v1/preferences/bulk": {
             "post": {
+                "description": "Add or update one or more user preferences groups like favorite Tafsirs and translations.",
                 "tags": [
                     "Preferences"
                 ],
-                "summary": "bulk add or update preference",
+                "summary": "Bulk add or update preferences",
                 "parameters": [],
                 "requestBody": {
                     "content": {
@@ -3611,9 +3627,7 @@
                                     "reading": {
                                         "readingPreference": "translation",
                                         "showWordByWordTranslation": false,
-                                        "selectedWordByWordTranslation": 20,
                                         "showWordByWordTransliteration": false,
-                                        "selectedWordByWordTransliteration": 12,
                                         "selectedWordByWordLocale": "en",
                                         "showTooltipFor": [
                                             "translation"
@@ -3651,7 +3665,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3671,7 +3685,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3701,7 +3715,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3731,7 +3745,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3761,7 +3775,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3795,10 +3809,11 @@
         },
         "/v1/reading-sessions/": {
             "post": {
+                "description": "Create or update an existing reading session. Reading session is used to keep track of recently read Ayahs. A new reading session will be created if the user does not have an existing one in the past 20 minutes, otherwise, the existing reading session will be updated with the latest read Ayah.",
                 "tags": [
                     "Reading Sessions"
                 ],
-                "summary": "Add user reading sessions",
+                "summary": "Add or update user reading session",
                 "parameters": [],
                 "requestBody": {
                     "content": {
@@ -3809,12 +3824,12 @@
                                     "chapterNumber": {
                                         "type": "integer",
                                         "minimum": 1,
-                                        "description": "The chapter number to add to reading session"
+                                        "description": "The Surah number to be added to reading session."
                                     },
                                     "verseNumber": {
                                         "type": "integer",
                                         "minimum": 1,
-                                        "description": "The verse number to add to reading session"
+                                        "description": "The Ayah number to be added to reading session."
                                     }
                                 },
                                 "required": [
@@ -3828,7 +3843,7 @@
                 },
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3848,7 +3863,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3878,7 +3893,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3908,7 +3923,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3938,7 +3953,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3970,6 +3985,7 @@
                 }
             },
             "get": {
+                "description": "Get all existing reading sessions.",
                 "tags": [
                     "Reading Sessions"
                 ],
@@ -3980,10 +3996,10 @@
                         "name": "last",
                         "schema": {
                             "type": "integer",
-                            "description": "The number of items you want to get. Should be used together with `before`",
+                            "description": "The number of items to be fetched. Should be used together with `before`",
                             "example": 10
                         },
-                        "description": "The number of items you want to get. Should be used together with `before`"
+                        "description": "The number of items to be fetched. Should be used together with `before`"
                     },
                     {
                         "in": "query",
@@ -3995,10 +4011,10 @@
                                     "type": "integer"
                                 }
                             ],
-                            "description": "The number of items that you want to get",
+                            "description": "The number of items to be fetched.",
                             "example": 10
                         },
-                        "description": "The number of items that you want to get"
+                        "description": "The number of items to be fetched."
                     },
                     {
                         "in": "query",
@@ -4011,7 +4027,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld2mtxni0001od3h3b5o2ln6"
+                            "example": "cld45vm9i0001lo3h0xl5b2gc"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -4025,15 +4041,15 @@
                                     "type": "string"
                                 }
                             ],
-                            "description": "The cursor before which you want to get the previous page of items. Should be used together with `last`",
-                            "example": "cld2mtxnj0002od3h355y5nl0"
+                            "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
+                            "example": "cld45vm9i0002lo3h6nsogq72"
                         },
-                        "description": "The cursor before which you want to get the previous page of items. Should be used together with `last`"
+                        "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4053,7 +4069,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4083,7 +4099,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4113,7 +4129,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4143,7 +4159,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4177,14 +4193,15 @@
         },
         "/v1/users/profile": {
             "get": {
+                "description": "Get user profile.",
                 "tags": [
-                    "User"
+                    "Users"
                 ],
                 "summary": "Get User Profile",
                 "parameters": [],
                 "responses": {
                     "200": {
-                        "description": "Request success",
+                        "description": "Request has been handled successfully.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4204,7 +4221,7 @@
                         }
                     },
                     "403": {
-                        "description": "Forbidden error. You access token might be expired. You need to refresh it",
+                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4234,7 +4251,7 @@
                         }
                     },
                     "404": {
-                        "description": "Not Found. The resource you're looking is not found",
+                        "description": "Not Found. The resource being accessed does not exist.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4264,7 +4281,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. Something is wrong your input. Please check your input and try again.",
+                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4294,7 +4311,7 @@
                         }
                     },
                     "500": {
-                        "description": "Server Error. Something went wrong on our side",
+                        "description": "Server Error. Something went wrong, try again later.",
                         "content": {
                             "application/json": {
                                 "schema": {
