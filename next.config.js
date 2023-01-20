@@ -1,5 +1,14 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/qdc-v4/',
+        permanent: false,
+      },
+    ]
+  },
   async rewrites() {
     return [
       {
