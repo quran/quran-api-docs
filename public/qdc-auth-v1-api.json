@@ -3,7 +3,7 @@
     "info": {
         "title": "Quran.com Auth V1 API",
         "version": "1.0.0",
-        "description": "Quran.com Auth V1 APIs allow your app to authenticate and interact with Quran Foundation's users' resources. \n\n See it in action https://share.descript.com/view/rBczFqlYZQz"
+        "description": "Quran.com Auth V1 APIs allow your app to authenticate and interact with Quran Foundation's users' resources. \n\n See it in action https://share.descript.com/view/rBczFqlYZQz \n\n ## Pagination \n\n We are using cursor based pagination. The pagination query params consist of `first`,`after`, `before` and `last`. \n\n Example \n - `first: 10` will give you first 10 items \n - `first: 10, after: xyz` will give you first 10 items after the item with id `xyz` \n - `last: 10` will give you the last 10 items \n - `last: 10, before: xyz` will give you the last 10 items before the item with id `xyz` \n\n The only possible combinations are `first + after` or `last + before`. They should not be used together"
     },
     "servers": [
         {
