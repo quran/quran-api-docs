@@ -29,7 +29,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "cld9uuyl50000fd3hd0sheas7"
+                        "example": "cld9xreb60000ml3h5apy9a7v"
                     },
                     "createdAt": {
                         "type": "string",
@@ -65,7 +65,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "cld9uuyn20004fd3hfexy3rip"
+                        "example": "cld9xredm0004ml3h1najeum8"
                     },
                     "updatedAt": {
                         "type": "string",
@@ -103,7 +103,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "cld9uuyta000bfd3hcn1qble0"
+                        "example": "cld9xrel7000bml3hah0a0du6"
                     },
                     "updatedAt": {
                         "type": "string",
@@ -123,6 +123,36 @@
                     "id",
                     "updatedAt"
                 ],
+                "additionalProperties": false
+            },
+            "UserProfile": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2022-12-06T06:16:20.229Z"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "muhajir@quran.com"
+                    },
+                    "firstName": {
+                        "type": "string",
+                        "example": "Muhammad"
+                    },
+                    "lastName": {
+                        "type": "string",
+                        "example": "Muhajir"
+                    },
+                    "photoUrl": {
+                        "type": "string",
+                        "example": "https://photos.quran.com/img/muhajir.jpg"
+                    }
+                },
                 "additionalProperties": false
             }
         }
@@ -350,7 +380,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld9uuym60002fd3hghjj4qe5"
+                            "example": "cld9xreck0002ml3hfoja52nk"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -365,7 +395,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld9uuym70003fd3hfx1jdhuw"
+                            "example": "cld9xrecl0003ml3hheueciat"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -531,7 +561,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be added.",
-                            "example": "cld9uuyoe0005fd3h9r7scz2d"
+                            "example": "cld9xref10005ml3h3p2z8dvo"
                         },
                         "required": true,
                         "description": "The Id of the collection to be added."
@@ -794,7 +824,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be deleted.",
-                            "example": "cld9uuyox0007fd3h7bvsbwvi"
+                            "example": "cld9xrefk0007ml3hg762drtn"
                         },
                         "required": true,
                         "description": "The Id of the collection to be deleted."
@@ -1052,7 +1082,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be deleted.",
-                            "example": "cld9uuyoj0006fd3hczakbjjf"
+                            "example": "cld9xref60006ml3her0tc4az"
                         },
                         "required": true,
                         "description": "The Id of the collection to be deleted."
@@ -1221,7 +1251,7 @@
                         "name": "collectionId",
                         "schema": {
                             "type": "string",
-                            "example": "cld9uuyq2000afd3hco1pdzdb"
+                            "example": "cld9xregq000aml3h919a5s3r"
                         }
                     },
                     {
@@ -1273,7 +1303,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld9uuym60002fd3hghjj4qe5"
+                            "example": "cld9xreck0002ml3hfoja52nk"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -1288,7 +1318,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld9uuym70003fd3hfx1jdhuw"
+                            "example": "cld9xrecl0003ml3hheueciat"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -1651,7 +1681,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be deleted.",
-                            "example": "cld9uuyp60008fd3haxmv2gzs"
+                            "example": "cld9xreft0008ml3h7kjihh4c"
                         },
                         "required": true,
                         "description": "The Id of the collection to be deleted."
@@ -1662,7 +1692,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the bookmark to be deleted.",
-                            "example": "cld9uuyp60009fd3h91ntfbo6"
+                            "example": "cld9xreft0009ml3h10u2hexn"
                         },
                         "required": true,
                         "description": "The Id of the bookmark to be deleted."
@@ -1877,7 +1907,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld9uuym60002fd3hghjj4qe5"
+                            "example": "cld9xreck0002ml3hfoja52nk"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -1892,7 +1922,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld9uuym70003fd3hfx1jdhuw"
+                            "example": "cld9xrecl0003ml3hheueciat"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -2359,7 +2389,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld9uuym60002fd3hghjj4qe5"
+                            "example": "cld9xreck0002ml3hfoja52nk"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -2375,7 +2405,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld9uuym70003fd3hfx1jdhuw"
+                            "example": "cld9xrecl0003ml3hheueciat"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -2542,7 +2572,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The id of the bookmark to be deleted.",
-                            "example": "cld9uuylf0001fd3hcp1p84kj"
+                            "example": "cld9xrebh0001ml3h325t01ll"
                         },
                         "required": true,
                         "description": "The id of the bookmark to be deleted."
@@ -2796,7 +2826,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld9uuym60002fd3hghjj4qe5"
+                            "example": "cld9xreck0002ml3hfoja52nk"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -2812,7 +2842,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld9uuym70003fd3hfx1jdhuw"
+                            "example": "cld9xrecl0003ml3hheueciat"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -3046,7 +3076,7 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "$ref": "#/components/schemas/Bookmark"
                                         }
                                     },
                                     "additionalProperties": false
@@ -3270,7 +3300,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld9uuym60002fd3hghjj4qe5"
+                            "example": "cld9xreck0002ml3hfoja52nk"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -3286,7 +3316,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld9uuym70003fd3hfx1jdhuw"
+                            "example": "cld9xrecl0003ml3hheueciat"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -4279,7 +4309,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld9uuym60002fd3hghjj4qe5"
+                            "example": "cld9xreck0002ml3hfoja52nk"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -4294,7 +4324,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld9uuym70003fd3hfx1jdhuw"
+                            "example": "cld9xrecl0003ml3hheueciat"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -4467,34 +4497,7 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object",
-                                            "properties": {
-                                                "id": {
-                                                    "type": "string"
-                                                },
-                                                "createdAt": {
-                                                    "type": "string",
-                                                    "format": "date-time",
-                                                    "example": "2022-12-06T06:16:20.229Z"
-                                                },
-                                                "email": {
-                                                    "type": "string",
-                                                    "example": "muhajir@quran.com"
-                                                },
-                                                "firstName": {
-                                                    "type": "string",
-                                                    "example": "Muhammad"
-                                                },
-                                                "lastName": {
-                                                    "type": "string",
-                                                    "example": "Muhajir"
-                                                },
-                                                "photoUrl": {
-                                                    "type": "string",
-                                                    "example": "https://photos.quran.com/img/muhajir.jpg"
-                                                }
-                                            },
-                                            "additionalProperties": false
+                                            "$ref": "#/components/schemas/UserProfile"
                                         }
                                     },
                                     "additionalProperties": false
