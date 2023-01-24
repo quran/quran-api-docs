@@ -7,8 +7,8 @@
     },
     "servers": [
         {
-            "url": "https://auth.quran.com",
-            "description": "Production server"
+            "url": "http://localhost",
+            "description": "Production Server"
         },
         {
             "url": "http://localhost:3001",
@@ -21,6 +21,109 @@
                 "type": "apiKey",
                 "in": "header",
                 "name": "o_t_h"
+            }
+        },
+        "schemas": {
+            "Bookmark": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "cld9uuyl50000fd3hd0sheas7"
+                    },
+                    "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-21T07:28:13.023Z"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "ayah"
+                    },
+                    "key": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "verseNumber": {
+                        "type": "integer",
+                        "example": 5
+                    },
+                    "group": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "id",
+                    "createdAt",
+                    "type",
+                    "key"
+                ],
+                "additionalProperties": false
+            },
+            "Collection": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "cld9uuyn20004fd3hfexy3rip"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-21T07:28:13.023Z"
+                    },
+                    "name": {
+                        "type": "string",
+                        "example": "Woman in Quran"
+                    }
+                },
+                "required": [
+                    "id",
+                    "updatedAt",
+                    "name"
+                ],
+                "additionalProperties": false
+            },
+            "CollectionInput": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the new collection to be created.",
+                        "example": "Woman in Quran"
+                    }
+                },
+                "required": [
+                    "name"
+                ],
+                "additionalProperties": false
+            },
+            "ReadingSession": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "example": "cld9uuyta000bfd3hcn1qble0"
+                    },
+                    "updatedAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "example": "2023-01-21T07:28:13.023Z"
+                    },
+                    "chapterNumber": {
+                        "type": "integer",
+                        "example": 1
+                    },
+                    "verseNumber": {
+                        "type": "integer",
+                        "example": 5
+                    }
+                },
+                "required": [
+                    "id",
+                    "updatedAt"
+                ],
+                "additionalProperties": false
             }
         }
     },
@@ -42,18 +145,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "name": {
-                                        "type": "string",
-                                        "description": "The name of the new collection to be created.",
-                                        "example": "Woman in Quran"
-                                    }
-                                },
-                                "required": [
-                                    "name"
-                                ],
-                                "additionalProperties": false
+                                "$ref": "#/components/schemas/CollectionInput"
                             }
                         }
                     }
@@ -71,7 +163,7 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "$ref": "#/components/schemas/Collection"
                                         }
                                     },
                                     "additionalProperties": false
@@ -258,7 +350,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld5iqnfr0001yi3hdj0a2n3x"
+                            "example": "cld9uuym60002fd3hghjj4qe5"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -273,7 +365,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld5iqnfr0002yi3h9wd40ew8"
+                            "example": "cld9uuym70003fd3hfx1jdhuw"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -291,7 +383,10 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Collection"
+                                            }
                                         }
                                     },
                                     "additionalProperties": false
@@ -436,7 +531,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be added.",
-                            "example": "cld5iqnhv0003yi3hbxmlco02"
+                            "example": "cld9uuyoe0005fd3h9r7scz2d"
                         },
                         "required": true,
                         "description": "The Id of the collection to be added."
@@ -548,7 +643,15 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "enum": [
+                                                        "collection bookmark added"
+                                                    ]
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
@@ -684,7 +787,19 @@
                     "Collections"
                 ],
                 "summary": "Delete collection bookmark by details",
-                "parameters": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "collectionId",
+                        "schema": {
+                            "type": "string",
+                            "description": "The Id of the collection to be deleted.",
+                            "example": "cld9uuyox0007fd3h7bvsbwvi"
+                        },
+                        "required": true,
+                        "description": "The Id of the collection to be deleted."
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "Request has been handled successfully.",
@@ -874,7 +989,7 @@
                                             "verseNumber"
                                         ],
                                         "additionalProperties": false,
-                                        "title": "Ayah"
+                                        "title": "input"
                                     },
                                     {
                                         "type": "object",
@@ -913,9 +1028,10 @@
                                             "mushaf"
                                         ],
                                         "additionalProperties": false,
-                                        "title": "Surah, Juz, Or Page"
+                                        "title": "input"
                                     }
-                                ]
+                                ],
+                                "title": "input"
                             }
                         }
                     }
@@ -936,7 +1052,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be deleted.",
-                            "example": "cld5iqni20004yi3hftv5d7vg"
+                            "example": "cld9uuyoj0006fd3hczakbjjf"
                         },
                         "required": true,
                         "description": "The Id of the collection to be deleted."
@@ -955,7 +1071,15 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "enum": [
+                                                        "collection deleted"
+                                                    ]
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
@@ -1093,6 +1217,14 @@
                 "summary": "Get collection items by id",
                 "parameters": [
                     {
+                        "in": "path",
+                        "name": "collectionId",
+                        "schema": {
+                            "type": "string",
+                            "example": "cld9uuyq2000afd3hco1pdzdb"
+                        }
+                    },
+                    {
                         "in": "query",
                         "name": "sortBy",
                         "schema": {
@@ -1141,7 +1273,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld5iqnfr0001yi3hdj0a2n3x"
+                            "example": "cld9uuym60002fd3hghjj4qe5"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -1156,7 +1288,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld5iqnfr0002yi3h9wd40ew8"
+                            "example": "cld9uuym70003fd3hfx1jdhuw"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -1174,7 +1306,19 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "object",
+                                            "properties": {
+                                                "collection": {
+                                                    "$ref": "#/components/schemas/Collection"
+                                                },
+                                                "bookmarks": {
+                                                    "type": "array",
+                                                    "items": {
+                                                        "$ref": "#/components/schemas/Bookmark"
+                                                    }
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
@@ -1354,7 +1498,15 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "enum": [
+                                                        "collection renamed"
+                                                    ]
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
@@ -1499,7 +1651,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be deleted.",
-                            "example": "cld5iqnio0005yi3hgm496ypq"
+                            "example": "cld9uuyp60008fd3haxmv2gzs"
                         },
                         "required": true,
                         "description": "The Id of the collection to be deleted."
@@ -1510,7 +1662,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the bookmark to be deleted.",
-                            "example": "cld5iqnio0006yi3hfyu13d4z"
+                            "example": "cld9uuyp60009fd3h91ntfbo6"
                         },
                         "required": true,
                         "description": "The Id of the bookmark to be deleted."
@@ -1529,7 +1681,15 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "enum": [
+                                                        "collection bookmark deleted"
+                                                    ]
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
@@ -1717,7 +1877,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld5iqnfr0001yi3hdj0a2n3x"
+                            "example": "cld9uuym60002fd3hghjj4qe5"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -1732,7 +1892,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld5iqnfr0002yi3h9wd40ew8"
+                            "example": "cld9uuym70003fd3hfx1jdhuw"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -1750,7 +1910,10 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Bookmark"
+                                            }
                                         }
                                     },
                                     "additionalProperties": false
@@ -1996,7 +2159,7 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "$ref": "#/components/schemas/Bookmark"
                                         }
                                     },
                                     "additionalProperties": false
@@ -2196,7 +2359,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld5iqnfr0001yi3hdj0a2n3x"
+                            "example": "cld9uuym60002fd3hghjj4qe5"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -2212,7 +2375,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld5iqnfr0002yi3h9wd40ew8"
+                            "example": "cld9uuym70003fd3hfx1jdhuw"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -2231,7 +2394,10 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Bookmark"
+                                            }
                                         }
                                     },
                                     "additionalProperties": false
@@ -2376,7 +2542,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The id of the bookmark to be deleted.",
-                            "example": "cld5iqnez0000yi3hb7l0ewqn"
+                            "example": "cld9uuylf0001fd3hcp1p84kj"
                         },
                         "required": true,
                         "description": "The id of the bookmark to be deleted."
@@ -2395,7 +2561,15 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "enum": [
+                                                        "bookmark deleted"
+                                                    ]
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
@@ -2622,7 +2796,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld5iqnfr0001yi3hdj0a2n3x"
+                            "example": "cld9uuym60002fd3hghjj4qe5"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -2638,7 +2812,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld5iqnfr0002yi3h9wd40ew8"
+                            "example": "cld9uuym70003fd3hfx1jdhuw"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -2657,7 +2831,10 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Bookmark"
+                                            }
                                         }
                                     },
                                     "additionalProperties": false
@@ -3093,7 +3270,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld5iqnfr0001yi3hdj0a2n3x"
+                            "example": "cld9uuym60002fd3hghjj4qe5"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -3109,7 +3286,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld5iqnfr0002yi3h9wd40ew8"
+                            "example": "cld9uuym70003fd3hfx1jdhuw"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -3128,7 +3305,10 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Collection"
+                                            }
                                         }
                                     },
                                     "additionalProperties": false
@@ -3320,7 +3500,15 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "enum": [
+                                                        "preference updated"
+                                                    ]
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
@@ -3470,7 +3658,51 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "object",
+                                            "properties": {},
+                                            "additionalProperties": false,
+                                            "example": {
+                                                "success": true,
+                                                "data": {
+                                                    "theme": {
+                                                        "type": "auto"
+                                                    },
+                                                    "reading": {
+                                                        "showTooltipFor": [
+                                                            "translation"
+                                                        ],
+                                                        "readingPreference": "translation",
+                                                        "wordClickFunctionality": "play-audio",
+                                                        "selectedWordByWordLocale": "en",
+                                                        "showWordByWordTranslation": false,
+                                                        "selectedWordByWordTranslation": 20,
+                                                        "showWordByWordTransliteration": false,
+                                                        "selectedWordByWordTransliteration": 12
+                                                    },
+                                                    "quranReaderStyles": {
+                                                        "quranFont": "code_v1",
+                                                        "mushafLines": "16_lines",
+                                                        "tafsirFontScale": 3,
+                                                        "quranTextFontScale": 3,
+                                                        "translationFontScale": 3
+                                                    },
+                                                    "translations": {
+                                                        "selectedTranslations": [
+                                                            131
+                                                        ]
+                                                    },
+                                                    "audio": {
+                                                        "reciter": 7,
+                                                        "playbackRate": 1,
+                                                        "enableAutoScrolling": true,
+                                                        "showTooltipWhenPlayingAudio": false
+                                                    },
+                                                    "language": "en",
+                                                    "tafsirs": {
+                                                        "selectedTafsirs": "[\"en-tafisr-ibn-kathir\"]"
+                                                    }
+                                                }
+                                            }
                                         }
                                     },
                                     "additionalProperties": false
@@ -3680,7 +3912,15 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "enum": [
+                                                        "preferences updated"
+                                                    ]
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
@@ -3858,7 +4098,15 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "enum": [
+                                                        "reading session created"
+                                                    ]
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
@@ -4031,7 +4279,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld5iqnfr0001yi3hdj0a2n3x"
+                            "example": "cld9uuym60002fd3hghjj4qe5"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -4046,7 +4294,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld5iqnfr0002yi3h9wd40ew8"
+                            "example": "cld9uuym70003fd3hfx1jdhuw"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -4064,7 +4312,10 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/ReadingSession"
+                                            }
                                         }
                                     },
                                     "additionalProperties": false
@@ -4216,7 +4467,34 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object"
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string"
+                                                },
+                                                "createdAt": {
+                                                    "type": "string",
+                                                    "format": "date-time",
+                                                    "example": "2022-12-06T06:16:20.229Z"
+                                                },
+                                                "email": {
+                                                    "type": "string",
+                                                    "example": "muhajir@quran.com"
+                                                },
+                                                "firstName": {
+                                                    "type": "string",
+                                                    "example": "Muhammad"
+                                                },
+                                                "lastName": {
+                                                    "type": "string",
+                                                    "example": "Muhajir"
+                                                },
+                                                "photoUrl": {
+                                                    "type": "string",
+                                                    "example": "https://photos.quran.com/img/muhajir.jpg"
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
