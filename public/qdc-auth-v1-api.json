@@ -29,7 +29,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "cld9xreb60000ml3h5apy9a7v"
+                        "example": "cldb761ei0000g13h3i2a4evp"
                     },
                     "createdAt": {
                         "type": "string",
@@ -65,7 +65,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "cld9xredm0004ml3h1najeum8"
+                        "example": "cldb761gh0004g13hfrg1ap9f"
                     },
                     "updatedAt": {
                         "type": "string",
@@ -98,12 +98,139 @@
                 ],
                 "additionalProperties": false
             },
+            "Preference": {
+                "type": "object",
+                "properties": {
+                    "theme": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "example": "auto"
+                            }
+                        },
+                        "additionalProperties": false
+                    },
+                    "reading": {
+                        "type": "object",
+                        "properties": {
+                            "readingPreference": {
+                                "type": "string",
+                                "example": "translation"
+                            },
+                            "showWordByWordTranslation": {
+                                "type": "boolean",
+                                "example": false
+                            },
+                            "showWordByWordTransliteration": {
+                                "type": "boolean",
+                                "example": false
+                            },
+                            "selectedWordByWordLocale": {
+                                "type": "string",
+                                "example": "en"
+                            },
+                            "showTooltipFor": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "example": "translation"
+                                }
+                            },
+                            "wordClickFunctionality": {
+                                "type": "string",
+                                "example": "play-audio"
+                            }
+                        },
+                        "additionalProperties": false
+                    },
+                    "quranReaderStyles": {
+                        "type": "object",
+                        "properties": {
+                            "tafsirFontScale": {
+                                "type": "integer",
+                                "example": 3
+                            },
+                            "quranTextFontScale": {
+                                "type": "integer",
+                                "example": 3
+                            },
+                            "translationFontScale": {
+                                "type": "integer",
+                                "example": 3
+                            },
+                            "quranFont": {
+                                "type": "string",
+                                "example": "code_v1"
+                            },
+                            "mushafLines": {
+                                "type": "string",
+                                "example": "16_lines"
+                            }
+                        },
+                        "additionalProperties": false
+                    },
+                    "translations": {
+                        "type": "object",
+                        "properties": {
+                            "selectedTranslations": {
+                                "type": "array",
+                                "items": {
+                                    "type": "integer",
+                                    "example": 131
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    },
+                    "tafsirs": {
+                        "type": "object",
+                        "properties": {
+                            "selectedTafsirs": {
+                                "type": "array",
+                                "items": {
+                                    "type": "string",
+                                    "example": "en-tafisr-ibn-kathir"
+                                }
+                            }
+                        },
+                        "additionalProperties": false
+                    },
+                    "audio": {
+                        "type": "object",
+                        "properties": {
+                            "reciter": {
+                                "type": "integer",
+                                "example": 7
+                            },
+                            "playbackRate": {
+                                "type": "integer",
+                                "example": 1
+                            },
+                            "showTooltipWhenPlayingAudio": {
+                                "type": "boolean",
+                                "example": true
+                            },
+                            "enableAutoScrolling": {
+                                "type": "boolean",
+                                "example": true
+                            }
+                        },
+                        "additionalProperties": false
+                    },
+                    "language": {
+                        "type": "string",
+                        "example": "en"
+                    }
+                },
+                "additionalProperties": false
+            },
             "ReadingSession": {
                 "type": "object",
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "cld9xrel7000bml3hah0a0du6"
+                        "example": "cldb761n6000ag13h5gir4rho"
                     },
                     "updatedAt": {
                         "type": "string",
@@ -262,7 +389,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -380,7 +507,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld9xreck0002ml3hfoja52nk"
+                            "example": "cldb761fl0002g13hf0io122m"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -395,7 +522,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld9xrecl0003ml3hheueciat"
+                            "example": "cldb761fm0003g13h8t7g785h"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -485,7 +612,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -561,7 +688,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be added.",
-                            "example": "cld9xref10005ml3h3p2z8dvo"
+                            "example": "cldb761hs0005g13h6iua2uer"
                         },
                         "required": true,
                         "description": "The Id of the collection to be added."
@@ -750,7 +877,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -806,262 +933,6 @@
                                     },
                                     "additionalProperties": false
                                 }
-                            }
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "description": "Delete a bookmark from an existing collection by bookmark's details. When successfully deleted, the bookmark itself does not get deleted but rather only detached from the collection.",
-                "tags": [
-                    "Collections"
-                ],
-                "summary": "Delete collection bookmark by details",
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "collectionId",
-                        "schema": {
-                            "type": "string",
-                            "description": "The Id of the collection to be deleted.",
-                            "example": "cld9xrefk0007ml3hg762drtn"
-                        },
-                        "required": true,
-                        "description": "The Id of the collection to be deleted."
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Request has been handled successfully.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": true
-                                        },
-                                        "data": {
-                                            "type": "object"
-                                        }
-                                    },
-                                    "additionalProperties": false
-                                }
-                            }
-                        }
-                    },
-                    "403": {
-                        "description": "Forbidden error. Can either be due to access token not being passed, having been expired or the caller trying to access a resource without enough permissions.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": false
-                                        },
-                                        "error": {
-                                            "type": "object",
-                                            "properties": {
-                                                "code": {
-                                                    "type": "string",
-                                                    "example": "ForbiddenError"
-                                                },
-                                                "message": {
-                                                    "type": "string",
-                                                    "example": "Token expired"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "additionalProperties": false
-                                }
-                            }
-                        }
-                    },
-                    "404": {
-                        "description": "Not Found. The resource being accessed does not exist.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": false
-                                        },
-                                        "error": {
-                                            "type": "object",
-                                            "properties": {
-                                                "code": {
-                                                    "type": "string",
-                                                    "example": "NotFoundError"
-                                                },
-                                                "message": {
-                                                    "type": "string",
-                                                    "example": "The resource you're looking for does not exist"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "additionalProperties": false
-                                }
-                            }
-                        }
-                    },
-                    "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": false
-                                        },
-                                        "error": {
-                                            "type": "object",
-                                            "properties": {
-                                                "code": {
-                                                    "type": "string",
-                                                    "example": "ValidationError"
-                                                },
-                                                "message": {
-                                                    "type": "string",
-                                                    "example": "`id` is required"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "additionalProperties": false
-                                }
-                            }
-                        }
-                    },
-                    "500": {
-                        "description": "Server Error. Something went wrong, try again later.",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "object",
-                                    "properties": {
-                                        "success": {
-                                            "type": "boolean",
-                                            "example": false
-                                        },
-                                        "error": {
-                                            "type": "object",
-                                            "properties": {
-                                                "code": {
-                                                    "type": "string",
-                                                    "example": "ServerError"
-                                                },
-                                                "message": {
-                                                    "type": "string",
-                                                    "example": "Something went wrong"
-                                                }
-                                            }
-                                        }
-                                    },
-                                    "additionalProperties": false
-                                }
-                            }
-                        }
-                    }
-                },
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "anyOf": [
-                                    {
-                                        "type": "object",
-                                        "properties": {
-                                            "key": {
-                                                "type": "integer",
-                                                "description": "Surah number",
-                                                "example": 2
-                                            },
-                                            "mushaf": {
-                                                "type": "integer",
-                                                "enum": [
-                                                    1,
-                                                    2,
-                                                    3,
-                                                    4,
-                                                    5,
-                                                    6,
-                                                    7,
-                                                    11
-                                                ],
-                                                "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed",
-                                                "example": 4
-                                            },
-                                            "type": {
-                                                "type": "string",
-                                                "enum": [
-                                                    "ayah"
-                                                ],
-                                                "description": "The bookmark type.",
-                                                "default": "ayah"
-                                            },
-                                            "verseNumber": {
-                                                "type": "integer",
-                                                "example": 3
-                                            }
-                                        },
-                                        "required": [
-                                            "key",
-                                            "mushaf",
-                                            "verseNumber"
-                                        ],
-                                        "additionalProperties": false,
-                                        "title": "input"
-                                    },
-                                    {
-                                        "type": "object",
-                                        "properties": {
-                                            "key": {
-                                                "type": "integer",
-                                                "description": "Surah, Juz or page number."
-                                            },
-                                            "mushaf": {
-                                                "type": "integer",
-                                                "enum": [
-                                                    1,
-                                                    2,
-                                                    3,
-                                                    4,
-                                                    5,
-                                                    6,
-                                                    7,
-                                                    11
-                                                ],
-                                                "description": "The id of the Mushaf being used. \n\n1 = QCFV2 \n\n  2 = QCFV1 \n\n  3 = Indopak \n\n  4 = UthmaniHafs \n\n  5 = KFGQPCHAFS \n\n  6 = Indopak15Lines \n\n  7 = Indopak16Lines \n\n  11 = Tajweeed"
-                                            },
-                                            "type": {
-                                                "type": "string",
-                                                "enum": [
-                                                    "juz",
-                                                    "page",
-                                                    "surah"
-                                                ],
-                                                "description": "The bookmark type.",
-                                                "example": "surah"
-                                            }
-                                        },
-                                        "required": [
-                                            "key",
-                                            "mushaf"
-                                        ],
-                                        "additionalProperties": false,
-                                        "title": "input"
-                                    }
-                                ],
-                                "title": "input"
                             }
                         }
                     }
@@ -1082,7 +953,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be deleted.",
-                            "example": "cld9xref60006ml3her0tc4az"
+                            "example": "cldb761hx0006g13h7jtl8psv"
                         },
                         "required": true,
                         "description": "The Id of the collection to be deleted."
@@ -1178,7 +1049,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1251,7 +1122,7 @@
                         "name": "collectionId",
                         "schema": {
                             "type": "string",
-                            "example": "cld9xregq000aml3h919a5s3r"
+                            "example": "cldb761ja0009g13hca4mbpsp"
                         }
                     },
                     {
@@ -1303,7 +1174,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld9xreck0002ml3hfoja52nk"
+                            "example": "cldb761fl0002g13hf0io122m"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -1318,7 +1189,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld9xrecl0003ml3hheueciat"
+                            "example": "cldb761fm0003g13h8t7g785h"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -1417,7 +1288,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1605,7 +1476,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1681,7 +1552,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be deleted.",
-                            "example": "cld9xreft0008ml3h7kjihh4c"
+                            "example": "cldb761i80007g13hh2js9njw"
                         },
                         "required": true,
                         "description": "The Id of the collection to be deleted."
@@ -1692,7 +1563,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the bookmark to be deleted.",
-                            "example": "cld9xreft0009ml3h10u2hexn"
+                            "example": "cldb761i80008g13h6hl3e18n"
                         },
                         "required": true,
                         "description": "The Id of the bookmark to be deleted."
@@ -1788,7 +1659,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -1907,7 +1778,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld9xreck0002ml3hfoja52nk"
+                            "example": "cldb761fl0002g13hf0io122m"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -1922,7 +1793,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld9xrecl0003ml3hheueciat"
+                            "example": "cldb761fm0003g13h8t7g785h"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -2012,7 +1883,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2258,7 +2129,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2389,7 +2260,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld9xreck0002ml3hfoja52nk"
+                            "example": "cldb761fl0002g13hf0io122m"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -2405,7 +2276,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld9xrecl0003ml3hheueciat"
+                            "example": "cldb761fm0003g13h8t7g785h"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -2496,7 +2367,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2572,7 +2443,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The id of the bookmark to be deleted.",
-                            "example": "cld9xrebh0001ml3h325t01ll"
+                            "example": "cldb761es0001g13hh86v1nrk"
                         },
                         "required": true,
                         "description": "The id of the bookmark to be deleted."
@@ -2668,7 +2539,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -2826,7 +2697,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld9xreck0002ml3hfoja52nk"
+                            "example": "cldb761fl0002g13hf0io122m"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -2842,7 +2713,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld9xrecl0003ml3hheueciat"
+                            "example": "cldb761fm0003g13h8t7g785h"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -2933,7 +2804,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3145,7 +3016,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3300,7 +3171,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld9xreck0002ml3hfoja52nk"
+                            "example": "cldb761fl0002g13hf0io122m"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -3316,7 +3187,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld9xrecl0003ml3hheueciat"
+                            "example": "cldb761fm0003g13h8t7g785h"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -3407,7 +3278,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3607,7 +3478,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3688,51 +3559,7 @@
                                             "example": true
                                         },
                                         "data": {
-                                            "type": "object",
-                                            "properties": {},
-                                            "additionalProperties": false,
-                                            "example": {
-                                                "success": true,
-                                                "data": {
-                                                    "theme": {
-                                                        "type": "auto"
-                                                    },
-                                                    "reading": {
-                                                        "showTooltipFor": [
-                                                            "translation"
-                                                        ],
-                                                        "readingPreference": "translation",
-                                                        "wordClickFunctionality": "play-audio",
-                                                        "selectedWordByWordLocale": "en",
-                                                        "showWordByWordTranslation": false,
-                                                        "selectedWordByWordTranslation": 20,
-                                                        "showWordByWordTransliteration": false,
-                                                        "selectedWordByWordTransliteration": 12
-                                                    },
-                                                    "quranReaderStyles": {
-                                                        "quranFont": "code_v1",
-                                                        "mushafLines": "16_lines",
-                                                        "tafsirFontScale": 3,
-                                                        "quranTextFontScale": 3,
-                                                        "translationFontScale": 3
-                                                    },
-                                                    "translations": {
-                                                        "selectedTranslations": [
-                                                            131
-                                                        ]
-                                                    },
-                                                    "audio": {
-                                                        "reciter": 7,
-                                                        "playbackRate": 1,
-                                                        "enableAutoScrolling": true,
-                                                        "showTooltipWhenPlayingAudio": false
-                                                    },
-                                                    "language": "en",
-                                                    "tafsirs": {
-                                                        "selectedTafsirs": "[\"en-tafisr-ibn-kathir\"]"
-                                                    }
-                                                }
-                                            }
+                                            "$ref": "#/components/schemas/Preference"
                                         }
                                     },
                                     "additionalProperties": false
@@ -3801,7 +3628,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -3875,56 +3702,7 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "object",
-                                "properties": {
-                                    "tafsirs": {},
-                                    "translations": {},
-                                    "audio": {},
-                                    "theme": {},
-                                    "quranReaderStyles": {},
-                                    "reading": {},
-                                    "language": {}
-                                },
-                                "additionalProperties": false,
-                                "example": {
-                                    "theme": {
-                                        "type": "auto"
-                                    },
-                                    "reading": {
-                                        "readingPreference": "translation",
-                                        "showWordByWordTranslation": false,
-                                        "showWordByWordTransliteration": false,
-                                        "selectedWordByWordLocale": "en",
-                                        "showTooltipFor": [
-                                            "translation"
-                                        ],
-                                        "wordClickFunctionality": "play-audio"
-                                    },
-                                    "quranReaderStyles": {
-                                        "tafsirFontScale": 3,
-                                        "quranTextFontScale": 3,
-                                        "translationFontScale": 3,
-                                        "quranFont": "code_v1",
-                                        "mushafLines": "16_lines"
-                                    },
-                                    "translations": {
-                                        "selectedTranslations": [
-                                            131
-                                        ]
-                                    },
-                                    "tafsirs": {
-                                        "selectedTafsirs": [
-                                            "en-tafisr-ibn-kathir"
-                                        ]
-                                    },
-                                    "audio": {
-                                        "reciter": 7,
-                                        "playbackRate": 1,
-                                        "showTooltipWhenPlayingAudio": false,
-                                        "enableAutoScrolling": true
-                                    },
-                                    "language": "ar"
-                                }
+                                "$ref": "#/components/schemas/Preference"
                             }
                         }
                     }
@@ -4019,7 +3797,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4205,7 +3983,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4309,7 +4087,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cld9xreck0002ml3hfoja52nk"
+                            "example": "cldb761fl0002g13hf0io122m"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -4324,7 +4102,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cld9xrecl0003ml3hheueciat"
+                            "example": "cldb761fm0003g13h8t7g785h"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -4414,7 +4192,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {
@@ -4566,7 +4344,7 @@
                         }
                     },
                     "422": {
-                        "description": "Validation Error. The request include one or more invalid params. Please check the request params and try again.",
+                        "description": "Validation Error. The request includes one or more invalid params. Please check the request params and try again.",
                         "content": {
                             "application/json": {
                                 "schema": {

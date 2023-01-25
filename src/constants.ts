@@ -1,10 +1,20 @@
 export const APIs = [
   {
-    title: 'Quran.com Auth V1',
-    url: '/qdc-auth-v1',
+    label: 'Quran.com Auth V1',
+    value: '/qdc-auth-v1',
+    group: 'Quran.com Auth',
   },
+
   {
-    title: 'Quran.com V4',
-    url: '/qdc-v4',
+    label: 'Quran.com V4',
+    value: '/qdc-v4',
+    group: 'Quran.com',
   },
 ]
+
+const groups = ['Quran.com Auth', 'Quran.com']
+
+export const APIGroups = groups.map((group) => ({
+  label: group,
+  options: APIs.filter((api) => api.group === group),
+}))
