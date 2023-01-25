@@ -36,7 +36,7 @@ const APIDocs = ({ basePath, apiDescriptionUrl }: Props) => {
           }}
         ></Select>
       </div>
-      <div className="px-4 py-8 md:p-0">
+      <div className="px-4 py-8 md:p-0 h-full">
         <API
           layout={layout}
           basePath={basePath}
