@@ -7,12 +7,8 @@
     },
     "servers": [
         {
-            "url": "http://localhost",
+            "url": "https://auth.quran.com",
             "description": "Production Server"
-        },
-        {
-            "url": "http://localhost:3001",
-            "description": "Development Server"
         }
     ],
     "components": {
@@ -29,7 +25,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "cldb761ei0000g13h3i2a4evp"
+                        "example": "cldcq28r50000ic3h6e7x7dwf"
                     },
                     "createdAt": {
                         "type": "string",
@@ -65,7 +61,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "cldb761gh0004g13hfrg1ap9f"
+                        "example": "cldcq28t70004ic3h9tsf0h4n"
                     },
                     "updatedAt": {
                         "type": "string",
@@ -80,20 +76,6 @@
                 "required": [
                     "id",
                     "updatedAt",
-                    "name"
-                ],
-                "additionalProperties": false
-            },
-            "CollectionInput": {
-                "type": "object",
-                "properties": {
-                    "name": {
-                        "type": "string",
-                        "description": "The name of the new collection to be created.",
-                        "example": "Woman in Quran"
-                    }
-                },
-                "required": [
                     "name"
                 ],
                 "additionalProperties": false
@@ -230,7 +212,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "cldb761n6000ag13h5gir4rho"
+                        "example": "cldcq28zd000aic3h9e17gcru"
                     },
                     "updatedAt": {
                         "type": "string",
@@ -302,7 +284,18 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/CollectionInput"
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "description": "The name of the new collection to be created.",
+                                        "example": "Woman in Quran"
+                                    }
+                                },
+                                "required": [
+                                    "name"
+                                ],
+                                "additionalProperties": false
                             }
                         }
                     }
@@ -507,7 +500,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cldb761fl0002g13hf0io122m"
+                            "example": "cldcq28sd0002ic3hhhx85jt1"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -522,7 +515,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cldb761fm0003g13h8t7g785h"
+                            "example": "cldcq28sd0003ic3h22hlhxj5"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -688,7 +681,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be added.",
-                            "example": "cldb761hs0005g13h6iua2uer"
+                            "example": "cldcq28uh0005ic3hf6l30hig"
                         },
                         "required": true,
                         "description": "The Id of the collection to be added."
@@ -953,7 +946,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be deleted.",
-                            "example": "cldb761hx0006g13h7jtl8psv"
+                            "example": "cldcq28um0006ic3h4b6yexev"
                         },
                         "required": true,
                         "description": "The Id of the collection to be deleted."
@@ -1122,7 +1115,7 @@
                         "name": "collectionId",
                         "schema": {
                             "type": "string",
-                            "example": "cldb761ja0009g13hca4mbpsp"
+                            "example": "cldcq28vy0009ic3h6r0g7bko"
                         }
                     },
                     {
@@ -1174,7 +1167,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cldb761fl0002g13hf0io122m"
+                            "example": "cldcq28sd0002ic3hhhx85jt1"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -1189,7 +1182,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cldb761fm0003g13h8t7g785h"
+                            "example": "cldcq28sd0003ic3h22hlhxj5"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -1552,7 +1545,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be deleted.",
-                            "example": "cldb761i80007g13hh2js9njw"
+                            "example": "cldcq28uv0007ic3h8r8t16qw"
                         },
                         "required": true,
                         "description": "The Id of the collection to be deleted."
@@ -1563,7 +1556,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the bookmark to be deleted.",
-                            "example": "cldb761i80008g13h6hl3e18n"
+                            "example": "cldcq28uv0008ic3hfz0ngm13"
                         },
                         "required": true,
                         "description": "The Id of the bookmark to be deleted."
@@ -1778,7 +1771,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cldb761fl0002g13hf0io122m"
+                            "example": "cldcq28sd0002ic3hhhx85jt1"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -1793,7 +1786,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cldb761fm0003g13h8t7g785h"
+                            "example": "cldcq28sd0003ic3h22hlhxj5"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -2260,7 +2253,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cldb761fl0002g13hf0io122m"
+                            "example": "cldcq28sd0002ic3hhhx85jt1"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -2276,7 +2269,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cldb761fm0003g13h8t7g785h"
+                            "example": "cldcq28sd0003ic3h22hlhxj5"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -2443,7 +2436,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The id of the bookmark to be deleted.",
-                            "example": "cldb761es0001g13hh86v1nrk"
+                            "example": "cldcq28rf0001ic3h7cpf2jt0"
                         },
                         "required": true,
                         "description": "The id of the bookmark to be deleted."
@@ -2697,7 +2690,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cldb761fl0002g13hf0io122m"
+                            "example": "cldcq28sd0002ic3hhhx85jt1"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -2713,7 +2706,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cldb761fm0003g13h8t7g785h"
+                            "example": "cldcq28sd0003ic3h22hlhxj5"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -3171,7 +3164,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cldb761fl0002g13hf0io122m"
+                            "example": "cldcq28sd0002ic3hhhx85jt1"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -3187,7 +3180,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cldb761fm0003g13h8t7g785h"
+                            "example": "cldcq28sd0003ic3h22hlhxj5"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -4087,7 +4080,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cldb761fl0002g13hf0io122m"
+                            "example": "cldcq28sd0002ic3hhhx85jt1"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -4102,7 +4095,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cldb761fm0003g13h8t7g785h"
+                            "example": "cldcq28sd0003ic3h22hlhxj5"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
