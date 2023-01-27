@@ -25,7 +25,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "cldcq28r50000ic3h6e7x7dwf"
+                        "example": "clde254z80004vn3h31lg0a2t"
                     },
                     "createdAt": {
                         "type": "string",
@@ -61,7 +61,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "cldcq28t70004ic3h9tsf0h4n"
+                        "example": "clde2550v0006vn3h1dj537ej"
                     },
                     "updatedAt": {
                         "type": "string",
@@ -212,7 +212,7 @@
                 "properties": {
                     "id": {
                         "type": "string",
-                        "example": "cldcq28zd000aic3h9e17gcru"
+                        "example": "clde2556z000cvn3h8vel4i82"
                     },
                     "updatedAt": {
                         "type": "string",
@@ -500,7 +500,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cldcq28sd0002ic3hhhx85jt1"
+                            "example": "clde254yt0000vn3h4d3wesym"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -515,7 +515,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cldcq28sd0003ic3h22hlhxj5"
+                            "example": "clde254yu0001vn3h549u8ev1"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -537,6 +537,28 @@
                                             "items": {
                                                 "$ref": "#/components/schemas/Collection"
                                             }
+                                        },
+                                        "pagination": {
+                                            "type": "object",
+                                            "properties": {
+                                                "startCursor": {
+                                                    "type": "string",
+                                                    "example": "clde254yu0002vn3h2jp02tak"
+                                                },
+                                                "endCursor": {
+                                                    "type": "string",
+                                                    "example": "clde254yu0003vn3h1wzl0vfw"
+                                                },
+                                                "hasNextPage": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "hasPreviousPage": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
@@ -681,7 +703,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be added.",
-                            "example": "cldcq28uh0005ic3hf6l30hig"
+                            "example": "clde2552a0007vn3hhch0f4cm"
                         },
                         "required": true,
                         "description": "The Id of the collection to be added."
@@ -946,7 +968,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be deleted.",
-                            "example": "cldcq28um0006ic3h4b6yexev"
+                            "example": "clde2552g0008vn3h6bfa0fxn"
                         },
                         "required": true,
                         "description": "The Id of the collection to be deleted."
@@ -1115,7 +1137,7 @@
                         "name": "collectionId",
                         "schema": {
                             "type": "string",
-                            "example": "cldcq28vy0009ic3h6r0g7bko"
+                            "example": "clde2553q000bvn3h9cgv8s5q"
                         }
                     },
                     {
@@ -1167,7 +1189,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cldcq28sd0002ic3hhhx85jt1"
+                            "example": "clde254yt0000vn3h4d3wesym"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -1182,7 +1204,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cldcq28sd0003ic3h22hlhxj5"
+                            "example": "clde254yu0001vn3h549u8ev1"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -1210,6 +1232,28 @@
                                                     "items": {
                                                         "$ref": "#/components/schemas/Bookmark"
                                                     }
+                                                }
+                                            },
+                                            "additionalProperties": false
+                                        },
+                                        "pagination": {
+                                            "type": "object",
+                                            "properties": {
+                                                "startCursor": {
+                                                    "type": "string",
+                                                    "example": "clde254yu0002vn3h2jp02tak"
+                                                },
+                                                "endCursor": {
+                                                    "type": "string",
+                                                    "example": "clde254yu0003vn3h1wzl0vfw"
+                                                },
+                                                "hasNextPage": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "hasPreviousPage": {
+                                                    "type": "boolean",
+                                                    "example": false
                                                 }
                                             },
                                             "additionalProperties": false
@@ -1545,7 +1589,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the collection to be deleted.",
-                            "example": "cldcq28uv0007ic3h8r8t16qw"
+                            "example": "clde2552o0009vn3hcing9gd8"
                         },
                         "required": true,
                         "description": "The Id of the collection to be deleted."
@@ -1556,7 +1600,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The Id of the bookmark to be deleted.",
-                            "example": "cldcq28uv0008ic3hfz0ngm13"
+                            "example": "clde2552o000avn3hc4eq2eoh"
                         },
                         "required": true,
                         "description": "The Id of the bookmark to be deleted."
@@ -1771,7 +1815,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cldcq28sd0002ic3hhhx85jt1"
+                            "example": "clde254yt0000vn3h4d3wesym"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -1786,7 +1830,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cldcq28sd0003ic3h22hlhxj5"
+                            "example": "clde254yu0001vn3h549u8ev1"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -1808,6 +1852,28 @@
                                             "items": {
                                                 "$ref": "#/components/schemas/Bookmark"
                                             }
+                                        },
+                                        "pagination": {
+                                            "type": "object",
+                                            "properties": {
+                                                "startCursor": {
+                                                    "type": "string",
+                                                    "example": "clde254yu0002vn3h2jp02tak"
+                                                },
+                                                "endCursor": {
+                                                    "type": "string",
+                                                    "example": "clde254yu0003vn3h1wzl0vfw"
+                                                },
+                                                "hasNextPage": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "hasPreviousPage": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
@@ -2253,7 +2319,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cldcq28sd0002ic3hhhx85jt1"
+                            "example": "clde254yt0000vn3h4d3wesym"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -2269,7 +2335,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cldcq28sd0003ic3h22hlhxj5"
+                            "example": "clde254yu0001vn3h549u8ev1"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -2292,6 +2358,28 @@
                                             "items": {
                                                 "$ref": "#/components/schemas/Bookmark"
                                             }
+                                        },
+                                        "pagination": {
+                                            "type": "object",
+                                            "properties": {
+                                                "startCursor": {
+                                                    "type": "string",
+                                                    "example": "clde254yu0002vn3h2jp02tak"
+                                                },
+                                                "endCursor": {
+                                                    "type": "string",
+                                                    "example": "clde254yu0003vn3h1wzl0vfw"
+                                                },
+                                                "hasNextPage": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "hasPreviousPage": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
@@ -2436,7 +2524,7 @@
                         "schema": {
                             "type": "string",
                             "description": "The id of the bookmark to be deleted.",
-                            "example": "cldcq28rf0001ic3h7cpf2jt0"
+                            "example": "clde254zh0005vn3hdaqxgjys"
                         },
                         "required": true,
                         "description": "The id of the bookmark to be deleted."
@@ -2690,7 +2778,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cldcq28sd0002ic3hhhx85jt1"
+                            "example": "clde254yt0000vn3h4d3wesym"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -2706,7 +2794,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cldcq28sd0003ic3h22hlhxj5"
+                            "example": "clde254yu0001vn3h549u8ev1"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -2729,6 +2817,28 @@
                                             "items": {
                                                 "$ref": "#/components/schemas/Bookmark"
                                             }
+                                        },
+                                        "pagination": {
+                                            "type": "object",
+                                            "properties": {
+                                                "startCursor": {
+                                                    "type": "string",
+                                                    "example": "clde254yu0002vn3h2jp02tak"
+                                                },
+                                                "endCursor": {
+                                                    "type": "string",
+                                                    "example": "clde254yu0003vn3h1wzl0vfw"
+                                                },
+                                                "hasNextPage": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "hasPreviousPage": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
@@ -3164,7 +3274,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cldcq28sd0002ic3hhhx85jt1"
+                            "example": "clde254yt0000vn3h4d3wesym"
                         },
                         "required": false,
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
@@ -3180,7 +3290,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cldcq28sd0003ic3h22hlhxj5"
+                            "example": "clde254yu0001vn3h549u8ev1"
                         },
                         "required": false,
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
@@ -4080,7 +4190,7 @@
                                 }
                             ],
                             "description": "The cursor after which you want to get the next page of items. Should be used together with `first`",
-                            "example": "cldcq28sd0002ic3hhhx85jt1"
+                            "example": "clde254yt0000vn3h4d3wesym"
                         },
                         "description": "The cursor after which you want to get the next page of items. Should be used together with `first`"
                     },
@@ -4095,7 +4205,7 @@
                                 }
                             ],
                             "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`",
-                            "example": "cldcq28sd0003ic3h22hlhxj5"
+                            "example": "clde254yu0001vn3h549u8ev1"
                         },
                         "description": "The cursor before which the previous page of items will be fetched. Should be used together with `last`"
                     }
@@ -4117,6 +4227,28 @@
                                             "items": {
                                                 "$ref": "#/components/schemas/ReadingSession"
                                             }
+                                        },
+                                        "pagination": {
+                                            "type": "object",
+                                            "properties": {
+                                                "startCursor": {
+                                                    "type": "string",
+                                                    "example": "clde254yu0002vn3h2jp02tak"
+                                                },
+                                                "endCursor": {
+                                                    "type": "string",
+                                                    "example": "clde254yu0003vn3h1wzl0vfw"
+                                                },
+                                                "hasNextPage": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                },
+                                                "hasPreviousPage": {
+                                                    "type": "boolean",
+                                                    "example": false
+                                                }
+                                            },
+                                            "additionalProperties": false
                                         }
                                     },
                                     "additionalProperties": false
