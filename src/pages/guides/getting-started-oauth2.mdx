@@ -1,22 +1,12 @@
 import { GuideLayout } from '@/components/guide-layout'
 
-# Getting started with Quran.com's OAuth2
+# Using OAuth 2.0 to Access Quran.com APIs
 
-Quran.com API uses OAuth2 Protocal for authentication and authorization.
+Quran.com  APIs use the [OAuth 2.0 protocol](https://www.rfc-editor.org/rfc/rfc6749) for authentication and authorization. Google supports common OAuth 2.0 scenarios such as those for web server, client-side, installed, and limited-input device applications.
 
-## Video
+To begin, [obtain OAuth 2.0 client credentials](#getting-the-client-id-and-client-secret) from Quran.com. Then your client application requests an access token from Quran.com Authorization Server, extracts a token from the response, and sends the token to the Quran.com API that you want to access.
 
-<iframe
-  width="560"
-  height="315"
-  src="https://www.youtube.com/embed/RgHntxRUmh0"
-  title="YouTube video player"
-  frameborder="0"
-  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-  allowfullscreen
-></iframe>
-
-## Getting the client id and client secret
+## Obtaining OAuth 2.0 client credentials
 
 Quran.com's OAuth2 is currently in beta. Please contact <a hef="mailto:osama@quran.com">osama@quran.com</a> to get the client id and secret.
 
