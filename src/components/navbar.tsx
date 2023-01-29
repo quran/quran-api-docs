@@ -1,5 +1,5 @@
 import Select from 'react-select'
-import { APIGroups, APIs } from '@/constants'
+import { APIGroups, APIs, websiteName } from '@/constants'
 import { useRouter } from 'next/router'
 
 type Props = { basePath?: string }
@@ -7,7 +7,7 @@ export const Navbar = (props: Props) => {
   const router = useRouter()
   return (
     <div className="h-12 flex items-center justify-between px-4 border-b">
-      <div>Quran Foundation API Docs</div>
+      <div>{websiteName}</div>
       <Select
         className="w-32 md:w-56"
         options={APIGroups}
