@@ -12,7 +12,7 @@ export const APIs = [
   {
     label: 'Getting started With Auth',
     value: '/guides/getting-started-oauth2',
-    group: 'Quran.com',
+    group: 'Guides',
   },
   // {
   //   label: 'Quran.com OAuth2 Server',
