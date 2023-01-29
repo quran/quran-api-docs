@@ -2,6 +2,8 @@ import { GuideLayout } from '@/components/guide-layout'
 
 # Getting started with Quran.com's OAuth2
 
+Quran.com API uses OAuth2 Protocal for authentication and authorization.
+
 ## Video
 
 <iframe
@@ -29,6 +31,31 @@ How to request scopes
 ## Accessing the resource using the obtained access token
 
 ## Refresh the access token if necessary
+
+---
+
+OAuth2 is an authorization protocol that enables applications to access user data on Quran.com without having to provide usernames and passwords. This tutorial will show you how to use OAuth2 to authorize access to your Quran.com account.
+
+Step 1: Register your application
+
+First, you need to register your application with Quran.com. This will provide you with the necessary Client ID and Client Secret that you will need to authenticate the request.
+Currently Quran.com's API is in beta. To get the Client ID and Client Secret pleasee contact <a href="mailto:osama@quran.com">osama@quran.com</a>
+
+Step 2: Generate an authorization URL
+
+Once your application is registered, you will need to generate an authorization URL. This URL will contain the necessary parameters that will be used to authenticate the request.
+
+The authorization URL should include the following parameters:
+
+• response_type: The type of response you are expecting (e.g. “code” for an authorization code)
+
+• client_id: Your application’s Client ID
+
+• redirect_uri: The URL where the user should be redirected after authentication
+
+• scope: The scope of access the user is granting (e.g. “read” to read data from their account)
+
+• state: An optional parameter that can be used to verify the request
 
 export default ({ children }) => (
   <GuideLayout title="Getting started with Quran.com's OAuth2">
