@@ -1,6 +1,6 @@
 export const APIs = [
   {
-    label: 'Quran.com Resource Server',
+    label: 'Quran.com Auth',
     value: '/qdc-auth-v1',
     group: 'Quran.com Auth',
   },
@@ -9,11 +9,11 @@ export const APIs = [
     value: '/qdc-v4',
     group: 'Quran.com',
   },
-  {
-    label: 'Quran.com OAuth2 Server',
-    value: '/qdc-oauth2',
-    group: 'Quran.com Auth',
-  },
+  // {
+  //   label: 'Quran.com OAuth2 Server',
+  //   value: '/qdc-oauth2',
+  //   group: 'Quran.com Auth',
+  // },
 ]
 
 const groups = ['Quran.com Auth', 'Quran.com']
