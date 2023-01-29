@@ -1,7 +1,9 @@
-import H2 from "./H2";
+import CustomLink from "./MDX/CustomLink";
+import H2 from "./MDX/H2";
 
 const MDXComponents = {
-    h2: (props) => <H2 {...props} />,
-  };
-  
-  export default MDXComponents;
+  h2: H2,
+  a: CustomLink
+};
+
+export default MDXComponents;
