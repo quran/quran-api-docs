@@ -2,7 +2,7 @@ import { GuideLayout } from '@/components/guide-layout'
 
 # Using OAuth 2.0 to Access Quran.com APIs
 
-Quran.com APIs use the [OAuth 2.0 protocol](https://www.rfc-editor.org/rfc/rfc6749) for authentication and authorization. Google supports common OAuth 2.0 scenarios such as those for web server, client-side, installed, and limited-input device applications.
+Quran.com APIs use the [OAuth 2.0 protocol](https://www.rfc-editor.org/rfc/rfc6749) for authentication and authorization. Quran.com supports common OAuth 2.0 scenarios such as those for web server, client-side, installed, and limited-input device applications.
 
 To begin, [obtain OAuth 2.0 client credentials](#obtaining-oauth-20-client-credentials) from Quran.com. Then your client application requests an access token from Quran.com Authorization Server, extracts a token from the response, and sends the token to the Quran.com API that you want to access.
 
@@ -24,7 +24,7 @@ Contact [us](mailto:osama@quran.com) to obtain OAuth 2.0 credentials such as a c
 
 Before your application can access private data using a quran.com API, it must obtain an access token that grants access to that API. A single access token can grant varying degrees of access to multiple APIs. A variable parameter called scope controls the set of resources and operations that an access token permits. During the access-token request, your application sends one or more values in the scope parameter.
 
-There are several ways to make this request, and they vary based on the type of application you are building. For example, a JavaScript application might request an access token using a browser redirect to Google, while an application installed on a device that has no browser uses web service requests.
+There are several ways to make this request, and they vary based on the type of application you are building. For example, a JavaScript application might request an access token using a browser redirect to Quran.com, while an application installed on a device that has no browser uses web service requests.
 
 Some requests require an authentication step where the user logs in with their Quran.com account. After logging in, the user is asked whether they are willing to grant one or more permissions that your application is requesting. This process is called user consent.
 
@@ -36,13 +36,13 @@ It is generally a best practice to request scopes incrementally, at the time acc
 
 Compare the scopes included in the access token response to the scopes required to access features and functionality of your application dependent upon access to a related Quran.com API. Disable any features of your app unable to function without access to the related API.
 
-The scope included in your request may not match the scope included in your response, even if the user granted all requested scopes. Refer to the documentation for each Quran.com API for the scopes required for access. An API may map multiple scope string values to a single scope of access, returning the same scope string for all values allowed in the request. Example: the Google People API may return a scope of https://www.googleapis.com/auth/contacts when an app requested a user authorize a scope of https://www.google.com/m8/feeds/; the Google People API method people.updateContact requires a granted scope of https://www.googleapis.com/auth/contacts.
+The scope included in your request may not match the scope included in your response, even if the user granted all requested scopes. Refer to the documentation for each Quran.com API for the scopes required for access. An API may map multiple scope string values to a single scope of access, returning the same scope string for all values allowed in the request. Example: the Quran.com People API may return a scope of https://www.googleapis.com/auth/contacts when an app requested a user authorize a scope of https://www.google.com/m8/feeds/; the Quran.com People API method people.updateContact requires a granted scope of https://www.googleapis.com/auth/contacts.
 
 4. Send the access token to an API.
 
 After an application obtains an access token, it sends the token to a Quran.com API in an HTTP Authorization request header. 
 
-Access tokens are valid only for the set of operations and resources described in the scope of the token request. For example, if an access token is issued for the Quran.com Bookmark API, it does not grant access to the Quran.com Collection API. You can, however, send that access token to the Google Bookmark API multiple times for similar operations.
+Access tokens are valid only for the set of operations and resources described in the scope of the token request. For example, if an access token is issued for the Quran.com Bookmark API, it does not grant access to the Quran.com Collection API. You can, however, send that access token to the Quran.com Bookmark API multiple times for similar operations.
 
 5. Refresh the access token, if necessary.
 
@@ -69,7 +69,7 @@ OAuth2 is an authorization protocol that enables applications to access user dat
 Step 1: Register your application
 
 First, you need to register your application with Quran.com. This will provide you with the necessary Client ID and Client Secret that you will need to authenticate the request.
-Currently Quran.com's API is in beta. To get the Client ID and Client Secret pleasee contact <a href="mailto:osama@quran.com">osama@quran.com</a>
+Currently Quran.com's API is in beta. To get the Client ID and Client Secret please contact <a href="mailto:osama@quran.com">osama@quran.com</a>
 
 Step 2: Generate an authorization URL
 
