@@ -4857,7 +4857,7 @@
                         "description": "Production Server"
                     }
                 ],
-                "description": "Use open source libraries to perform OAuth 2.0 and OpenID Connect\navailable for any programming language. You can find a list of libraries at https://oauth.net/code/\n\n",
+                "description": "Use open source libraries to perform OAuth 2.0 and OpenID Connect\navailable for any programming language. You can find a list of libraries at https://oauth.net/code/\n\n \n\n We currently only support `authorization_code` `grant_type`",
                 "operationId": "oAuth2Authorize",
                 "responses": {
                     "302": {
