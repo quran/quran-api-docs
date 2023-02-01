@@ -1,0 +1,10 @@
+.anchor-link {
+    color: #666;
+    opacity: 0;
+    position: absolute;
+    transform: translate(-1em, -2px);
+    width: 1em;
+}
+h2:hover .anchor-link {
+    opacity: 1;
+}
