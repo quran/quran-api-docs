@@ -19,7 +19,7 @@ export const GuideLayout = ({ children, title }: Props) => {
         </title>
       </Head>
       <Navbar basePath={basePath} />
-      <div className="max-w-4xl prose mx-auto my-8 md:px-0 px-4">
+      <div className="max-w-4xl prose mx-auto my-8 lg:px-0 px-4">
         {children}
       </div>
     </div>
