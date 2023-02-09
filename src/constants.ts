@@ -15,7 +15,7 @@ export const APIs = [
     group: 'Quran.com Auth',
   },
   {
-    label: 'Getting started With OAuth 2.0',
+    label: 'Scopes',
     value: '/guides/scopes',
     group: 'Quran.com Auth',
   },
