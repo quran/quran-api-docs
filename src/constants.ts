@@ -14,6 +14,11 @@ export const APIs = [
     value: '/guides/getting-started-with-oauth2',
     group: 'Quran.com Auth',
   },
+  {
+    label: 'Getting started With OAuth 2.0',
+    value: '/guides/scopes',
+    group: 'Quran.com Auth',
+  },
   // {
   //   label: 'Quran.com OAuth2 Server',
   //   value: '/qdc-oauth2',
