@@ -1,18 +1,18 @@
 export const APIs = [
   {
-    label: 'Quran.com Auth',
+    label: 'V1 APIs',
     value: '/qdc-auth-v1',
     group: 'Quran.com Auth',
   },
   {
-    label: 'Quran.com V4',
+    label: 'V4 APIs',
     value: '/qdc-v4',
-    group: 'Quran.com',
+    group: 'Quran.com Backend',
   },
   {
-    label: 'Getting started With Auth',
-    value: '/guides/getting-started-oauth2',
-    group: 'Guides',
+    label: 'Getting started With OAuth 2.0',
+    value: '/guides/getting-started-with-oauth2',
+    group: 'Quran.com Auth',
   },
   // {
   //   label: 'Quran.com OAuth2 Server',
@@ -21,7 +21,7 @@ export const APIs = [
   // },
 ]
 
-const groups = ['Quran.com Auth', 'Quran.com', 'Guides']
+const groups = ['Quran.com Auth', 'Quran.com Backend']
 
 export const APIGroups = groups.map((group) => ({
   label: group,
