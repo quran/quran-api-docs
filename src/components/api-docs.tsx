@@ -15,7 +15,7 @@ const APIDocs = ({ basePath, apiDescriptionUrl }: Props) => {
 
   return (
     <div style={{ height: '100%' }}>
-      <div className="py-8 md:p-0 h-full">
+      <div className="md:p-0 h-full">
         <Navbar basePath={basePath} />
         <div className="lg:px-0 px-4 h-full">
           <API
