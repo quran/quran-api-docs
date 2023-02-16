@@ -9,6 +9,7 @@ export const Navbar = (props: Props) => {
     <div className="h-12 flex items-center justify-between px-4 border-b">
       <div>{websiteName}</div>
       <Select
+        instanceId="navbar"
         className="w-32 md:w-56"
         options={APIGroups}
         defaultValue={APIs.find((option) => option.value === props.basePath)}
