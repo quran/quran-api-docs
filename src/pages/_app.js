@@ -1,6 +1,6 @@
 import '../styles/global.css'
-import { MDXProvider } from '@mdx-js/react';
-import MDXComponents from '../components/MDXComponents';
+import { MDXProvider } from '@mdx-js/react'
+import MDXComponents from '../components/MDXComponents'
 
 // This default export is required in a new `pages/_app.js` file.
 export default function MyApp({ Component, pageProps }) {
