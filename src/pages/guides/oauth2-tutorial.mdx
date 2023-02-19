@@ -20,11 +20,11 @@ import { GuideLayout } from '@/components/guide-layout'
   - Notice that we have example client id and client secret (`quran-demo` and `secret`)
   - On production, you should request your own client id and secret. You can do so by emailing osama@quran.com
 - Install dependency
-  ```jsx
+  ```bash
   npm install
   ```
 - Start the demo app
-  ```jsx
+  ```bash
   npm start
   ```
 
@@ -227,7 +227,7 @@ html(lang="en")
 
 And finally wrap those code with `createApplication` function to get express start listening at port 3000
 
-```jsx
+```javascript
 createApplication(({ app, callbackUrl }) => {
   const client = new AuthorizationCode({
     client: {
