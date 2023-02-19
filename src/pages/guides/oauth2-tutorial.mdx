@@ -95,7 +95,7 @@ dotenv.config()
 
 Here we setting up the view engine to use `pug` and start importing environment variable PORT and BASE_PATH
 
-```jsx
+```js
 const PORT = process.env.PORT
 const BASE_PATH = process.env.BASE_PATH
 
@@ -282,7 +282,7 @@ createApplication(({ app, callbackUrl }) => {
 ```
 
 export default ({ children }) => (
-  <GuideLayout title="OpenId Connect">
+  <GuideLayout title="OAuth2 Tutorial">
     {children}
   </GuideLayout>
 

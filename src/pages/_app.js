@@ -1,4 +1,5 @@
 import '../styles/global.css'
+import '../styles/prism.css'
 import { MDXProvider } from '@mdx-js/react'
 import MDXComponents from '../components/MDXComponents'
 

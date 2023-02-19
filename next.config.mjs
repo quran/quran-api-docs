@@ -1,12 +1,14 @@
 // next.config.mjs
 import remarkGfm from 'remark-gfm'
+import rehypeHighlight from 'rehype-highlight'
+import rehypePrism from '@mapbox/rehype-prism'
 import createMDX from '@next/mdx'
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [],
+    rehypePlugins: [rehypePrism],
   },
 })
 
