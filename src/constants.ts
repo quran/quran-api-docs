@@ -19,6 +19,11 @@ export const APIs = [
     value: '/guides/scopes',
     group: 'Quran.com Auth',
   },
+  {
+    label: 'Quran.com',
+    value: '/qdc',
+    group: 'Quran.com Backend',
+  },
   // {
   //   label: 'Quran.com OAuth2 Server',
   //   value: '/qdc-oauth2',
