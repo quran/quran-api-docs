@@ -1,0 +1,5040 @@
+{
+  "openapi": "3.1.0",
+  "x-stoplight": {
+    "id": "xsq6y4bmz7pjp"
+  },
+  "info": {
+    "title": "Quran.com api (qdc)",
+    "version": "qdc",
+    "summary": "Quran.com api",
+    "description": "API specifically designed for the quran.com frontend. ",
+    "contact": {
+      "name": "Discord channel",
+      "url": "https://discord.gg/4GF5HatSHa"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.quran.com/api/qdc"
+    }
+  ],
+  "paths": {
+    "/chapters": {
+      "get": {
+        "summary": "Get chapters list",
+        "tags": [
+          "chapter"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/chapters-list-response"
+          }
+        },
+        "operationId": "get-chapters",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "false",
+              "enum": [
+                "false",
+                "true",
+                "0",
+                "1",
+                "yes",
+                "no"
+              ]
+            },
+            "in": "query",
+            "name": "slugs",
+            "description": "Get all slugs of chapters"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false",
+                "yes",
+                "no",
+                "1",
+                "0"
+              ],
+              "example": "false"
+            },
+            "in": "query",
+            "name": "translated_names",
+            "description": "Include all translated names of chapter"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "en"
+            },
+            "in": "query",
+            "name": "locale",
+            "description": "Get translated name of chapters in specific language "
+          }
+        ],
+        "description": "Get the list of all chapters, "
+      }
+    },
+    "/chapters/{id}": {
+      "get": {
+        "summary": "Get chapter detail",
+        "tags": [
+          "chapter"
+        ],
+        "operationId": "get-chapter",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "false",
+              "enum": [
+                "false",
+                "true",
+                "0",
+                "1",
+                "yes",
+                "no"
+              ]
+            },
+            "in": "query",
+            "name": "slugs",
+            "description": "Include all the slugs of chapter"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "true",
+                "false",
+                "yes",
+                "no",
+                "1",
+                "0"
+              ],
+              "example": "false"
+            },
+            "in": "query",
+            "name": "translated_names",
+            "description": "Include all translated names of chapter"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "en"
+            },
+            "in": "query",
+            "name": "locale",
+            "description": "Include translated name in specific language"
+          },
+          {
+            "schema": {
+              "type": "boolean"
+            },
+            "in": "query",
+            "name": "info",
+            "description": "Include chapter info in the response. You can get info in specific language using `locale` query string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/chapter-response"
+          }
+        },
+        "description": "Get detail of a single chapter"
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "1"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "chapter number or slug"
+        }
+      ]
+    },
+    "/resources/translations": {
+      "get": {
+        "summary": "List of translations",
+        "tags": [
+          "Resources"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/translations-list-response"
+          }
+        },
+        "operationId": "get-resources-translations",
+        "description": "Get the list of translations and their author name",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "en"
+            },
+            "in": "query",
+            "name": "locale",
+            "description": "Get translated names in specific language"
+          }
+        ]
+      }
+    },
+    "/resources/tafsirs": {
+      "get": {
+        "summary": "List of tafsirs",
+        "tags": [
+          "Resources"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/tafsirs-list-response"
+          }
+        },
+        "operationId": "get-resources-tafsirs",
+        "description": "Get the list of tafsirs and their author name",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "en"
+            },
+            "in": "query",
+            "name": "locale",
+            "description": "Get translated names in specific language"
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/resources/languages": {
+      "get": {
+        "summary": "Get languages",
+        "tags": [
+          "Resources"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/language-list-response"
+          }
+        },
+        "operationId": "get-resources-languages",
+        "description": "List of languages",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "locale",
+            "description": "get translated names of language in a specific language"
+          }
+        ]
+      },
+      "parameters": []
+    },
+    "/resources/recitation_styles": {
+      "get": {
+        "summary": "Get list of recitation styles",
+        "tags": [],
+        "responses": {},
+        "operationId": "get-resources-recitation_styles",
+        "description": "List of Quran recitation styles",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "recitation_styles": {
+                    "type": "object",
+                    "properties": {
+                      "mujawwad": {
+                        "type": "string"
+                      },
+                      "murattal": {
+                        "type": "string"
+                      },
+                      "muallim": {
+                        "type": "string"
+                      },
+                      "ijaza": {
+                        "type": "string"
+                      }
+                    }
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "recitation_styles": {
+                      "mujawwad": "Mujawwad is a melodic style of Holy Quran recitation",
+                      "murattal": "Murattal is at a slower pace, used for study and practice",
+                      "muallim": "Muallim is teaching style recitation of Holy Quran",
+                      "ijaza": "Quran Recitation Ijazah is a certification that authorizes its holder to teach Quran recitation (reading) and can be awarded by an already certified Imam or scholar (endless chain). The learner obtains this certificate after reciting (reading) the whole Quran with Tajweed in the presence of the certified tutor."
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "recitation_styles": {
+                      "mujawwad": "Mujawwad is a melodic style of Holy Quran recitation",
+                      "murattal": "Murattal is at a slower pace, used for study and practice",
+                      "muallim": "Muallim is teaching style recitation of Holy Quran",
+                      "ijaza": "Quran Recitation Ijazah is a certification that authorizes its holder to teach Quran recitation (reading) and can be awarded by an already certified Imam or scholar (endless chain). The learner obtains this certificate after reciting (reading) the whole Quran with Tajweed in the presence of the certified tutor."
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "description": ""
+        }
+      }
+    },
+    "/resources/chapter_infos": {
+      "get": {
+        "summary": "Get list of chapter info",
+        "tags": [
+          "Resources"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/chapter-info-list-response"
+          }
+        },
+        "operationId": "get-resources-chapter_infos",
+        "description": "We've chapter/surah info in multiple languages, use this endpoint to get list of chapter info"
+      }
+    },
+    "/chapters/{id}/info": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "chapter id or slug"
+        }
+      ],
+      "get": {
+        "summary": "Get chapter info",
+        "tags": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/chapter-info-response"
+          }
+        },
+        "operationId": "get-chapters-id-info",
+        "description": "Get chapter info in specific language",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "ur"
+            },
+            "in": "query",
+            "name": "locale",
+            "description": "get info of a specific language"
+          }
+        ]
+      }
+    },
+    "/juzs": {
+      "get": {
+        "summary": "Get the juz list",
+        "tags": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/juz-list-response"
+          }
+        },
+        "operationId": "get-juzs",
+        "description": "List of Juz in Quran"
+      }
+    },
+    "/juzs/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number",
+            "example": 1,
+            "minimum": 1,
+            "maximum": 30
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Juz number"
+        }
+      ],
+      "get": {
+        "summary": "Get juz detail",
+        "tags": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/juz-response"
+          }
+        },
+        "operationId": "get-juzs-id",
+        "description": "Get detail of single juz"
+      }
+    },
+    "/hizbs": {
+      "get": {
+        "summary": "Get list of Hizbs",
+        "tags": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/hizb-list-response"
+          }
+        },
+        "operationId": "get-hizbs",
+        "description": "Get list of Hizbs with ayahs mapping. Hizb are half of Juz and there are total 60 Hizbs in Quran."
+      }
+    },
+    "/hizbs/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 60
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Hizb number"
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/hizb-response"
+          }
+        },
+        "operationId": "get-hizbs-id"
+      }
+    },
+    "/rub_el_hizbs": {
+      "get": {
+        "summary": "Get list of Rub el hizbs",
+        "tags": [
+          "Quran"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/rubelhizb-list-response"
+          }
+        },
+        "operationId": "get-rub_el_hizbs",
+        "description": "Rub el hizb is quarter of Hizb, there are total 240 Rub el hizb in Quran. Use this endpoint to get list of Rub el Hizbs"
+      }
+    },
+    "/rub_el_hizbs/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number",
+            "example": 1,
+            "maximum": 240,
+            "minimum": 1
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Rub el hizb number"
+        }
+      ],
+      "get": {
+        "summary": "Get Rub el hizb detail",
+        "tags": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/hizb-list-response"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "integer"
+                    },
+                    "error": {
+                      "type": "string"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "status": 404,
+                      "error": "Rub el Hizb not found. Please select valid rub el hizb number from 1-240"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "status": 404,
+                      "error": "Rub el Hizb not found. Please select valid rub el hizb number from 1-240"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-rub_el_hizbs-id",
+        "description": "Get detail of single rub el hizb"
+      }
+    },
+    "/manzils": {
+      "get": {
+        "summary": "Get list of Manzils",
+        "tags": [
+          "Quran",
+          "Manzil"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/juz-response"
+          }
+        },
+        "operationId": "get-manzils",
+        "description": "Manzil is another division on Quran, there are total 7 manzils. Use this endpoint for getting the list of manzils and ayah mapping"
+      }
+    },
+    "/manzils/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 7,
+            "example": 1
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Manzil number"
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [
+          "Quran"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/manzil-response"
+          }
+        },
+        "operationId": "get-manzil-detail",
+        "description": "Get detail of single manzil with ayah mapping"
+      }
+    },
+    "/rukus": {
+      "get": {
+        "summary": "Get list of Ruku",
+        "tags": [
+          "Quran"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/juz-response"
+          }
+        },
+        "operationId": "get-rukus",
+        "description": "Longer chapters in the Quran are usually divided into several rukus, so that the reciters could identify when to make ruku in Salah without breaking an ongoing topic in the Quranic text. Use this end point for getting list of rukus"
+      }
+    },
+    "/rukus/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number",
+            "example": 1,
+            "minimum": 1,
+            "maximum": 558
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "Ruku number"
+        }
+      ],
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/ruku-response"
+          }
+        },
+        "operationId": "get-rukus-id"
+      }
+    },
+    "/mushafs": {
+      "get": {
+        "summary": "Get the list of Mushafs",
+        "tags": [
+          "Quran"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/mushaf-list-response"
+          }
+        },
+        "operationId": "get-mushafs",
+        "description": "Get the list of Mushafs, number of pages and lines per page for each mushaf."
+      }
+    },
+    "/pages": {
+      "get": {
+        "summary": "Get list of pages of a Mushaf",
+        "tags": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/page-list-response"
+          }
+        },
+        "operationId": "get-pages",
+        "description": "Get list of pages of a specific Mushaf, see \"Get mushaf list\" api for fetching the ids of Mushafs. If no mushaf_id is provided, we'll return pages of Madani Mushaf printed by Quran complex in KSA.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "mushaf_id",
+            "description": "Mushaf id"
+          }
+        ]
+      }
+    },
+    "/pages/{page_number}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number"
+          },
+          "name": "page_number",
+          "in": "path",
+          "required": true,
+          "description": "page number, each mushaf has different number of pages. See \"get mushaf list\" api for count of pages in each mushaf."
+        }
+      ],
+      "get": {
+        "summary": "Get mushaf page detail",
+        "tags": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/page-response"
+          }
+        },
+        "operationId": "get-pages-page_number",
+        "description": "Get page detail of a specific Mushaf, If no mushaf_id is provided, we'll return pages of Madani Mushaf printed by Quran complex in KSA.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "mushaf_id"
+          }
+        ]
+      }
+    },
+    "/pages/lookup": {
+      "get": {
+        "summary": "Page lookup/filters",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "total_page": 44,
+                      "lookup_range": {
+                        "from": "2:1",
+                        "to": "2:286"
+                      },
+                      "pages": {
+                        "2": {
+                          "first_verse_key": "2:1",
+                          "last_verse_key": "2:4",
+                          "from": "2:1",
+                          "to": "2:4"
+                        },
+                        "3": {
+                          "first_verse_key": "2:5",
+                          "last_verse_key": "2:17",
+                          "from": "2:5",
+                          "to": "2:17"
+                        }
+                      }
+                    }
+                  },
+                  "properties": {
+                    "total_page": {
+                      "type": "integer"
+                    },
+                    "lookup_range": {
+                      "type": "object",
+                      "properties": {
+                        "from": {
+                          "type": "string"
+                        },
+                        "to": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "pages": {
+                      "type": "object",
+                      "description": "page map, key is the page number \n",
+                      "properties": {
+                        "page_number": {
+                          "type": "object",
+                          "properties": {
+                            "first_verse_key": {
+                              "type": "string"
+                            },
+                            "last_verse_key": {
+                              "type": "string"
+                            },
+                            "from": {
+                              "type": "string"
+                            },
+                            "to": {
+                              "type": "string"
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "total_page": 44,
+                      "lookup_range": {
+                        "from": "2:1",
+                        "to": "2:286"
+                      },
+                      "pages": {
+                        "2": {
+                          "first_verse_key": "2:1",
+                          "last_verse_key": "2:4",
+                          "from": "2:1",
+                          "to": "2:4"
+                        },
+                        "3": {
+                          "first_verse_key": "2:5",
+                          "last_verse_key": "2:17",
+                          "from": "2:5",
+                          "to": "2:17"
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-pages-lookup",
+        "description": "Look up for mushaf pages and ayah range on those pages based on different filters.\n\nYou can also use `from` and `to` (both are verse key in chapter:verse format e.g 2:3) query string to filter pages within range of verses. ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "chapter_number",
+            "description": "use for getting pages for specific chapter"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "juz_number",
+            "description": "filter pages for specific juz"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "manzil_number",
+            "description": "filter pages for specific manzil"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "rub_el_hizb_number",
+            "description": "filter pages for specific rub el hizb"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "hizb_number",
+            "description": "filter pages for specific hizb"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "ruku_number",
+            "description": "filter pages for specific ruku"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "1:1"
+            },
+            "in": "query",
+            "name": "from",
+            "description": "Ayah key, use this if you want to filter pages after this ayah."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "2:3"
+            },
+            "in": "query",
+            "name": "to",
+            "description": "Ayah key, use this if you want to filter pages before this ayah."
+          }
+        ]
+      }
+    },
+    "/verses/by_chapter/{chapter_id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "minimum": 1,
+            "maximum": 114
+          },
+          "name": "chapter_id",
+          "in": "path",
+          "required": true,
+          "description": "chapter id, number of slug"
+        }
+      ],
+      "get": {
+        "summary": "By chapter",
+        "tags": [
+          "Verses"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/verse-list-response"
+          }
+        },
+        "operationId": "get-verses-by_chapter-chapter_id",
+        "description": "Get list of verses by Chapter/Surah number.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "language iso code for getting translated names of chapter in specific language"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "enum": [
+                true,
+                false
+              ],
+              "default": false
+            },
+            "in": "query",
+            "name": "words",
+            "description": "Include ayah words in the response?"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translations=131, 121"
+            },
+            "in": "query",
+            "name": "translations",
+            "description": "Comma separated ids of translations to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 4
+            },
+            "in": "query",
+            "name": "mushaf_id",
+            "description": "Mushaf id to include line and page mapping for specific Mushaf.  "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsirs",
+            "description": "Comma separated ids of tafsirs to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "reciter=1"
+            },
+            "in": "query",
+            "name": "reciter",
+            "description": "Id of reciter to include audio url and segments data for each ayah"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_translation_language=ur"
+            },
+            "in": "query",
+            "name": "word_translation_language",
+            "description": "iso code of language to get word translations in specific language"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "language=ur"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "iso code of language to get translated name of surah in specific language. See `surah_detail` below for surah info"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "fields=text_uthmani"
+            },
+            "in": "query",
+            "name": "fields",
+            "description": "Comma separated ayah fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_fields=text_qpc_hafs,text_indopak"
+            },
+            "in": "query",
+            "name": "word_fields",
+            "description": "Comma separated word fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translation_fields=resource_name,id"
+            },
+            "in": "query",
+            "name": "translation_fields",
+            "description": "Comma separated translation fields "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsir_fields",
+            "description": "Comma separated tafsir fields "
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ],
+              "example": true,
+              "default": false
+            },
+            "in": "query",
+            "name": "surah_detail",
+            "description": "Include list of surah for all the ayahs in the response"
+          }
+        ]
+      }
+    },
+    "/verses/by_page/{page_number}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number"
+          },
+          "name": "page_number",
+          "in": "path",
+          "required": true,
+          "description": "mushaf page number"
+        }
+      ],
+      "get": {
+        "summary": "By page number",
+        "tags": [
+          "Verses"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/verse-list-response"
+          }
+        },
+        "operationId": "get-verses-by_page",
+        "description": "Get list of verses by page number. Page number depends on mushaf, madani mushaf has 604 pages so page_number value should be >= 1 and <= 604.  ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "language iso code for getting translated names of chapter in specific language"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "enum": [
+                true,
+                false
+              ],
+              "default": false
+            },
+            "in": "query",
+            "name": "words",
+            "description": "Include ayah words in the response?"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translations=131, 121"
+            },
+            "in": "query",
+            "name": "translations",
+            "description": "Comma separated ids of translations to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 4
+            },
+            "in": "query",
+            "name": "mushaf_id",
+            "description": "Mushaf id to include line and page mapping for specific Mushaf.  "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsirs",
+            "description": "Comma separated ids of tafsirs to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "reciter=1"
+            },
+            "in": "query",
+            "name": "reciter",
+            "description": "Id of reciter to include audio url and segments data for each ayah"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_translation_language=ur"
+            },
+            "in": "query",
+            "name": "word_translation_language",
+            "description": "iso code of language to get word translations in specific language"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "language=ur"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "iso code of language to get translated name of surah in specific language. See `surah_detail` below for surah info"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "fields=text_uthmani"
+            },
+            "in": "query",
+            "name": "fields",
+            "description": "Comma separated ayah fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_fields=text_qpc_hafs,text_indopak"
+            },
+            "in": "query",
+            "name": "word_fields",
+            "description": "Comma separated word fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translation_fields=resource_name,id"
+            },
+            "in": "query",
+            "name": "translation_fields",
+            "description": "Comma separated translation fields "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsir_fields",
+            "description": "Comma separated tafsir fields "
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ],
+              "example": true,
+              "default": false
+            },
+            "in": "query",
+            "name": "surah_detail",
+            "description": "Include list of surah for all the ayahs in the response"
+          }
+        ]
+      }
+    },
+    "/verses/by_juz/{juz_number}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 30
+          },
+          "name": "juz_number",
+          "in": "path",
+          "required": true,
+          "description": "Juz number"
+        }
+      ],
+      "get": {
+        "summary": "By Juz",
+        "tags": [
+          "Verses"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/verse-list-response"
+          }
+        },
+        "operationId": "get-verses-by_juz",
+        "description": "Get list of verses by juz number. ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "language iso code for getting translated names of chapter in specific language"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "enum": [
+                true,
+                false
+              ],
+              "default": false
+            },
+            "in": "query",
+            "name": "words",
+            "description": "Include ayah words in the response?"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translations=131, 121"
+            },
+            "in": "query",
+            "name": "translations",
+            "description": "Comma separated ids of translations to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 4
+            },
+            "in": "query",
+            "name": "mushaf_id",
+            "description": "Mushaf id to include line and page mapping for specific Mushaf.  "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsirs",
+            "description": "Comma separated ids of tafsirs to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "reciter=1"
+            },
+            "in": "query",
+            "name": "reciter",
+            "description": "Id of reciter to include audio url and segments data for each ayah"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_translation_language=ur"
+            },
+            "in": "query",
+            "name": "word_translation_language",
+            "description": "iso code of language to get word translations in specific language"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "language=ur"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "iso code of language to get translated name of surah in specific language. See `surah_detail` below for surah info"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "fields=text_uthmani"
+            },
+            "in": "query",
+            "name": "fields",
+            "description": "Comma separated ayah fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_fields=text_qpc_hafs,text_indopak"
+            },
+            "in": "query",
+            "name": "word_fields",
+            "description": "Comma separated word fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translation_fields=resource_name,id"
+            },
+            "in": "query",
+            "name": "translation_fields",
+            "description": "Comma separated translation fields "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsir_fields",
+            "description": "Comma separated tafsir fields "
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ],
+              "example": true,
+              "default": false
+            },
+            "in": "query",
+            "name": "surah_detail",
+            "description": "Include list of surah for all the ayahs in the response"
+          }
+        ]
+      }
+    },
+    "/verses/by_manzil/{manzil_number}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 7
+          },
+          "name": "manzil_number",
+          "in": "path",
+          "required": true,
+          "description": "manzil number"
+        }
+      ],
+      "get": {
+        "summary": "By Manzil",
+        "tags": [
+          "Verses"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/verse-list-response"
+          }
+        },
+        "operationId": "get-verses-by_manzil",
+        "description": "Get list of verses by manzil number. There are seven manzils in Quran, it's another dividion of Quran to finsih the recitation in 7 days.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "language iso code for getting translated names of chapter in specific language"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "enum": [
+                true,
+                false
+              ],
+              "default": false
+            },
+            "in": "query",
+            "name": "words",
+            "description": "Include ayah words in the response?"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translations=131, 121"
+            },
+            "in": "query",
+            "name": "translations",
+            "description": "Comma separated ids of translations to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 4
+            },
+            "in": "query",
+            "name": "mushaf_id",
+            "description": "Mushaf id to include line and page mapping for specific Mushaf.  "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsirs",
+            "description": "Comma separated ids of tafsirs to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "reciter=1"
+            },
+            "in": "query",
+            "name": "reciter",
+            "description": "Id of reciter to include audio url and segments data for each ayah"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_translation_language=ur"
+            },
+            "in": "query",
+            "name": "word_translation_language",
+            "description": "iso code of language to get word translations in specific language"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "language=ur"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "iso code of language to get translated name of surah in specific language. See `surah_detail` below for surah info"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "fields=text_uthmani"
+            },
+            "in": "query",
+            "name": "fields",
+            "description": "Comma separated ayah fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_fields=text_qpc_hafs,text_indopak"
+            },
+            "in": "query",
+            "name": "word_fields",
+            "description": "Comma separated word fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translation_fields=resource_name,id"
+            },
+            "in": "query",
+            "name": "translation_fields",
+            "description": "Comma separated translation fields "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsir_fields",
+            "description": "Comma separated tafsir fields "
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ],
+              "example": true,
+              "default": false
+            },
+            "in": "query",
+            "name": "surah_detail",
+            "description": "Include list of surah for all the ayahs in the response"
+          }
+        ]
+      }
+    },
+    "/verses/by_hizb/{hizb_number}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 60
+          },
+          "name": "hizb_number",
+          "in": "path",
+          "required": true,
+          "description": "hizb number"
+        }
+      ],
+      "get": {
+        "summary": "By Hizb",
+        "tags": [
+          "Verses"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/verse-list-response"
+          }
+        },
+        "operationId": "get-verses-by_hizb",
+        "description": "Get list of verses by hizb number, there are 60 Hizb in Quran.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "language iso code for getting translated names of chapter in specific language"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "enum": [
+                true,
+                false
+              ],
+              "default": false
+            },
+            "in": "query",
+            "name": "words",
+            "description": "Include ayah words in the response?"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translations=131, 121"
+            },
+            "in": "query",
+            "name": "translations",
+            "description": "Comma separated ids of translations to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 4
+            },
+            "in": "query",
+            "name": "mushaf_id",
+            "description": "Mushaf id to include line and page mapping for specific Mushaf.  "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsirs",
+            "description": "Comma separated ids of tafsirs to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "reciter=1"
+            },
+            "in": "query",
+            "name": "reciter",
+            "description": "Id of reciter to include audio url and segments data for each ayah"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_translation_language=ur"
+            },
+            "in": "query",
+            "name": "word_translation_language",
+            "description": "iso code of language to get word translations in specific language"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "language=ur"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "iso code of language to get translated name of surah in specific language. See `surah_detail` below for surah info"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "fields=text_uthmani"
+            },
+            "in": "query",
+            "name": "fields",
+            "description": "Comma separated ayah fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_fields=text_qpc_hafs,text_indopak"
+            },
+            "in": "query",
+            "name": "word_fields",
+            "description": "Comma separated word fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translation_fields=resource_name,id"
+            },
+            "in": "query",
+            "name": "translation_fields",
+            "description": "Comma separated translation fields "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsir_fields",
+            "description": "Comma separated tafsir fields "
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ],
+              "example": true,
+              "default": false
+            },
+            "in": "query",
+            "name": "surah_detail",
+            "description": "Include list of surah for all the ayahs in the response"
+          }
+        ]
+      }
+    },
+    "/verses/by_rub_el_hizb/{rub_el_hizb_number}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 240
+          },
+          "name": "rub_el_hizb_number",
+          "in": "path",
+          "required": true,
+          "description": "rub el hizb number"
+        }
+      ],
+      "get": {
+        "summary": "By Hizb",
+        "tags": [
+          "Verses"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/verse-list-response"
+          }
+        },
+        "operationId": "get-verses-by_rub_el_hizb",
+        "description": "Get list of verses by rub el hizb, there are 240 Rub el Hizb in Quran.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "language iso code for getting translated names of chapter in specific language"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "enum": [
+                true,
+                false
+              ],
+              "default": false
+            },
+            "in": "query",
+            "name": "words",
+            "description": "Include ayah words in the response?"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translations=131, 121"
+            },
+            "in": "query",
+            "name": "translations",
+            "description": "Comma separated ids of translations to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 4
+            },
+            "in": "query",
+            "name": "mushaf_id",
+            "description": "Mushaf id to include line and page mapping for specific Mushaf.  "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsirs",
+            "description": "Comma separated ids of tafsirs to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "reciter=1"
+            },
+            "in": "query",
+            "name": "reciter",
+            "description": "Id of reciter to include audio url and segments data for each ayah"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_translation_language=ur"
+            },
+            "in": "query",
+            "name": "word_translation_language",
+            "description": "iso code of language to get word translations in specific language"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "language=ur"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "iso code of language to get translated name of surah in specific language. See `surah_detail` below for surah info"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "fields=text_uthmani"
+            },
+            "in": "query",
+            "name": "fields",
+            "description": "Comma separated ayah fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_fields=text_qpc_hafs,text_indopak"
+            },
+            "in": "query",
+            "name": "word_fields",
+            "description": "Comma separated word fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translation_fields=resource_name,id"
+            },
+            "in": "query",
+            "name": "translation_fields",
+            "description": "Comma separated translation fields "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsir_fields",
+            "description": "Comma separated tafsir fields "
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ],
+              "example": true,
+              "default": false
+            },
+            "in": "query",
+            "name": "surah_detail",
+            "description": "Include list of surah for all the ayahs in the response"
+          }
+        ]
+      }
+    },
+    "/verses/by_ruku/{ruku_number}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 558
+          },
+          "name": "ruku_number",
+          "in": "path",
+          "required": true,
+          "description": "ruku number"
+        }
+      ],
+      "get": {
+        "summary": "By Ruku",
+        "tags": [
+          "Verses"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/verse-list-response"
+          }
+        },
+        "operationId": "get-verses-by_ruku",
+        "description": "Get list of verses by ruku.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "language iso code for getting translated names of chapter in specific language"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "enum": [
+                true,
+                false
+              ],
+              "default": false
+            },
+            "in": "query",
+            "name": "words",
+            "description": "Include ayah words in the response?"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translations=131, 121"
+            },
+            "in": "query",
+            "name": "translations",
+            "description": "Comma separated ids of translations to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 4
+            },
+            "in": "query",
+            "name": "mushaf_id",
+            "description": "Mushaf id to include line and page mapping for specific Mushaf.  "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsirs",
+            "description": "Comma separated ids of tafsirs to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "reciter=1"
+            },
+            "in": "query",
+            "name": "reciter",
+            "description": "Id of reciter to include audio url and segments data for each ayah"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_translation_language=ur"
+            },
+            "in": "query",
+            "name": "word_translation_language",
+            "description": "iso code of language to get word translations in specific language"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "language=ur"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "iso code of language to get translated name of surah in specific language. See `surah_detail` below for surah info"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "fields=text_uthmani"
+            },
+            "in": "query",
+            "name": "fields",
+            "description": "Comma separated ayah fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_fields=text_qpc_hafs,text_indopak"
+            },
+            "in": "query",
+            "name": "word_fields",
+            "description": "Comma separated word fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translation_fields=resource_name,id"
+            },
+            "in": "query",
+            "name": "translation_fields",
+            "description": "Comma separated translation fields "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsir_fields",
+            "description": "Comma separated tafsir fields "
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ],
+              "example": true,
+              "default": false
+            },
+            "in": "query",
+            "name": "surah_detail",
+            "description": "Include list of surah for all the ayahs in the response"
+          }
+        ]
+      }
+    },
+    "/verses/filter": {
+      "parameters": [],
+      "get": {
+        "summary": "By specific ayah/surah filters",
+        "tags": [
+          "Verses"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/verse-list-response"
+          }
+        },
+        "operationId": "get-verses-by_filters",
+        "description": "Get list of verses by spefic filters, filters could be list of ayah keys, ayah ranges, surah numbers etc.\n\nYou can use three types of filters:\n- Surah numbers: single number values are considered the surah numbers. e.g 1,3,5\n \n- Ayah keys: ayah keys in surah:ayah format are ayah keys. e.g 1:3\n\n- Ayah ranges: Ranges of ayahs keys e.g 2:2-10 means 2-10 ayah of second surah\n\nYou can use `filters` query string, seperate each filter with comma. Here are some example filters:\n\n- `filters=1,2:5,2:255` \n- `filters=1,112,113,114`\n- `filters=2:255,2:71`",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "language iso code for getting translated names of chapter in specific language"
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "enum": [
+                true,
+                false
+              ],
+              "default": false
+            },
+            "in": "query",
+            "name": "words",
+            "description": "Include ayah words in the response?"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translations=131, 121"
+            },
+            "in": "query",
+            "name": "translations",
+            "description": "Comma separated ids of translations to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 4
+            },
+            "in": "query",
+            "name": "mushaf_id",
+            "description": "Mushaf id to include line and page mapping for specific Mushaf.  "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsirs",
+            "description": "Comma separated ids of tafsirs to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "reciter=1"
+            },
+            "in": "query",
+            "name": "reciter",
+            "description": "Id of reciter to include audio url and segments data for each ayah"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_translation_language=ur"
+            },
+            "in": "query",
+            "name": "word_translation_language",
+            "description": "iso code of language to get word translations in specific language"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "language=ur"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "iso code of language to get translated name of surah in specific language. See `surah_detail` below for surah info"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "fields=text_uthmani"
+            },
+            "in": "query",
+            "name": "fields",
+            "description": "Comma separated ayah fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_fields=text_qpc_hafs,text_indopak"
+            },
+            "in": "query",
+            "name": "word_fields",
+            "description": "Comma separated word fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translation_fields=resource_name,id"
+            },
+            "in": "query",
+            "name": "translation_fields",
+            "description": "Comma separated translation fields "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsir_fields",
+            "description": "Comma separated tafsir fields "
+          },
+          {
+            "schema": {
+              "type": "boolean",
+              "enum": [
+                true,
+                false
+              ],
+              "example": true,
+              "default": false
+            },
+            "in": "query",
+            "name": "surah_detail",
+            "description": "Include list of surah for all the ayahs in the response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "filters=1:1,5:4-10,2"
+            },
+            "in": "query",
+            "name": "filters",
+            "required": true,
+            "description": "Comma separated list of filters"
+          }
+        ]
+      }
+    },
+    "/verses/random": {
+      "parameters": [],
+      "get": {
+        "summary": "Get random verse",
+        "tags": [
+          "Verses"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/verse-response"
+          }
+        },
+        "operationId": "get-verses-by_random",
+        "description": "Get single verse by the verse key ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "enum": [
+                true,
+                false
+              ],
+              "default": false
+            },
+            "in": "query",
+            "name": "words",
+            "description": "Include ayah words in the response?"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translations=131, 121"
+            },
+            "in": "query",
+            "name": "translations",
+            "description": "Comma separated ids of translations to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 4
+            },
+            "in": "query",
+            "name": "mushaf_id",
+            "description": "Mushaf id to include line and page mapping for specific Mushaf.  "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsirs",
+            "description": "Comma separated ids of tafsirs to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "reciter=1"
+            },
+            "in": "query",
+            "name": "reciter",
+            "description": "Id of reciter to include audio url and segments data for each ayah"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_translation_language=ur"
+            },
+            "in": "query",
+            "name": "word_translation_language",
+            "description": "iso code of language to get word translations in specific language"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "language=ur"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "iso code of language to get translated name of surah in specific language. See `surah_detail` below for surah info"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "fields=text_uthmani"
+            },
+            "in": "query",
+            "name": "fields",
+            "description": "Comma separated ayah fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_fields=text_qpc_hafs,text_indopak"
+            },
+            "in": "query",
+            "name": "word_fields",
+            "description": "Comma separated word fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translation_fields=resource_name,id"
+            },
+            "in": "query",
+            "name": "translation_fields",
+            "description": "Comma separated translation fields "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsir_fields",
+            "description": "Comma separated tafsir fields "
+          },
+          {
+            "schema": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 114
+            },
+            "in": "query",
+            "name": "chapter_id",
+            "description": "Get random ayah from specific surah"
+          },
+          {
+            "schema": {
+              "type": "number"
+            },
+            "in": "query",
+            "name": "page_number",
+            "description": "Get random ayah from specific mushaf page"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 30
+            },
+            "in": "query",
+            "name": "juz_number",
+            "description": "Get random ayah from specific juz"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 60
+            },
+            "in": "query",
+            "name": "hizb_number",
+            "description": "Get random ayah from specific hizb"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "maximum": 240,
+              "minimum": 1
+            },
+            "in": "query",
+            "name": "rub_el_hizb_number",
+            "description": "Get random ayah from specific rub el hizb"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 558
+            },
+            "in": "query",
+            "name": "ruku_number",
+            "description": "Get random ayah from specific ruku"
+          },
+          {
+            "schema": {
+              "type": "number",
+              "minimum": 1,
+              "maximum": 7
+            },
+            "in": "query",
+            "name": "manzil_number",
+            "description": "Get random ayah from specific manzil"
+          }
+        ]
+      }
+    },
+    "/verses/by_key/{verse_key}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string",
+            "example": "2:255"
+          },
+          "name": "verse_key",
+          "in": "path",
+          "required": true,
+          "description": "The verse key in surah:ayah format"
+        }
+      ],
+      "get": {
+        "summary": "By Verse key",
+        "tags": [
+          "Verses"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/verse-response"
+          }
+        },
+        "operationId": "get-verses-by_key",
+        "description": "Get single verse by the verse key ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "boolean",
+              "example": true,
+              "enum": [
+                true,
+                false
+              ],
+              "default": false
+            },
+            "in": "query",
+            "name": "words",
+            "description": "Include ayah words in the response?"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translations=131, 121"
+            },
+            "in": "query",
+            "name": "translations",
+            "description": "Comma separated ids of translations to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "number",
+              "default": 4
+            },
+            "in": "query",
+            "name": "mushaf_id",
+            "description": "Mushaf id to include line and page mapping for specific Mushaf.  "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsirs",
+            "description": "Comma separated ids of tafsirs to include for each ayah."
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "reciter=1"
+            },
+            "in": "query",
+            "name": "reciter",
+            "description": "Id of reciter to include audio url and segments data for each ayah"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_translation_language=ur"
+            },
+            "in": "query",
+            "name": "word_translation_language",
+            "description": "iso code of language to get word translations in specific language"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "language=ur"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "iso code of language to get translated name of surah in specific language. See `surah_detail` below for surah info"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "fields=text_uthmani"
+            },
+            "in": "query",
+            "name": "fields",
+            "description": "Comma separated ayah fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "word_fields=text_qpc_hafs,text_indopak"
+            },
+            "in": "query",
+            "name": "word_fields",
+            "description": "Comma separated word fields to include in response"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "translation_fields=resource_name,id"
+            },
+            "in": "query",
+            "name": "translation_fields",
+            "description": "Comma separated translation fields "
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "tafsir_fields",
+            "description": "Comma separated tafsir fields "
+          }
+        ]
+      }
+    },
+    "/search": {
+      "get": {
+        "summary": "Your GET endpoint",
+        "tags": [
+          "Search"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/search-response"
+          }
+        },
+        "operationId": "get-search",
+        "description": "",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "query",
+            "required": true,
+            "description": "the search query sting"
+          }
+        ]
+      }
+    },
+    "/foot_notes/{id}": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "number"
+          },
+          "name": "id",
+          "in": "path",
+          "required": true,
+          "description": "foot note id"
+        }
+      ],
+      "get": {
+        "summary": "Get foot note text",
+        "tags": [
+          "FoottNote"
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/footnote-response"
+          }
+        },
+        "operationId": "get-foot_notes-id",
+        "description": "Get the text of footnote by id"
+      }
+    },
+    "/ping": {
+      "get": {
+        "summary": "Ping",
+        "tags": [
+          "Ping"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "message": {
+                      "type": "string"
+                    },
+                    "versions": {
+                      "type": "object",
+                      "properties": {
+                        "v3": {
+                          "type": "string"
+                        },
+                        "v4": {
+                          "type": "string"
+                        },
+                        "qdc": {
+                          "type": "string"
+                        },
+                        "graphql": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "message": "الحمد لله api is working fine. Please see the docs for each version for more help.",
+                      "versions": {
+                        "v3": "https://quran.api-docs.io/v3/getting-started/introduction",
+                        "v4": "https://quran.api-docs.io/v4/getting-started/introduction",
+                        "qdc": "https://quran.api-docs.io/qdc/getting-started/introduction",
+                        "graphql": "https://api.quran.com/graphql-playground"
+                      }
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "message": "الحمد لله api is working fine. Please see the docs for each version for more help.",
+                      "versions": {
+                        "v3": "https://quran.api-docs.io/v3/getting-started/introduction",
+                        "v4": "https://quran.api-docs.io/v4/getting-started/introduction",
+                        "qdc": "https://quran.api-docs.io/qdc/getting-started/introduction",
+                        "graphql": "https://api.quran.com/graphql-playground"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-ping",
+        "description": "Ping api to check the server status"
+      }
+    },
+    "/audio/reciters": {
+      "get": {
+        "summary": "List of recitations",
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/recitation-list-response"
+          }
+        },
+        "operationId": "get-audio-reciters",
+        "tags": [
+          "Audio"
+        ],
+        "description": "Get list of approved recitations ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "fields",
+            "description": "See `Reciter` model for list of available fields"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "language",
+            "description": "Get translated name of reciters in specific language"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "TranslatedName": {
+        "title": "TranslatedName",
+        "x-stoplight": {
+          "id": "2ksfc4xregr34"
+        },
+        "type": "object",
+        "description": "Translated name of resources(Chapter, Translation, Reciter etc) in specific language. If translated name for the queried language is not available, the English name will be returned as a fallback.",
+        "examples": [
+          {
+            "language_name": "english",
+            "name": "The Opener"
+          }
+        ],
+        "properties": {
+          "language_name": {
+            "type": "string",
+            "example": "english",
+            "description": "Lowercase name of the language"
+          },
+          "name": {
+            "type": "string",
+            "example": "The Opener"
+          }
+        }
+      },
+      "Chapter": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": 1,
+            "revelation_place": "makkah",
+            "revelation_order": 5,
+            "bismillah_pre": false,
+            "name_simple": "Al-Fatihah",
+            "name_complex": "Al-Fātiĥah",
+            "name_arabic": "الفاتحة",
+            "verses_count": 7,
+            "pages": [
+              1,
+              1
+            ],
+            "slug": {
+              "slug": "al-fatihah",
+              "locale": "en"
+            },
+            "translated_name": {
+              "language_name": "english",
+              "name": "The Opener"
+            }
+          }
+        },
+        "examples": [
+          {
+            "id": 1,
+            "revelation_place": "makkah",
+            "revelation_order": 5,
+            "bismillah_pre": false,
+            "name_simple": "Al-Fatihah",
+            "name_complex": "Al-Fātiĥah",
+            "name_arabic": "الفاتحة",
+            "verses_count": 7,
+            "pages": [
+              1,
+              1
+            ],
+            "slug": {
+              "slug": "al-fatihah",
+              "locale": "en"
+            },
+            "translated_name": {
+              "language_name": "english",
+              "name": "The Opener"
+            },
+            "slugs": [
+              {
+                "slug": "pembukaan",
+                "locale": "ms",
+                "is_default": false
+              }
+            ]
+          },
+          {
+            "id": 1,
+            "revelation_place": "makkah",
+            "revelation_order": 5,
+            "bismillah_pre": false,
+            "name_simple": "Al-Fatihah",
+            "name_complex": "Al-Fātiĥah",
+            "name_arabic": "الفاتحة",
+            "verses_count": 7,
+            "pages": [
+              1,
+              1
+            ],
+            "slug": {
+              "slug": "al-fatihah",
+              "locale": "en"
+            },
+            "translated_name": {
+              "language_name": "english",
+              "name": "The Opener"
+            },
+            "slugs": [
+              {
+                "slug": "pembukaan",
+                "locale": "ms",
+                "is_default": false
+              }
+            ],
+            "chapter_info": {
+              "source": "Tafhim al-Quran...",
+              "text": "<h2>Name</h2><p>This Surah is named Al-Fatihah because of its subject matter...",
+              "short_text": "This Surah is named Al-Fatihah becaus..."
+            }
+          }
+        ],
+        "title": "Chapter",
+        "description": "Surah/Chapter representation of Quran",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "revelation_place": {
+            "type": "string",
+            "enum": [
+              "makkah",
+              "madinah"
+            ],
+            "example": "makkah"
+          },
+          "revelation_order": {
+            "type": "integer"
+          },
+          "bismillah_pre": {
+            "type": "boolean",
+            "description": "Indicate whether to include 'bismillah' at the beginning of this chapter."
+          },
+          "name_simple": {
+            "type": "string",
+            "description": "Transliterated name of chapter",
+            "example": "Al-Fatihah"
+          },
+          "name_complex": {
+            "type": "string"
+          },
+          "name_arabic": {
+            "type": "string"
+          },
+          "verses_count": {
+            "type": "integer"
+          },
+          "pages": {
+            "type": "array",
+            "description": "Beginning and last page number in Madani Mushaf for the chapter. Al-Fatihah for example starts and ends on page number 1",
+            "items": {
+              "type": "integer"
+            }
+          },
+          "slug": {
+            "type": "object",
+            "properties": {
+              "slug": {
+                "type": "string"
+              },
+              "locale": {
+                "type": "string"
+              }
+            }
+          },
+          "translated_name": {
+            "$ref": "#/components/schemas/TranslatedName"
+          },
+          "slugs": {
+            "type": "array",
+            "description": "optional list of all the slugs for chapter in multiple languages.",
+            "items": {
+              "$ref": "#/components/schemas/Slug"
+            }
+          },
+          "chapter_info": {
+            "$ref": "#/components/schemas/ChapterInfo",
+            "description": "Optional chapter informaiton, you can fetch it using `info` query string."
+          }
+        }
+      },
+      "Slug": {
+        "title": "Slug",
+        "x-stoplight": {
+          "id": "a3tiucs4dcwfl"
+        },
+        "type": "object",
+        "examples": [
+          {
+            "slug": "al-fatihah",
+            "locale": "en"
+          }
+        ],
+        "description": "Representation of Slug, slugs are human readable alias for ids",
+        "properties": {
+          "slug": {
+            "type": "string",
+            "example": "al-fatihah",
+            "description": "the slug, you can use this as ids as well"
+          },
+          "locale": {
+            "type": "string",
+            "example": "en"
+          },
+          "is_default": {
+            "type": "boolean",
+            "default": false
+          }
+        }
+      },
+      "TranslationResource": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": 167,
+            "name": "Maarif-ul-Quran",
+            "author_name": "Mufti Muhammad Shafi",
+            "slug": "en-maarif-ul-quran",
+            "language_name": "english",
+            "translated_name": {
+              "name": "Maarif-ul-Quran",
+              "language_name": "english"
+            }
+          }
+        },
+        "examples": [
+          {
+            "id": 167,
+            "name": "Maarif-ul-Quran",
+            "author_name": "Mufti Muhammad Shafi",
+            "slug": "en-maarif-ul-quran",
+            "language_name": "english",
+            "translated_name": {
+              "name": "Maarif-ul-Quran",
+              "language_name": "english"
+            }
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string",
+            "example": "Maarif-ul-Quran"
+          },
+          "author_name": {
+            "type": "string",
+            "example": "Mufti Muhammad Shafi"
+          },
+          "slug": {
+            "type": "string",
+            "example": "en-maarif-ul-quran"
+          },
+          "language_name": {
+            "type": "string",
+            "description": "Translation's language name",
+            "example": "english"
+          },
+          "translated_name": {
+            "$ref": "#/components/schemas/TranslatedName"
+          }
+        },
+        "title": "TranslationResource",
+        "description": "Representation of Quran translation"
+      },
+      "Language": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": 38,
+            "name": "English",
+            "iso_code": "en",
+            "native_name": "English",
+            "direction": "ltr",
+            "translations_count": 19,
+            "translated_name": {
+              "name": "English",
+              "language_name": "english"
+            }
+          }
+        },
+        "title": "Language",
+        "description": "Representation of language model",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "iso_code": {
+            "type": "string",
+            "description": "iso code of language",
+            "example": "ur"
+          },
+          "native_name": {
+            "type": "string",
+            "description": "Name in native language",
+            "example": "اردو"
+          },
+          "direction": {
+            "type": "string",
+            "description": "text direction of language",
+            "enum": [
+              "ltr",
+              "rtl"
+            ],
+            "default": "ltr",
+            "example": "ltr"
+          },
+          "translations_count": {
+            "type": "integer",
+            "description": "Count of translations we've in this language"
+          },
+          "translated_name": {
+            "$ref": "#/components/schemas/TranslatedName"
+          }
+        },
+        "required": [
+          "direction"
+        ],
+        "examples": [
+          {
+            "id": 0,
+            "name": "Urdu",
+            "iso_code": "ur",
+            "native_name": "اردو",
+            "direction": "rtl",
+            "translations_count": 0,
+            "translated_name": {
+              "language_name": "english",
+              "name": "urdu"
+            }
+          }
+        ]
+      },
+      "ChapterInfo": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": 1,
+            "chapter_id": 1,
+            "language_name": "english",
+            "short_text": "This Surah is named Al-Fatihah ...",
+            "source": "Sayyid Abul Ala Maududi - Tafhim al-Qur'an - The Meaning of the Quran",
+            "text": "<h2>Name</h2><p>This Surah is named Al-Fatihah because of its subject matter. ....</p>"
+          }
+        },
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "chapter_id": {
+            "type": "integer",
+            "description": "the chapter number"
+          },
+          "language_name": {
+            "type": "string"
+          },
+          "short_text": {
+            "type": "string",
+            "description": "Short version of chapter info, you can use this as meta tag for  "
+          },
+          "source": {
+            "type": "string",
+            "description": "Source name of this info"
+          },
+          "text": {
+            "type": "string",
+            "description": "full info, this include html tags as well"
+          }
+        },
+        "examples": [
+          {
+            "id": 1,
+            "chapter_id": 1,
+            "language_name": "english",
+            "short_text": "This Surah is named Al-Fatihah ...",
+            "source": "Sayyid Abul Ala Maududi - Tafhim al-Qur'an - The Meaning of the Quran",
+            "text": "<h2>Name</h2><p>This Surah is named Al-Fatihah because of its subject matter. ....</p>"
+          }
+        ],
+        "title": "ChapterInfo",
+        "description": "Representation of chapter info model"
+      },
+      "Juz": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": 1,
+            "juz_number": 1,
+            "verse_mapping": {
+              "1": "1-7",
+              "2": "1-141"
+            },
+            "first_verse_id": 1,
+            "last_verse_id": 148,
+            "verses_count": 148
+          }
+        },
+        "examples": [
+          {
+            "id": 1,
+            "juz_number": 1,
+            "verse_mapping": {
+              "1": "1-7",
+              "2": "1-141"
+            },
+            "first_verse_id": 1,
+            "last_verse_id": 148,
+            "verses_count": 148
+          }
+        ],
+        "title": "Juz",
+        "description": "Representation of Quran Juz",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "juz_number": {
+            "type": "integer",
+            "example": 1,
+            "minimum": 1,
+            "maximum": 30
+          },
+          "verse_mapping": {
+            "type": "object",
+            "description": "Mapping of ayahs for the juz. Mapping format is {chapter_number => \"ayah range\"}\n",
+            "properties": {
+              "1": {
+                "type": "string"
+              },
+              "2": {
+                "type": "string"
+              }
+            }
+          },
+          "first_verse_id": {
+            "type": "integer"
+          },
+          "last_verse_id": {
+            "type": "integer"
+          },
+          "verses_count": {
+            "type": "integer"
+          }
+        }
+      },
+      "Hizb": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": 1,
+            "hizb_number": 1,
+            "verse_mapping": {
+              "1": "1-7",
+              "2": "1-74"
+            },
+            "first_verse_id": 1,
+            "last_verse_id": 81,
+            "verses_count": 81
+          }
+        },
+        "title": "Hizb",
+        "description": "Representation of Quran's Hizb, Hizb are half of Juz. There are 60 Hizbs in Quran.",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "hizb_number": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 60
+          },
+          "verse_mapping": {
+            "type": "object",
+            "properties": {
+              "1": {
+                "type": "string"
+              },
+              "2": {
+                "type": "string"
+              }
+            }
+          },
+          "first_verse_id": {
+            "type": "integer"
+          },
+          "last_verse_id": {
+            "type": "integer"
+          },
+          "verses_count": {
+            "type": "integer"
+          }
+        }
+      },
+      "RubElHizb": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "rub_el_hizb_number": {
+            "type": "integer"
+          },
+          "verse_mapping": {
+            "type": "object",
+            "properties": {
+              "1": {
+                "type": "string"
+              },
+              "2": {
+                "type": "string"
+              }
+            }
+          },
+          "first_verse_id": {
+            "type": "integer"
+          },
+          "last_verse_id": {
+            "type": "integer"
+          },
+          "verses_count": {
+            "type": "integer"
+          }
+        },
+        "x-examples": {
+          "Example 1": {
+            "id": 1,
+            "rub_el_hizb_number": 1,
+            "verse_mapping": {
+              "1": "1-7",
+              "2": "1-25"
+            },
+            "first_verse_id": 1,
+            "last_verse_id": 32,
+            "verses_count": 32
+          }
+        },
+        "examples": [
+          {
+            "id": 1,
+            "rub_el_hizb_number": 1,
+            "verse_mapping": {
+              "1": "1-7",
+              "2": "1-25"
+            },
+            "first_verse_id": 1,
+            "last_verse_id": 32,
+            "verses_count": 32
+          }
+        ],
+        "title": "RubElHizb",
+        "description": "Rub el hizb is quarter of Hizb, there are total 240 Rub el hizb in Quran."
+      },
+      "Manzil": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "manzil_number": {
+            "type": "integer"
+          },
+          "verse_mapping": {
+            "type": "object",
+            "properties": {
+              "1": {
+                "type": "string"
+              },
+              "2": {
+                "type": "string"
+              },
+              "3": {
+                "type": "string"
+              },
+              "4": {
+                "type": "string"
+              }
+            }
+          },
+          "first_verse_id": {
+            "type": "integer"
+          },
+          "last_verse_id": {
+            "type": "integer"
+          },
+          "verses_count": {
+            "type": "integer"
+          }
+        },
+        "x-examples": {
+          "Example 1": {
+            "id": 1,
+            "manzil_number": 1,
+            "verse_mapping": {
+              "1": "1-7",
+              "2": "1-286",
+              "3": "1-200",
+              "4": "1-176"
+            },
+            "first_verse_id": 1,
+            "last_verse_id": 669,
+            "verses_count": 669
+          }
+        },
+        "examples": [
+          {
+            "id": 1,
+            "manzil_number": 1,
+            "verse_mapping": {
+              "1": "1-7",
+              "2": "1-286",
+              "3": "1-200",
+              "4": "1-176"
+            },
+            "first_verse_id": 1,
+            "last_verse_id": 669,
+            "verses_count": 669
+          }
+        ],
+        "title": "Manzil",
+        "description": "Representation of Quran Manzil"
+      },
+      "Ruku": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "ruku_number": {
+            "type": "integer"
+          },
+          "surah_ruku_number": {
+            "type": "integer"
+          },
+          "verse_mapping": {
+            "type": "object",
+            "properties": {
+              "1": {
+                "type": "string"
+              }
+            }
+          },
+          "first_verse_id": {
+            "type": "integer"
+          },
+          "last_verse_id": {
+            "type": "integer"
+          },
+          "verses_count": {
+            "type": "integer"
+          }
+        },
+        "x-examples": {
+          "Example 1": {
+            "id": 1,
+            "ruku_number": 1,
+            "surah_ruku_number": 1,
+            "verse_mapping": {
+              "1": "1-7"
+            },
+            "first_verse_id": 1,
+            "last_verse_id": 7,
+            "verses_count": 7
+          }
+        },
+        "examples": [
+          {
+            "id": 1,
+            "ruku_number": 1,
+            "surah_ruku_number": 1,
+            "verse_mapping": {
+              "1": "1-7"
+            },
+            "first_verse_id": 1,
+            "last_verse_id": 7,
+            "verses_count": 7
+          }
+        ],
+        "title": "Ruku",
+        "description": "Representation of a Ruku"
+      },
+      "Page": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": 1209,
+            "page_number": 1,
+            "verse_mapping": {
+              "1": "1-7"
+            },
+            "first_verse_id": 1,
+            "last_verse_id": 7,
+            "verses_count": 7
+          }
+        },
+        "examples": [
+          {
+            "id": 1209,
+            "page_number": 1,
+            "verse_mapping": {
+              "1": "1-7"
+            },
+            "first_verse_id": 1,
+            "last_verse_id": 7,
+            "verses_count": 7
+          }
+        ],
+        "title": "Page",
+        "description": "Representation of Quran page",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "page_number": {
+            "type": "integer",
+            "description": "madani Muhsaf has 604 pages, number of pages could be different based on Mushaf printed in differnt parts of the world.\n"
+          },
+          "verse_mapping": {
+            "type": "object",
+            "properties": {
+              "1": {
+                "type": "string"
+              }
+            }
+          },
+          "first_verse_id": {
+            "type": "integer"
+          },
+          "last_verse_id": {
+            "type": "integer"
+          },
+          "verses_count": {
+            "type": "integer"
+          }
+        }
+      },
+      "Mushaf": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string"
+          },
+          "pages_count": {
+            "type": "integer"
+          },
+          "lines_per_page": {
+            "type": "integer"
+          },
+          "mushaf_type": {
+            "type": "string"
+          },
+          "font": {
+            "type": "string"
+          },
+          "qirat": {
+            "type": "object",
+            "properties": {
+              "id": {
+                "type": "integer"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "x-examples": {
+          "Example 1": {
+            "id": 2,
+            "name": "QCF V1",
+            "pages_count": 604,
+            "lines_per_page": 15,
+            "mushaf_type": "madani",
+            "font": "v1",
+            "qirat": {
+              "id": 1,
+              "name": "Hafs"
+            }
+          }
+        },
+        "examples": [
+          {
+            "id": 2,
+            "name": "QCF V1",
+            "pages_count": 604,
+            "lines_per_page": 15,
+            "mushaf_type": "madani",
+            "font": "v1",
+            "qirat": {
+              "id": 1,
+              "name": "Hafs"
+            }
+          }
+        ],
+        "title": "Mushaf",
+        "description": "Representation of printed copy of Quran, it includes information like number of pages, number of lines per page. You can pass `mushaf_id` query string to get words for specific mushaf in most `get verses` apis. If query value is missing, we'll send dthisata of Madani Mushaf printed by Kind Fahad Quran complex in KSA. This Mushaf has 604 pages and 15 lines on each page."
+      },
+      "Verse": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": 1,
+            "verse_number": 1,
+            "verse_key": "1:1",
+            "hizb_number": 1,
+            "rub_el_hizb_number": 1,
+            "ruku_number": 1,
+            "manzil_number": 1,
+            "sajdah_number": null,
+            "page_number": 1,
+            "juz_number": 1,
+            "chapter_id": 1,
+            "text_indopak": "بِسۡمِ اللهِ الرَّحۡمٰنِ الرَّحِيۡمِ",
+            "text_imlaei_simple": "بسم الله الرحمن الرحيم",
+            "text_imlaei": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+            "text_uthmani": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+            "text_uthmani_simple": "بسم الله الرحمن الرحيم",
+            "text_uthmani_tajweed": "بِسْمِ <tajweed class=ham_wasl>ٱ</tajweed>للَّهِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّحْمَ<tajweed class=madda_normal>ـٰ</tajweed>نِ <tajweed class=ham_wasl>ٱ</tajweed><tajweed class=laam_shamsiyah>ل</tajweed>رَّح<tajweed class=madda_permissible>ِي</tajweed>مِ <span class=end>١</span>",
+            "text_qpc_hafs": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ ١",
+            "text_qpc_nastaleeq_hafs": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ ١",
+            "text_qpc_nastaleeq": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ ۟",
+            "text_indopak_nastaleeq": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ ۟",
+            "image_url": "//c22506.r6.cf1.rackcdn.com/1_1.png",
+            "image_width": 675,
+            "code_v1": "ﭑ ﭒ ﭓ ﭔ ﭕ",
+            "code_v2": "ﱁ ﱂ ﱃ ﱄ ﱅ",
+            "v1_page": 1,
+            "v2_page": 1
+          }
+        },
+        "examples": [
+          {
+            "id": 1,
+            "verse_number": 1,
+            "verse_key": "1:1",
+            "hizb_number": 1,
+            "rub_el_hizb_number": 1,
+            "ruku_number": 1,
+            "manzil_number": 1,
+            "sajdah_number": null,
+            "page_number": 1,
+            "juz_number": 1,
+            "chapter_id": 1,
+            "text_indopak": "بِسۡمِ اللهِ الرَّحۡمٰنِ الرَّحِيۡمِ",
+            "text_imlaei_simple": "بسم الله الرحمن الرحيم",
+            "text_imlaei": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+            "text_uthmani": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+            "text_uthmani_simple": "بسم الله الرحمن الرحيم",
+            "text_uthmani_tajweed": "بِسْمِ <tajweed class=ham_wasl>ٱ</tajweed>...",
+            "text_qpc_hafs": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ ١",
+            "text_qpc_nastaleeq_hafs": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ ١",
+            "text_qpc_nastaleeq": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ ۟",
+            "text_indopak_nastaleeq": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ ۟",
+            "image_url": "//c22506.r6.cf1.rackcdn.com/1_1.png",
+            "image_width": 675,
+            "code_v1": "ﭑ ﭒ ﭓ ﭔ ﭕ",
+            "code_v2": "ﱁ ﱂ ﱃ ﱄ ﱅ",
+            "v1_page": 1,
+            "v2_page": 1,
+            "words": [
+              {
+                "id": 1,
+                "position": 1,
+                "audio_url": "wbw/001_001_001.mp3",
+                "char_type_name": "word",
+                "page_number": 1,
+                "line_number": 2,
+                "text": "بِسْمِ",
+                "translation": {
+                  "text": "In (the) name",
+                  "language_name": "english",
+                  "language_id": 38
+                },
+                "transliteration": {
+                  "text": "bis'mi",
+                  "language_name": "english",
+                  "language_id": 38
+                }
+              }
+            ]
+          }
+        ],
+        "title": "Verse",
+        "description": "Quran ayah resource, the response includes basic attributes of the verse. If additional attributes are needed in the response, use `fields` query string. e.g `fields=text_uthmani,text_indopak' will add `uthamni` and `indopak` script of each ayah.\n",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "verse_number": {
+            "type": "integer",
+            "description": "Chapter's verse number\n",
+            "example": 1,
+            "minimum": 1,
+            "maximum": 286
+          },
+          "verse_key": {
+            "type": "string",
+            "description": "Ayah key in chapter_number:verse_number format"
+          },
+          "hizb_number": {
+            "type": "integer",
+            "description": "Hizb number of this ayah, see Hizb model for more info.",
+            "example": 1,
+            "minimum": 1,
+            "maximum": 60
+          },
+          "rub_el_hizb_number": {
+            "type": "integer"
+          },
+          "ruku_number": {
+            "type": "integer"
+          },
+          "manzil_number": {
+            "type": "integer",
+            "example": 1,
+            "minimum": 1,
+            "maximum": 7
+          },
+          "sajdah_number": {
+            "type": "number"
+          },
+          "sajdah_number - copy": {
+            "type": "number"
+          },
+          "page_number": {
+            "type": "integer"
+          },
+          "juz_number": {
+            "type": "integer"
+          },
+          "chapter_id": {
+            "type": "integer"
+          },
+          "text_indopak": {
+            "type": "string",
+            "description": "Indopak text is compatible with pdms font, but we'll recommend to use this text only for seo or search. Use `text_indopak_nastaleeq` for showing indopak text, this script is very closed to printed mushafs in indopak.\n"
+          },
+          "text_indopak - copy": {
+            "type": "string",
+            "description": "Indopak text is compatible with pdms font, but we'll recommend to use this text only for seo or search. Use `text_indopak_nastaleeq` for showing indopak text, this script is very closed to printed mushafs in indopak.\n"
+          },
+          "text_imlaei_simple": {
+            "type": "string",
+            "description": "imlaei script without tashkeel harkats, please use this only for search or seo.\n"
+          },
+          "text_imlaei": {
+            "type": "string",
+            "description": "imlaei script with tashkeel \n"
+          },
+          "text_uthmani": {
+            "type": "string",
+            "description": "Uthmani script, this script is compatiable with me_quran font\n"
+          },
+          "text_uthmani_simple": {
+            "type": "string",
+            "description": "Uthmani script without tashkeel\n\n"
+          },
+          "text_uthmani_tajweed": {
+            "type": "string",
+            "description": "Uthmani script with tajweed color \n"
+          },
+          "text_qpc_hafs": {
+            "type": "string",
+            "description": "Madani script from Quran printing complex\n"
+          },
+          "text_qpc_nastaleeq_hafs": {
+            "type": "string"
+          },
+          "text_qpc_nastaleeq": {
+            "type": "string"
+          },
+          "text_indopak_nastaleeq": {
+            "type": "string"
+          },
+          "image_url": {
+            "type": "string"
+          },
+          "image_width": {
+            "type": "integer"
+          },
+          "code_v1": {
+            "type": "string"
+          },
+          "code_v2": {
+            "type": "string"
+          },
+          "v1_page": {
+            "type": "integer"
+          },
+          "v2_page": {
+            "type": "integer"
+          },
+          "words": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Word"
+            }
+          }
+        }
+      },
+      "Word": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "verse_id": {
+            "type": "integer"
+          },
+          "chapter_id": {
+            "type": "integer"
+          },
+          "position": {
+            "type": "integer"
+          },
+          "text_uthmani": {
+            "type": "string"
+          },
+          "text_indopak": {
+            "type": "string"
+          },
+          "text_imlaei_simple": {
+            "type": "string"
+          },
+          "verse_key": {
+            "type": "string"
+          },
+          "line_number": {
+            "type": "integer"
+          },
+          "audio_url": {
+            "type": "string"
+          },
+          "location": {
+            "type": "string"
+          },
+          "char_type_name": {
+            "type": "string"
+          },
+          "text_imlaei": {
+            "type": "string"
+          },
+          "text_uthmani_simple": {
+            "type": "string"
+          },
+          "text_uthmani_tajweed": {
+            "type": "string"
+          },
+          "code_v1": {
+            "type": "string"
+          },
+          "code_v2": {
+            "type": "string"
+          },
+          "v1_page": {
+            "type": "integer"
+          },
+          "v2_page": {
+            "type": "integer"
+          },
+          "line_v1": {
+            "type": "integer"
+          },
+          "line_v2": {
+            "type": "integer"
+          },
+          "page_position": {
+            "type": "integer"
+          },
+          "line_position": {
+            "type": "integer"
+          },
+          "text_qpc_hafs": {
+            "type": "string"
+          },
+          "text_indopak_nastaleeq": {
+            "type": "string"
+          },
+          "text_qpc_nastaleeq": {
+            "type": "string"
+          },
+          "text_qpc_nastaleeq_hafs": {
+            "type": "string"
+          },
+          "translation": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "language_name": {
+                "type": "string"
+              },
+              "language_id": {
+                "type": "integer"
+              }
+            }
+          },
+          "transliteration": {
+            "type": "object",
+            "properties": {
+              "text": {
+                "type": "string"
+              },
+              "language_name": {
+                "type": "string"
+              },
+              "language_id": {
+                "type": "integer"
+              }
+            }
+          }
+        },
+        "x-examples": {
+          "Example 1": {
+            "id": 1,
+            "verse_id": 1,
+            "chapter_id": 1,
+            "position": 1,
+            "text_uthmani": "بِسْمِ",
+            "text_indopak": "بِسۡمِ",
+            "text_imlaei_simple": "بسم",
+            "verse_key": "1:1",
+            "line_number": 2,
+            "audio_url": "wbw/001_001_001.mp3",
+            "location": "1:1:1",
+            "char_type_name": "word",
+            "text_imlaei": "بِسْمِ",
+            "text_uthmani_simple": "بسم",
+            "text_uthmani_tajweed": "بِسۡمِ",
+            "code_v1": "ﭑ",
+            "code_v2": "ﱁ",
+            "v1_page": 1,
+            "v2_page": 1,
+            "line_v1": 2,
+            "line_v2": 2,
+            "page_position": 1,
+            "line_position": 1,
+            "text_qpc_hafs": "بِسۡمِ",
+            "text_indopak_nastaleeq": "بِسْمِ",
+            "text_qpc_nastaleeq": "بِسْمِ",
+            "text_qpc_nastaleeq_hafs": "بِسْمِ",
+            "translation": {
+              "text": "In (the) name",
+              "language_name": "english",
+              "language_id": 38
+            },
+            "transliteration": {
+              "text": "bis'mi",
+              "language_name": "english",
+              "language_id": 38
+            }
+          }
+        },
+        "description": "Words of the ayahs. By default respose will include the minimal info of each word. You can use `word_fields` query string if need more information of word.\n\nFor example `word_fields=text_uthmani,text_indopak` will send Uthmani and Indopak script of each word in the response.\n",
+        "examples": [
+          {
+            "id": 1,
+            "position": 1,
+            "audio_url": "wbw/001_001_001.mp3",
+            "char_type_name": "word",
+            "page_number": 1,
+            "line_number": 2,
+            "text": "بِسْمِ",
+            "translation": {
+              "text": "In (the) name",
+              "language_name": "english",
+              "language_id": 38
+            },
+            "transliteration": {
+              "text": "bis'mi",
+              "language_name": "english",
+              "language_id": 38
+            }
+          }
+        ],
+        "title": "Word"
+      },
+      "Translation": {
+        "title": "Translation",
+        "x-stoplight": {
+          "id": "54g9hjmoffj7v"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        },
+        "description": ""
+      },
+      "Tafsir": {
+        "title": "Tafsir",
+        "x-stoplight": {
+          "id": "14ak0ujsiz3q1"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string"
+          }
+        }
+      },
+      "Pagination": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "per_page": 10,
+            "current_page": 1,
+            "next_page": null,
+            "total_pages": 1,
+            "total_records": 7
+          }
+        },
+        "properties": {
+          "per_page": {
+            "type": "integer",
+            "description": "number of results per api call."
+          },
+          "current_page": {
+            "type": "integer"
+          },
+          "next_page": {
+            "type": "null"
+          },
+          "total_pages": {
+            "type": "integer"
+          },
+          "total_records": {
+            "type": "integer"
+          }
+        },
+        "title": "Pagination",
+        "examples": [
+          {
+            "per_page": 10,
+            "current_page": 1,
+            "next_page": null,
+            "total_pages": 1,
+            "total_records": 7
+          }
+        ]
+      },
+      "FootNote": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": 212607,
+            "text": "The best way to begin any task is in the name of God, the Lord, the Being who is the source of all blessings, and whose blessings and mercy are continually pouring upon His creation. To commence any undertaking in His name is to pray that God, in His infinite mercy, should come to one’s assistance and bring one’s work to a successful conclusion. This is man’s acknowledgement of the fact that he is God’s servant, and also brings divine assurance of success.",
+            "language_name": "english",
+            "language_id": 38
+          }
+        },
+        "title": "FootNote",
+        "examples": [
+          {
+            "id": 1,
+            "text": "example of footnote text",
+            "language_name": "english",
+            "language_id": 38
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "example": 1
+          },
+          "text": {
+            "type": "string",
+            "example": "example of footnote text"
+          },
+          "language_name": {
+            "type": "string",
+            "example": "english",
+            "description": "language of footnote text"
+          },
+          "language_id": {
+            "type": "integer",
+            "example": 38
+          }
+        },
+        "required": [
+          "text"
+        ]
+      },
+      "RecitationStyle": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "name": "Murattal",
+            "language_name": "english",
+            "description": "Murattal is Quranic recitation at a slower pace, used for study and practice."
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Murattal"
+          },
+          "language_name": {
+            "type": "string",
+            "example": "english"
+          },
+          "description": {
+            "type": "string",
+            "example": "Murattal is Quranic recitation at a slower pace, used for study and practice."
+          }
+        },
+        "examples": [
+          {
+            "name": "Murattal",
+            "language_name": "english",
+            "description": "Murattal is Quranic recitation at a slower pace, used for study and practice."
+          }
+        ],
+        "title": "RecitationStyle",
+        "description": "Represenstation of differnt Quranic recitations, differnet styles of reciting the Quran. "
+      },
+      "Qirat": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "name": "Hafs",
+            "language_name": "english"
+          }
+        },
+        "title": "Qirat",
+        "examples": [
+          {
+            "name": "Hafs",
+            "language_name": "string"
+          }
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Hafs",
+            "description": "the name of Qirat"
+          },
+          "language_name": {
+            "type": "string",
+            "example": "english"
+          }
+        }
+      },
+      "Recitation": {
+        "title": "Recitation",
+        "x-stoplight": {
+          "id": "ce8gf5o4c8k2l"
+        },
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "number"
+          },
+          "reciter_id": {
+            "type": "integer",
+            "description": "id of reciter/qari. We're not exposing the qaris info via the api yet."
+          },
+          "name": {
+            "type": "string",
+            "example": "Mishari Rashid al-`Afasy"
+          },
+          "translated_name": {
+            "$ref": "#/components/schemas/TranslatedName"
+          },
+          "style": {
+            "$ref": "#/components/schemas/RecitationStyle"
+          },
+          "qirat": {
+            "$ref": "#/components/schemas/Qirat"
+          }
+        },
+        "examples": [
+          {
+            "id": 0,
+            "reciter_id": 0,
+            "name": "Mishari Rashid al-`Afasy",
+            "translated_name": {
+              "language_name": "english",
+              "name": "Mishari Rashid al-`Afasy"
+            },
+            "style": {
+              "name": "Murattal",
+              "language_name": "english",
+              "description": "Murattal is Quranic recitation at a slower pace, used for study and practice."
+            },
+            "qirat": {
+              "name": "Hafs",
+              "language_name": "string"
+            }
+          }
+        ]
+      },
+      "Recitor": {
+        "type": "object",
+        "x-examples": {
+          "Example 1": {
+            "id": 1,
+            "name": "AbdulBaset AbdulSamad",
+            "recitations_count": 4,
+            "profile_picture": "images/reciters/1/abdelbasset-profile.jpeg",
+            "bio": "<p>Abdulbasit Abdusamad is a renowned Qur'an reciter born in 1927 in a village called Almara'za in Egypt.</p><p>He learned the Holy Quran at an early age from Shaykh Mohamed El Amir and later from Mohamed Selim Hamada. He entered the National Radio Station in 1951. The first surah he recited was Surah Fater.</p><p>In 1952, Abdulbasit Abdulsamad was appointed official reciter to Al-Imam Achafiî's mosque and then to Al-Imam Al Hussain's mosque in 1985.</p><p>Abdulbasit has left a fortune of high qualified recordings of both the chanted Holy Scripture and the recited one. He was an ambassador of the Holy Qur'an across many countries and the first president of the Egyptian reciter's Bar in 1984.</p><p>Abdulbasit Abdusamad went to many Arab countries to recite the Qur'an in Ramadan such as Saudi Arabia and Syria.</p><p>He died on November the 30th, 1988. May Allah have mercy on his soul, bless him and grant him a place in Jannah.</p>",
+            "cover_image": "images/reciters/1/abdelbasset-cover.jpeg"
+          }
+        },
+        "examples": [
+          {
+            "id": 1,
+            "name": "AbdulBaset AbdulSamad",
+            "recitations_count": 2,
+            "profile_picture": "images/reciters/1/abdelbasset-profile.jpeg",
+            "bio": "string",
+            "cover_image": "images/reciters/1/abdelbasset-cover.jpeg"
+          }
+        ],
+        "properties": {
+          "id": {
+            "type": "integer"
+          },
+          "name": {
+            "type": "string",
+            "example": "AbdulBaset AbdulSamad"
+          },
+          "recitations_count": {
+            "type": "integer",
+            "description": "Number of recitations we've for this qari"
+          },
+          "profile_picture": {
+            "type": "string",
+            "description": "profile picture path",
+            "example": "images/reciters/1/abdelbasset-profile.jpeg"
+          },
+          "bio": {
+            "type": "string",
+            "description": "long bio of reciter"
+          },
+          "cover_image": {
+            "type": "string",
+            "description": "cover image path",
+            "example": "images/reciters/1/abdelbasset-cover.jpeg"
+          }
+        },
+        "title": "Reciter",
+        "description": "Reciter/Qari model"
+      }
+    },
+    "responses": {
+      "chapters-list-response": {
+        "description": "List of chapters",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "chapters": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Chapter"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "chapters": [
+                    {
+                      "id": 1,
+                      "revelation_place": "makkah",
+                      "revelation_order": 5,
+                      "bismillah_pre": false,
+                      "name_simple": "Al-Fatihah",
+                      "name_complex": "Al-Fātiĥah",
+                      "name_arabic": "الفاتحة",
+                      "verses_count": 7,
+                      "pages": [
+                        1,
+                        1
+                      ],
+                      "slug": {
+                        "slug": "al-fatihah",
+                        "locale": "en"
+                      },
+                      "translated_name": {
+                        "language_name": "english",
+                        "name": "The Opener"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "chapter-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "chapter": {
+                  "$ref": "#/components/schemas/Chapter"
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "chapter": {
+                    "id": 1,
+                    "revelation_place": "makkah",
+                    "revelation_order": 5,
+                    "bismillah_pre": false,
+                    "name_simple": "Al-Fatihah",
+                    "name_complex": "Al-Fātiĥah",
+                    "name_arabic": "الفاتحة",
+                    "verses_count": 7,
+                    "pages": [
+                      1,
+                      1
+                    ],
+                    "slug": {
+                      "slug": "al-fatihah",
+                      "locale": "en"
+                    },
+                    "translated_name": {
+                      "language_name": "english",
+                      "name": "The Opener"
+                    },
+                    "slugs": [
+                      {
+                        "slug": "pembukaan",
+                        "locale": "ms",
+                        "is_default": false
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "translations-list-response": {
+        "description": "List of translations",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "translations": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TranslationResource"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "translations": [
+                    {
+                      "id": 167,
+                      "name": "Maarif-ul-Quran",
+                      "author_name": "Mufti Muhammad Shafi",
+                      "slug": "en-maarif-ul-quran",
+                      "language_name": "english",
+                      "translated_name": {
+                        "name": "Maarif-ul-Quran",
+                        "language_name": "english"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "tafsirs-list-response": {
+        "description": "Example response of tafsirs",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "tafsirs": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TranslationResource"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "tafsirs": [
+                    {
+                      "id": 169,
+                      "name": "Tafsir Ibn Kathir",
+                      "author_name": "Hafiz Ibn Kathir",
+                      "slug": "en-tafisr-ibn-kathir",
+                      "language_name": "english",
+                      "translated_name": {
+                        "name": "Tafsir Ibn Kathir",
+                        "language_name": "english"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "language-list-response": {
+        "description": "Example response for languages",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "languages": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Language"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "languages": [
+                    {
+                      "id": 0,
+                      "name": "Urdu",
+                      "iso_code": "ur",
+                      "native_name": "اردو",
+                      "direction": "rtl",
+                      "translations_count": 0,
+                      "translated_name": {
+                        "language_name": "english",
+                        "name": "urdu"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "chapter-info-list-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "chapter_infos": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/TranslationResource"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "chapter_infos": [
+                    {
+                      "id": 58,
+                      "name": "Chapter Info",
+                      "author_name": "Sayyid Abul Ala Maududi",
+                      "slug": "",
+                      "language_name": "english",
+                      "translated_name": {
+                        "name": "Chapter Info",
+                        "language_name": "english"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "chapter-info-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "chapter_info": {
+                  "$ref": "#/components/schemas/ChapterInfo"
+                }
+              }
+            }
+          }
+        }
+      },
+      "juz-list-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "juzs": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Juz"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "juzs": [
+                    {
+                      "id": 1,
+                      "juz_number": 1,
+                      "verse_mapping": {
+                        "1": "1-7",
+                        "2": "1-141"
+                      },
+                      "first_verse_id": 1,
+                      "last_verse_id": 148,
+                      "verses_count": 148
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "juz-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "juz": {
+                  "$ref": "#/components/schemas/Juz"
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "juz": {
+                    "id": 1,
+                    "juz_number": 1,
+                    "verse_mapping": {
+                      "1": "1-7",
+                      "2": "1-141"
+                    },
+                    "first_verse_id": 1,
+                    "last_verse_id": 148,
+                    "verses_count": 148
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "hizb-list-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "hizbs": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Hizb"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "hizbs": [
+                    {
+                      "id": 1,
+                      "hizb_number": 1,
+                      "verse_mapping": {
+                        "1": "1-7",
+                        "2": "1-74"
+                      },
+                      "first_verse_id": 1,
+                      "last_verse_id": 81,
+                      "verses_count": 81
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "hizb-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "hizb": {
+                  "$ref": "#/components/schemas/Hizb"
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "hizb": {
+                    "id": 1,
+                    "hizb_number": 1,
+                    "verse_mapping": {
+                      "1": "1-7",
+                      "2": "1-74"
+                    },
+                    "first_verse_id": 1,
+                    "last_verse_id": 81,
+                    "verses_count": 81
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "rubelhizb-list-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "rub_el_hizbs": {
+                  "type": "array",
+                  "minItems": 240,
+                  "maxItems": 240,
+                  "description": "list of rub el hizbs\n",
+                  "items": {
+                    "$ref": "#/components/schemas/RubElHizb"
+                  }
+                }
+              },
+              "required": [
+                "rub_el_hizbs"
+              ]
+            }
+          }
+        }
+      },
+      "rubelhizb-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "rub_el_hizb": {
+                  "$ref": "#/components/schemas/RubElHizb"
+                }
+              }
+            }
+          }
+        }
+      },
+      "manzil-list-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "manzils": {
+                  "type": "array",
+                  "description": "List of manzils\n",
+                  "items": {
+                    "$ref": "#/components/schemas/Manzil"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "manzils": [
+                    {
+                      "id": 1,
+                      "manzil_number": 1,
+                      "verse_mapping": {
+                        "1": "1-7",
+                        "2": "1-286",
+                        "3": "1-200",
+                        "4": "1-176"
+                      },
+                      "first_verse_id": 1,
+                      "last_verse_id": 669,
+                      "verses_count": 669
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "manzil-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "manzil": {
+                  "$ref": "#/components/schemas/Manzil"
+                }
+              }
+            }
+          }
+        }
+      },
+      "ruku-list-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "rukus": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Ruku"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "rukus": [
+                    {
+                      "id": 1,
+                      "ruku_number": 1,
+                      "surah_ruku_number": 1,
+                      "verse_mapping": {
+                        "1": "1-7"
+                      },
+                      "first_verse_id": 1,
+                      "last_verse_id": 7,
+                      "verses_count": 7
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "ruku-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "ruku": {
+                  "$ref": "#/components/schemas/Ruku"
+                }
+              }
+            }
+          }
+        }
+      },
+      "page-list-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "pages": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Page"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "mushaf-list-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "mushafs": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Mushaf"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "mushafs": [
+                    {
+                      "id": 2,
+                      "name": "QCF V1",
+                      "pages_count": 604,
+                      "lines_per_page": 15,
+                      "mushaf_type": "madani",
+                      "font": "v1",
+                      "qirat": {
+                        "id": 1,
+                        "name": "Hafs"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
+      "page-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "page": {
+                  "$ref": "#/components/schemas/Page"
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "page": {
+                    "id": 1209,
+                    "page_number": 1,
+                    "verse_mapping": {
+                      "1": "1-7"
+                    },
+                    "first_verse_id": 1,
+                    "last_verse_id": 7,
+                    "verses_count": 7
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "verse-list-response": {
+        "description": "This example response includes all the fileds of verse model. Real api will include very few fields, if you need more fields, use `fields` query string. Value of this query string will be comma separated list of verse fields you need.\n\nSame is true for all resources in the response. \n\n- Use `words_fields` if you need more feilds for words \n- Use `translation_fields` if you need more feilds for translations \n- Use `tafisr_fields` if you need more feilds for tafisrs \n",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "verses": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Verse"
+                  }
+                },
+                "pagination": {
+                  "$ref": "#/components/schemas/Pagination"
+                },
+                "chapters": {
+                  "type": "object",
+                  "description": "Optional, we'll include chapter info if `surah_detail`query string value is `true`",
+                  "properties": {
+                    "chapter_number": {
+                      "$ref": "#/components/schemas/Chapter"
+                    }
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "verses": [
+                    {
+                      "id": 1,
+                      "verse_number": 1,
+                      "verse_key": "1:1",
+                      "hizb_number": 1,
+                      "rub_el_hizb_number": 1,
+                      "ruku_number": 1,
+                      "manzil_number": 1,
+                      "sajdah_number": 1,
+                      "page_number": 1,
+                      "juz_number": 1,
+                      "chapter_id": 1,
+                      "text_indopak": "بِسۡمِ اللهِ الرَّحۡمٰنِ الرَّحِيۡمِ",
+                      "text_imlaei_simple": "بسم الله الرحمن الرحيم",
+                      "text_imlaei": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+                      "text_uthmani": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+                      "text_uthmani_simple": "بسم الله الرحمن الرحيم",
+                      "text_uthmani_tajweed": "بِسْمِ <tajweed class=ham_wasl>ٱ</tajweed>...",
+                      "text_qpc_hafs": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ ١",
+                      "text_qpc_nastaleeq_hafs": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ ١",
+                      "text_qpc_nastaleeq": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ ۟",
+                      "text_indopak_nastaleeq": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ ۟",
+                      "image_url": "//c22506.r6.cf1.rackcdn.com/1_1.png",
+                      "image_width": 675,
+                      "code_v1": "ﭑ ﭒ ﭓ ﭔ ﭕ",
+                      "code_v2": "ﱁ ﱂ ﱃ ﱄ ﱅ",
+                      "v1_page": 1,
+                      "v2_page": 1,
+                      "words": [
+                        {
+                          "id": 1,
+                          "position": 1,
+                          "audio_url": "wbw/001_001_001.mp3",
+                          "char_type_name": "word",
+                          "page_number": 1,
+                          "line_number": 2,
+                          "text": "بِسْمِ",
+                          "translation": {
+                            "text": "In (the) name",
+                            "language_name": "english",
+                            "language_id": 38
+                          },
+                          "transliteration": {
+                            "text": "bis'mi",
+                            "language_name": "english",
+                            "language_id": 38
+                          }
+                        }
+                      ]
+                    }
+                  ],
+                  "pagination": {
+                    "per_page": 0,
+                    "current_page": 0,
+                    "next_page": null,
+                    "total_pages": 0,
+                    "total_records": 0
+                  }
+                }
+              }
+            }
+          },
+          "application/xml": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "verses": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Verse"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "verse-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "verse": {
+                  "$ref": "#/components/schemas/Verse"
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "verse": {
+                    "id": 1,
+                    "verse_number": 1,
+                    "verse_key": "1:1",
+                    "hizb_number": 1,
+                    "rub_el_hizb_number": 1,
+                    "ruku_number": 1,
+                    "manzil_number": 1,
+                    "sajdah_number": 1,
+                    "page_number": 1,
+                    "juz_number": 1,
+                    "chapter_id": 1,
+                    "text_indopak": "بِسۡمِ اللهِ الرَّحۡمٰنِ الرَّحِيۡمِ",
+                    "text_imlaei_simple": "بسم الله الرحمن الرحيم",
+                    "text_imlaei": "بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ",
+                    "text_uthmani": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+                    "text_uthmani_simple": "بسم الله الرحمن الرحيم",
+                    "text_uthmani_tajweed": "بِسْمِ <tajweed class=ham_wasl>ٱ</tajweed>...",
+                    "text_qpc_hafs": "بِسۡمِ ٱللَّهِ ٱلرَّحۡمَٰنِ ٱلرَّحِيمِ ١",
+                    "text_qpc_nastaleeq_hafs": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِيْمِ ١",
+                    "text_qpc_nastaleeq": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ ۟",
+                    "text_indopak_nastaleeq": "بِسْمِ اللّٰهِ الرَّحْمٰنِ الرَّحِیْمِ ۟",
+                    "image_url": "//c22506.r6.cf1.rackcdn.com/1_1.png",
+                    "image_width": 675,
+                    "code_v1": "ﭑ ﭒ ﭓ ﭔ ﭕ",
+                    "code_v2": "ﱁ ﱂ ﱃ ﱄ ﱅ",
+                    "v1_page": 1,
+                    "v2_page": 1,
+                    "words": [
+                      {
+                        "id": 1,
+                        "position": 1,
+                        "audio_url": "wbw/001_001_001.mp3",
+                        "char_type_name": "word",
+                        "page_number": 1,
+                        "line_number": 2,
+                        "text": "بِسْمِ",
+                        "translation": {
+                          "text": "In (the) name",
+                          "language_name": "english",
+                          "language_id": 38
+                        },
+                        "transliteration": {
+                          "text": "bis'mi",
+                          "language_name": "english",
+                          "language_id": 38
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "search-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "result": {
+                    "navigation": [
+                      {
+                        "result_type": "ayah",
+                        "name": "Surah Al-Fatihah, verse 1",
+                        "key": "1:1"
+                      }
+                    ],
+                    "verses": [
+                      {
+                        "verse_key": "1:1",
+                        "words": [
+                          {
+                            "char_type": "word",
+                            "text": "بِسۡمِ",
+                            "highlight": true
+                          },
+                          {
+                            "char_type": "word",
+                            "text": "ٱللَّهِ"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "pagination": {
+                    "per_page": 10,
+                    "current_page": 1,
+                    "next_page": null,
+                    "total_pages": 1,
+                    "total_records": 0
+                  }
+                }
+              },
+              "properties": {
+                "result": {
+                  "type": "object",
+                  "properties": {
+                    "navigation": {
+                      "type": "array",
+                      "description": "navigational search results, these are the results when the searched for specific surah, ayah or juz.",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "result_type": {
+                            "type": "string",
+                            "description": "Possible values are `ayah`, `surah`, `juz`, `page` or `range`."
+                          },
+                          "name": {
+                            "type": "string"
+                          },
+                          "key": {
+                            "type": "string"
+                          }
+                        }
+                      }
+                    },
+                    "verses": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "verse_key": {
+                            "type": "string"
+                          },
+                          "words": {
+                            "type": "array",
+                            "items": {
+                              "type": "object",
+                              "properties": {
+                                "char_type": {
+                                  "type": "string"
+                                },
+                                "text": {
+                                  "type": "string"
+                                },
+                                "highlight": {
+                                  "type": "boolean",
+                                  "description": "highlight means this arabic word was exact matc"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "pagination": {
+                  "type": "object",
+                  "properties": {
+                    "per_page": {
+                      "type": "integer"
+                    },
+                    "current_page": {
+                      "type": "integer"
+                    },
+                    "next_page": {
+                      "type": "null"
+                    },
+                    "total_pages": {
+                      "type": "integer"
+                    },
+                    "total_records": {
+                      "type": "integer"
+                    }
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "result": {
+                    "navigation": [
+                      {
+                        "result_type": "ayah",
+                        "name": "Surah Al-Fatihah, verse 1",
+                        "key": "1:1"
+                      }
+                    ],
+                    "verses": [
+                      {
+                        "verse_key": "1:1",
+                        "words": [
+                          {
+                            "char_type": "word",
+                            "text": "بِسۡمِ",
+                            "highlight": true
+                          },
+                          {
+                            "char_type": "word",
+                            "text": "ٱللَّهِ"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  "pagination": {
+                    "per_page": 10,
+                    "current_page": 1,
+                    "next_page": null,
+                    "total_pages": 1,
+                    "total_records": 0
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "footnote-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "foot_note": {
+                  "$ref": "#/components/schemas/FootNote"
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "foot_note": {
+                    "id": 1,
+                    "text": "example of footnote text",
+                    "language_name": "english",
+                    "language_id": 38
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "recitation-list-response": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "reciters": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/Recitation"
+                  }
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "reciters": [
+                    {
+                      "id": 0,
+                      "reciter_id": 0,
+                      "name": "Mishari Rashid al-`Afasy",
+                      "translated_name": {
+                        "language_name": "english",
+                        "name": "Mishari Rashid al-`Afasy"
+                      },
+                      "style": {
+                        "name": "Murattal",
+                        "language_name": "english",
+                        "description": "Murattal is Quranic recitation at a slower pace, used for study and practice."
+                      },
+                      "qirat": {
+                        "name": "Hafs",
+                        "language_name": "string"
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
