@@ -1,4 +1,5 @@
 import '../styles/global.css'
+import 'highlight.js/styles/a11y-dark.css'
 import { MDXProvider } from '@mdx-js/react'
 import MDXComponents from '../components/MDXComponents'
 

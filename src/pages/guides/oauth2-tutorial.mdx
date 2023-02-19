@@ -1,0 +1,289 @@
+import { GuideLayout } from '@/components/guide-layout'
+
+# Quran.com’s OAuth2 Integration Tutorial
+
+# Setup
+
+- Start with cloning this repo [https://github.com/quran/quran-oauth2-example/](https://github.com/quran/quran-oauth2-example/)
+- Duplicate the `.env.example` into `.env`
+  ```
+  BASE_PATH = 'http://localhost:3000'
+  PORT = 3000
+  TOKEN_HOST = 'https://oauth2.quran.com'
+  CLIENT_ID = 'quran-demo'
+  CLIENT_SECRET = 'secret'
+  SCOPES = 'openid offline collection bookmark reading_session preference user'
+  ```
+  ```bash
+  cp env.example.env
+  ```
+  - Notice that we have example client id and client secret (`quran-demo` and `secret`)
+  - On production, you should request your own client id and secret. You can do so by emailing osama@quran.com
+- Install dependency
+  ```bash
+  npm install
+  ```
+- Start the demo app
+  ```bash
+  npm start
+  ```
+
+## Quick Start
+
+- Go to http://localhost:3000
+- And click “Continue with Quran.com”
+- Approve all the required consents
+- You will be redirected to http://localhost:3000/callback
+  - And you will see the json response with this structure
+    - `access_token`
+    - `expires_in`
+    - `id_token`
+    - `refresh_token`
+    - `scope`
+    - `token_type`
+    - `expires_at`
+  - The `access_token` will be used for to access the resources from Quran.com’s server
+  - Save `refresh_token` in a long term storage. This will be used to access the `access_token` when expired
+  - The `scope` represent scopes that’s already granted on behalf of user.
+
+## Accessing the resources from Quran.com’s Server
+
+- You can explore list of available APIs here [https://api-docs.quran.com/qdc-auth-v1](https://api-docs.quran.com/qdc-auth-v1)
+- For example, add a collection you can access
+  - [https://api-docs.quran.com/qdc-auth-v1/paths/v1-collections/post](https://api-docs.quran.com/qdc-auth-v1/paths/v1-collections/post)
+  - Put the `access_token` value in `o_t_h`
+  - And write a collection’s `name`
+  - Then click `Send API Request`
+    ![Untitled](/oauth2-tutorial/Untitled.png)
+- Now, try to get all the collections
+  - [https://api-docs.quran.com/qdc-auth-v1/paths/v1-collections/get](https://api-docs.quran.com/qdc-auth-v1/paths/v1-collections/get)
+  - Put a value `first: 10`
+    ![Untitled](/oauth2-tutorial/Untitled%201.png)
+
+# How the quran-oauth2-example repo works
+
+## Dependencies
+
+- Express → A minimal nodejs’s web framework
+- [simple-oauth2](https://www.npmjs.com/package/simple-oauth2) → NodeJS OAuth2 client library
+- PugJS → Templating engine, to be integrated with expressjs
+
+## Important files
+
+- index.js → contains all the logic for this repo
+- views/index.pug → view for localhost:3000/
+
+## Endpoints
+
+If you open index.js, you will see that we have 3 endpoints
+
+- `/` → to render the view of http://localhost:3000
+- `/auth` → to initiate the oauth2 process
+- `/callback` → to get the callback from Quran.com’s server
+
+# Index.js
+
+Here we’re just important dependencies, and doing `dotenv.config()` to read the environment variable from `.env` file
+
+```jsx
+const { AuthorizationCode } = require('simple-oauth2')
+const path = require('path')
+const app = require('express')()
+const dotenv = require('dotenv')
+dotenv.config()
+```
+
+Here we setting up the view engine to use `pug` and start importing environment variable PORT and BASE_PATH
+
+```js
+const PORT = process.env.PORT
+const BASE_PATH = process.env.BASE_PATH
+
+app.set('views', path.join(__dirname, 'views'))
+app.set('view engine', 'pug')
+```
+
+This function will be called later to setup the express to start listening at PORT 3000
+
+```jsx
+const createApplication = (cb) => {
+  const callbackUrl = BASE_PATH + '/callback'
+  app.listen(PORT, (err) => {
+    if (err) return console.error(err)
+    console.log(`Express server listening at ${BASE_PATH}`)
+    return cb({
+      app,
+      callbackUrl,
+    })
+  })
+}
+```
+
+Here, we start using the `simple-oauth2` package.
+The [client.id](http://client.id) and client.secret comes from .env file.
+
+The auth.tokenHost should be [https://oauth2.quran.com](https://oauth2.quran.com/) (defined in .env file)
+
+and Quran.com’s tokenPath and aurhorizePath is `/oauth2/token` and `/oauth2/auth`
+
+```jsx
+const client = new AuthorizationCode({
+  client: {
+    id: process.env.CLIENT_ID,
+    secret: process.env.CLIENT_SECRET,
+  },
+  auth: {
+    tokenHost: process.env.TOKEN_HOST,
+    tokenPath: '/oauth2/token',
+    authorizePath: '/oauth2/auth',
+  },
+})
+```
+
+Define the `authoriationUri`
+
+- The redirect_uri should be `[http://localhost:3000](http://localhost:3000)` for our demo purpose
+- scope is defined in .env file as well. For full reference about the scopes, you can read more at [https://api-docs.quran.com/guides/scopes](https://api-docs.quran.com/guides/scopes)
+- State
+  - In OAuth 2.0, the purpose of the state parameter is to prevent CSRF (Cross-Site Request Forgery) attacks. The state parameter is a randomly generated value that is sent from the client (the application that initiates the OAuth flow) to the authorization server. The authorization server returns this state parameter to the client as part of the redirect URI.
+
+```jsx
+// Authorization uri definition
+const authorizationUri = client.authorizeURL({
+  redirect_uri: callbackUrl,
+  scope: process.env.SCOPES,
+  state: 'veimvfgqexjicockrwsgcb333o3a',
+})
+```
+
+## Endpoints
+
+Define `/auth` endpoint.
+
+- This endpoint when accessed (via localhost:3000/auth) will initiate the auth process
+
+```jsx
+app.get('/auth', (req, res) => {
+  console.log(authorizationUri)
+  res.redirect(authorizationUri)
+})
+```
+
+Define `/callback` endpoint.
+
+- After auth process completed, Quran.com’s server will redirect user to `[localhost:3000/callback](http://localhost:3000/callback)` with query params `code` ,`state` and `scope`
+- We’re going to exchange the `code` with access token, and then return the json `data.token`
+
+```jsx
+app.get('/callback', async (req, res) => {
+  const { code } = req.query
+  const options = {
+    code,
+    redirect_uri: callbackUrl,
+  }
+
+  try {
+    const data = await client.getToken(options)
+    console.log(data)
+
+    console.log('The resulting token: ', data.token)
+
+    return res.status(200).json(data.token)
+  } catch (error) {
+    console.error('Access Token Error', error)
+    return res.status(500).json('Authentication failed')
+  }
+})
+```
+
+Define `/` endpoint.
+
+- This endpoint, when accessed will render the view in `views/index.pug`
+
+```jsx
+app.get('/', (req, res) => {
+  res.render('index')
+})
+```
+
+- Create the `views/index.pug` . Here we only have an `a` tag with href to `/auth` (to initiate the auth process)
+  - We’re going to use Tailwind to simplify our styling process. So you’ll see the tailwind’s `class`
+
+```jsx
+doctype html
+html(lang="en")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
+    script(src="https://cdn.tailwindcss.com")
+    title Quran.com OAuth2 Demo
+  body
+    div(class="min-h-screen flex justify-center items-center" style="background-color:#22A5AD")
+      a(class="px-4 py-2 rounded text-white flex items-center space-x-4" href="/auth" style="background-color:#257D83")
+        img(src="https://quran.com/images/logo/Logo@192x192.png" width="32" height="32")
+        span Continue with Quran.com
+```
+
+And finally wrap those code with `createApplication` function to get express start listening at port 3000
+
+```javascript
+createApplication(({ app, callbackUrl }) => {
+  const client = new AuthorizationCode({
+    client: {
+      id: process.env.CLIENT_ID,
+      secret: process.env.CLIENT_SECRET,
+    },
+    auth: {
+      tokenHost: process.env.TOKEN_HOST,
+      tokenPath: '/oauth2/token',
+      authorizePath: '/oauth2/auth',
+    },
+  })
+
+  // Authorization uri definition
+  const authorizationUri = client.authorizeURL({
+    redirect_uri: callbackUrl,
+    scope: process.env.SCOPES,
+    state: 'veimvfgqexjicockrwsgcb333o3a',
+  })
+
+  // Initial page redirecting to Github
+  app.get('/auth', (req, res) => {
+    console.log(authorizationUri)
+    res.redirect(authorizationUri)
+  })
+
+  // Callback service parsing the authorization token and asking for the access token
+  app.get('/callback', async (req, res) => {
+    const { code } = req.query
+    const options = {
+      code,
+      redirect_uri: callbackUrl,
+    }
+
+    try {
+      const data = await client.getToken(options)
+      console.log(data)
+
+      console.log('The resulting token: ', data.token)
+
+      return res.status(200).json(data.token)
+    } catch (error) {
+      console.error('Access Token Error', error)
+      return res.status(500).json('Authentication failed')
+    }
+  })
+
+  app.get('/', (req, res) => {
+    res.render('index')
+  })
+})
+```
+
+export default ({ children }) => (
+  <GuideLayout title="OAuth2 Tutorial">
+    {children}
+  </GuideLayout>
+
+)

@@ -1,12 +1,29 @@
 // next.config.mjs
 import remarkGfm from 'remark-gfm'
+import rehypeHighlight from 'rehype-highlight'
+import langJavascript from 'highlight.js/lib/languages/javascript'
 import createMDX from '@next/mdx'
+
+const languages = {
+  javascript: langJavascript,
+}
+
+const aliases = { dockerfile: 'docker' }
 
 const withMDX = createMDX({
   extension: /\.mdx?$/,
   options: {
     remarkPlugins: [remarkGfm],
-    rehypePlugins: [],
+    rehypePlugins: [
+      [
+        rehypeHighlight,
+        {
+          ignoreMissing: true,
+          languages,
+          aliases,
+        },
+      ],
+    ],
   },
 })
 
