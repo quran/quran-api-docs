@@ -4,8 +4,12 @@ import { GuideLayout } from '@/components/guide-layout'
 
 # Setup
 
-- Start with cloning this repo [https://github.com/quran/quran-oauth2-example/](https://github.com/quran/quran-oauth2-example/)
-- Duplicate the `.env.example` into `.env`
+- Start with cloning our [Oauth2 example repo](https://github.com/quran/quran-oauth2-example/).
+- Copy `.env.example` file into `.env`:
+  ```bash
+  cp env.example .env
+  ```
+- Paste the following into `.env`:
   ```
   BASE_PATH = 'http://localhost:3000'
   PORT = 3000
@@ -14,27 +18,26 @@ import { GuideLayout } from '@/components/guide-layout'
   CLIENT_SECRET = 'secret'
   SCOPES = 'openid offline collection bookmark reading_session preference user'
   ```
-  ```bash
-  cp env.example.env
-  ```
-  - Notice that we have example client id and client secret (`quran-demo` and `secret`)
-  - On production, you should request your own client id and secret. You can do so by emailing osama@quran.com
-- Install dependency
+
+  - Please note that the values of client id and client secret are set to (`quran-demo` and `secret`) which are meant for testing purposes and are not meant for production use.
+  - For production use, please make sure to obtain your own client id and secret use by contacting [us](mailto:osama@quran.com).
+- Install dependencies:
   ```bash
   npm install
   ```
-- Start the demo app
+- Start the Oauth2 example app:
   ```bash
   npm start
   ```
 
 ## Quick Start
 
-- Go to http://localhost:3000
-- And click “Continue with Quran.com”
-- Approve all the required consents
-- You will be redirected to http://localhost:3000/callback
-  - And you will see the json response with this structure
+- Go to http://localhost:3000.
+- Click “Continue with Quran.com”.
+- If you are not logged in already, you will be asked to login, make sure you do.
+- You might be asked to consent to the example app accessing your data, make sure you consent to all of them.
+- Once logging in and consenting steps are done, You will be redirected to http://localhost:3000/callback.
+  - a JSON response that has the following structure will be shown:
     - `access_token`
     - `expires_in`
     - `id_token`
@@ -42,48 +45,47 @@ import { GuideLayout } from '@/components/guide-layout'
     - `scope`
     - `token_type`
     - `expires_at`
-  - The `access_token` will be used for to access the resources from Quran.com’s server
-  - Save `refresh_token` in a long term storage. This will be used to access the `access_token` when expired
-  - The `scope` represent scopes that’s already granted on behalf of user.
+  - `access_token` will be used to access your resources stored on Quran.com’s resources server.
+  - `refresh_token` will be used to re-generate a new `access_token` when it expires. Make sure to save it in a long term storage.
+  - `scope` object the scopes that have already been granted to the example app to access.
 
-## Accessing the resources from Quran.com’s Server
+## Accessing resources from Quran.com’s  Resources Server
 
-- You can explore list of available APIs here [https://api-docs.quran.com/qdc-auth-v1](https://api-docs.quran.com/qdc-auth-v1)
-- For example, add a collection you can access
-  - [https://api-docs.quran.com/qdc-auth-v1/paths/v1-collections/post](https://api-docs.quran.com/qdc-auth-v1/paths/v1-collections/post)
-  - Put the `access_token` value in `o_t_h`
-  - And write a collection’s `name`
-  - Then click `Send API Request`
+- You can explore the list of all available APIs [here](/qdc-auth-v1).
+- For example, to add a collection to your profile, you can use our interactive [collection API](/qdc-auth-v1/paths/v1-collections/post)
+  - Put the `access_token` value in `o_t_h` header.
+  - And add the name of the collection’s inside `name` JSON parameter.
+  - Click `Send API Request` button.
     ![Untitled](/oauth2-tutorial/Untitled.png)
-- Now, try to get all the collections
-  - [https://api-docs.quran.com/qdc-auth-v1/paths/v1-collections/get](https://api-docs.quran.com/qdc-auth-v1/paths/v1-collections/get)
-  - Put a value `first: 10`
+- Now, to make sure it was added, you can make a call to [get all collections API](/qdc-auth-v1/paths/v1-collections/get):
+  - Put the `access_token` value in `o_t_h` header.
+  - Set the value of `first` parameter to `10` for example.
+  - Click `Send API Request` button.
     ![Untitled](/oauth2-tutorial/Untitled%201.png)
 
 # How the quran-oauth2-example repo works
 
 ## Dependencies
 
-- Express → A minimal nodejs’s web framework
-- [simple-oauth2](https://www.npmjs.com/package/simple-oauth2) → NodeJS OAuth2 client library
-- PugJS → Templating engine, to be integrated with expressjs
-
-## Important files
-
-- index.js → contains all the logic for this repo
-- views/index.pug → view for localhost:3000/
+| Dependancy                                                   | Description                      |
+| ------------------------------------------------------------ | -------------------------------- |
+| [Express](https://expressjs.com/)                            | A minimal nodejs’s web framework |
+| [simple-oauth2](https://www.npmjs.com/package/simple-oauth2) | NodeJS OAuth2 client library     |
+| [Pug](https://pugjs.org/api/getting-started.html)          | Templating engine for Express.js |
 
 ## Endpoints
 
 If you open index.js, you will see that we have 3 endpoints
 
-- `/` → to render the view of http://localhost:3000
-- `/auth` → to initiate the oauth2 process
-- `/callback` → to get the callback from Quran.com’s server
+| Endpoint    | Description                                                 |
+| ----------- | ----------------------------------------------------------- |
+| `/`         | Renders the view of http://localhost:3000                   |
+| `/auth`     | Initiates the Oauth2 process                                |
+| `/callback` | Receives the callback from Quran.com’s authorization server |
 
 # Index.js
 
-Here we’re just important dependencies, and doing `dotenv.config()` to read the environment variable from `.env` file
+First part contains importing the required dependencies and setting up reading environment variables from `.env` file.
 
 ```jsx
 const { AuthorizationCode } = require('simple-oauth2')
@@ -93,7 +95,7 @@ const dotenv = require('dotenv')
 dotenv.config()
 ```
 
-Here we setting up the view engine to use `pug` and start importing environment variable PORT and BASE_PATH
+Next, we are setting up the view engine to use `pug` and setting which port and path the Oauth2 example app will run on.
 
 ```js
 const PORT = process.env.PORT
@@ -103,7 +105,7 @@ app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
 ```
 
-This function will be called later to setup the express to start listening at PORT 3000
+`createApplication` will be called later to actually kick start the express app at the PORT we set in `.env` file. 
 
 ```jsx
 const createApplication = (cb) => {
@@ -116,15 +118,11 @@ const createApplication = (cb) => {
       callbackUrl,
     })
   })
+  ...
 }
 ```
 
-Here, we start using the `simple-oauth2` package.
-The [client.id](http://client.id) and client.secret comes from .env file.
-
-The auth.tokenHost should be [https://oauth2.quran.com](https://oauth2.quran.com/) (defined in .env file)
-
-and Quran.com’s tokenPath and aurhorizePath is `/oauth2/token` and `/oauth2/auth`
+Next, we start setting up an Oauth2 client using `CLIENT_ID`, `CLIENT_SECRET` and `TOKEN_HOST` values set in `.env` file.
 
 ```jsx
 const client = new AuthorizationCode({
@@ -140,12 +138,7 @@ const client = new AuthorizationCode({
 })
 ```
 
-Define the `authoriationUri`
-
-- The redirect_uri should be `[http://localhost:3000](http://localhost:3000)` for our demo purpose
-- scope is defined in .env file as well. For full reference about the scopes, you can read more at [https://api-docs.quran.com/guides/scopes](https://api-docs.quran.com/guides/scopes)
-- State
-  - In OAuth 2.0, the purpose of the state parameter is to prevent CSRF (Cross-Site Request Forgery) attacks. The state parameter is a randomly generated value that is sent from the client (the application that initiates the OAuth flow) to the authorization server. The authorization server returns this state parameter to the client as part of the redirect URI.
+### Defining `authoriationUri`
 
 ```jsx
 // Authorization uri definition
@@ -156,11 +149,23 @@ const authorizationUri = client.authorizeURL({
 })
 ```
 
-## Endpoints
+- `redirect_uri` is where Quran.com's authorization server will redirect the user back to once a user successfully authorizes the example app and it should be set to our example app's url `[http://localhost:3000](http://localhost:3000)`.
+- `scope` value will come from `.env` file. You can read more about all the available scopes [here](/guides/scopes).
+- `state` is an optional randomly generated value whose purpose is to prevent CSRF (Cross-Site Request Forgery) attacks. The client app that initiates the OAuth2 flow sends it to the authorization server. The authorization server returns this state parameter to the client as part of the redirect URI. The client should validate it upon receiving it.
 
-Define `/auth` endpoint.
+### Defining `/` endpoint.
 
-- This endpoint when accessed (via localhost:3000/auth) will initiate the auth process
+- This endpoint, when accessed will render the view in `views/index.pug`
+
+```jsx
+app.get('/', (req, res) => {
+  res.render('index')
+})
+```
+
+### Defining `/auth` endpoint.
+
+- The endpoint that will initiate the entire Oauth2 flow when accessed (via `http://localhost:3000/auth`)
 
 ```jsx
 app.get('/auth', (req, res) => {
@@ -169,10 +174,10 @@ app.get('/auth', (req, res) => {
 })
 ```
 
-Define `/callback` endpoint.
+### Defining `/callback` endpoint.
 
-- After auth process completed, Quran.com’s server will redirect user to `[localhost:3000/callback](http://localhost:3000/callback)` with query params `code` ,`state` and `scope`
-- We’re going to exchange the `code` with access token, and then return the json `data.token`
+- Once a user successfully authorizes the example app, Quran.com’s authorization server will redirect the user back to `http://localhost:3000/callback` with `code` ,`state` and `scope` query params.
+- We’re going to exchange the `code` with an access token by calling the `tokenPath` endpoint defined above.
 
 ```jsx
 app.get('/callback', async (req, res) => {
@@ -196,36 +201,7 @@ app.get('/callback', async (req, res) => {
 })
 ```
 
-Define `/` endpoint.
-
-- This endpoint, when accessed will render the view in `views/index.pug`
-
-```jsx
-app.get('/', (req, res) => {
-  res.render('index')
-})
-```
-
-- Create the `views/index.pug` . Here we only have an `a` tag with href to `/auth` (to initiate the auth process)
-  - We’re going to use Tailwind to simplify our styling process. So you’ll see the tailwind’s `class`
-
-```jsx
-doctype html
-html(lang="en")
-  head
-    meta(charset="utf-8")
-    meta(http-equiv="X-UA-Compatible", content="IE=edge")
-    meta(name="viewport", content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0")
-    script(src="https://cdn.tailwindcss.com")
-    title Quran.com OAuth2 Demo
-  body
-    div(class="min-h-screen flex justify-center items-center" style="background-color:#22A5AD")
-      a(class="px-4 py-2 rounded text-white flex items-center space-x-4" href="/auth" style="background-color:#257D83")
-        img(src="https://quran.com/images/logo/Logo@192x192.png" width="32" height="32")
-        span Continue with Quran.com
-```
-
-And finally wrap those code with `createApplication` function to get express start listening at port 3000
+Putting all of the above configuration together, `createApplication` function looks like:
 
 ```javascript
 createApplication(({ app, callbackUrl }) => {
@@ -285,5 +261,4 @@ export default ({ children }) => (
   <GuideLayout title="OAuth2 Tutorial">
     {children}
   </GuideLayout>
-
 )
