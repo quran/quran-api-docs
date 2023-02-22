@@ -2,6 +2,7 @@ enum API_GROUP {
   AUTH = 'Quran.com Auth APIs',
   OAUTH2 = 'OAuth 2/OpenId Connect',
   BACKEND = 'Quran.com Backend APIs',
+  QURANREFLECT = "QuranReflect API",
 }
 
 const oAuth2List = [
@@ -28,6 +29,11 @@ const backendList = [
     value: '/qdc',
     group: API_GROUP.BACKEND,
   },
+  {
+    label: 'QuranReflect API',
+    value: '/qr-v1',
+    group: API_GROUP.QURANREFLECT,
+  }
 ]
 
 const authList = [

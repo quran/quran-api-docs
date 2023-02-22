@@ -1,0 +1,17 @@
+---
+stoplight-id: yb1c7g4m9egq6
+---
+
+# Required headers for user's specific apis
+
+All user specific apis(e.g creating post) will need following headers: 
+
+- `access-token` the user access token, this token can be changed with every request.
+- `token-type`  value should always be `Bearer`
+- `client` the client token, this too can be changed with every request 
+- `expiry` unix timestamp( in secnds ) indicate when access token will be expired
+- `uid` user's uuid
+`Authorization`: complete authorization header. Sample value `Bearer eyJhY2Nlc3MtdG9rZW4iOiJ4cjBrb3g1eXdVM3JrelVMZjhVUzlBIiwidG9rZW4tdHlwZSI6IkJlYXJlciIsImNsaWVudCI6IkpQeFJCRTloVmRBbDlTX1BVdEhJN2ciLCJleHBpcnkiOiIxNzA1OTQwNTQ3IiwidWlkIjoiYW1lci5hYmJhc0BtYWlsaW5hdG9yLmNvbSJ9`
+
+
+> You'll get values of `access-token`, `client`, `expiry`, and `uid` headers in response of "Sign in" api.
