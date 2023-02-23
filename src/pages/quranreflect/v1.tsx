@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div style={{ height: '100vh' }}>
       <Head>
-        <title>QuranReflect v1 APIs</title>
+        <title>QuranReflect V1 APIs</title>
       </Head>
       <APIDocs basePath="/quranreflect/v1" apiDescriptionUrl="/quranreflect/v1.json" />
     </div>
