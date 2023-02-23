@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div style={{ height: '100vh' }}>
       <Head>
-        <title>Quran Foundation Documentation</title>
+        <title>Quran Foundation Auth V1 APIs</title>
       </Head>
       <APIDocs
         basePath="/qdc-auth-v1"

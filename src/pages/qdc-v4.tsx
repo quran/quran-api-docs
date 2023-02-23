@@ -9,7 +9,7 @@ export default function Home() {
   return (
     <div style={{ height: '100vh' }}>
       <Head>
-        <title>Quran Foundation Documentation</title>
+        <title>Quran.com V4 APIs</title>
       </Head>
       <AIPDocs basePath="/qdc-v4" apiDescriptionUrl="/v4.json" />
     </div>
