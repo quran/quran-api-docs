@@ -2,6 +2,7 @@ enum API_GROUP {
   AUTH = 'Quran.com Auth APIs',
   OAUTH2 = 'OAuth 2/OpenId Connect',
   BACKEND = 'Quran.com Backend APIs',
+  QURANREFLECT = "QuranReflect.com APIs",
 }
 
 const oAuth2List = [
@@ -27,7 +28,7 @@ const backendList = [
     label: 'Quran.com',
     value: '/qdc',
     group: API_GROUP.BACKEND,
-  },
+  }
 ]
 
 const authList = [
@@ -36,8 +37,6 @@ const authList = [
     value: '/qdc-auth-v1',
     group: API_GROUP.AUTH,
   },
-
-
   {
     label: 'Scopes',
     value: '/guides/scopes',
@@ -45,13 +44,27 @@ const authList = [
   },
 ]
 
+const quranReflectList = [
+  {
+    label: 'Getting started with APIs',
+    value: '/quranreflect/guides/getting-started',
+    group: API_GROUP.QURANREFLECT,
+  },
+  {
+    label: 'V1 APIs',
+    value: '/quranreflect/v1',
+    group: API_GROUP.QURANREFLECT,
+  },
+]
+
 export const APIs = [
   ...authList,
   ...backendList,
-  ...oAuth2List
+  ...oAuth2List,
+  ...quranReflectList
 ]
 
-const groups = [API_GROUP.AUTH, API_GROUP.BACKEND, API_GROUP.OAUTH2]
+const groups = [API_GROUP.BACKEND, , API_GROUP.QURANREFLECT, API_GROUP.AUTH, API_GROUP.OAUTH2]
 
 export const APIGroups = groups.map((group) => ({
   label: group,

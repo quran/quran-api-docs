@@ -1,0 +1,24 @@
+import { GuideLayout } from '@/components/guide-layout'
+
+## Getting started
+
+Our APIs are not public and require an API key. Please contact us via [email](mailto:amer.abbas@gmail.com) to get yours.
+
+## User-specific APIs
+
+All user-specific APIs (For example [Creating a post](/quranreflect/v1/operations/post-create)) require the following headers: 
+
+- `access-token` the user access token, this token can be changed with every request.
+- `token-type`  value should always be `Bearer`.
+- `client` the client token, this too can be changed with every request.
+- `expiry` unix timestamp (in seconds) to indicate when access token will expire.
+- `uid` user's unique identifier.
+- `Authorization`: complete authorization header. Sample value `Bearer eyJhY2Nlc3MtdG9rZW4iOiJ4cjBrb3g1eXdVM3JrelVMZjhVUzlBIiwidG9rZW4tdHlwZSI6IkJlYXJlciIsImNsaWVudCI6IkpQeFJCRTloVmRBbDlTX1BVdEhJN2ciLCJleHBpcnkiOiIxNzA1OTQwNTQ3IiwidWlkIjoiYW1lci5hYmJhc0BtYWlsaW5hdG9yLmNvbSJ9`.
+
+The values of `access-token`, `client`, `expiry`, and `uid` headers will be returned in the response of [User Sign in API](/quranreflect/v1/operations/user-signin).
+
+export default ({ children }) => (
+  <GuideLayout title="Getting started QuranReflect APIs">
+    {children}
+  </GuideLayout>
+)
