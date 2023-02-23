@@ -11,7 +11,7 @@ export default function Home() {
       <Head>
         <title>Quran.com V4 APIs</title>
       </Head>
-      <AIPDocs basePath="/qdc-v4" apiDescriptionUrl="/v4.json" />
+      <AIPDocs basePath="/qdc-v4" apiDescriptionUrl="/quran.com/v4.json" />
     </div>
   )
 }
