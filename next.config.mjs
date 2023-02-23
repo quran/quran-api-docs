@@ -66,10 +66,10 @@ const nextConfig = {
         source: '/quran.com/v4/:path*',
         destination: '/quran.com/v4/', // The :path parameter is used here so will not be automatically passed in the query
       },
-      {
-        source: '/quran.com/qdc/:path*',
-        destination: '/quran.com/qdc/', // The :path parameter is used here so will not be automatically passed in the query
-      },
+      // {
+      //   source: '/quran.com/qdc/:path*',
+      //   destination: '/quran.com/qdc/', // The :path parameter is used here so will not be automatically passed in the query
+      // },
       {
         source: '/quranreflect/v1/:path*',
         destination: '/quranreflect/v1/', // The :path parameter is used here so will not be automatically passed in the query

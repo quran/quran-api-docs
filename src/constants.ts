@@ -24,11 +24,11 @@ const backendList = [
     value: '/quran.com/v4',
     group: API_GROUP.BACKEND,
   },
-  {
-    label: 'Quran.com',
-    value: '/quran.com/qdc',
-    group: API_GROUP.BACKEND,
-  }
+  // {
+  //   label: 'Quran.com',
+  //   value: '/quran.com/qdc',
+  //   group: API_GROUP.BACKEND,
+  // }
 ]
 
 const authList = [
