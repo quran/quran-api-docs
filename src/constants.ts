@@ -8,12 +8,12 @@ enum API_GROUP {
 const oAuth2List = [
   {
     label: 'Getting started With OAuth 2.0',
-    value: '/guides/getting-started-with-oauth2',
+    value: '/auth/guides/getting-started-with-oauth2',
     group: API_GROUP.OAUTH2,
   },
   {
     label: 'OAuth2 Tutorial',
-    value: '/guides/oauth2-tutorial',
+    value: '/auth/guides/oauth2-tutorial',
     group: API_GROUP.OAUTH2,
   },
 ];
@@ -21,12 +21,12 @@ const oAuth2List = [
 const backendList = [
   {
     label: 'V4 APIs',
-    value: '/qdc-v4',
+    value: '/quran.com/v4',
     group: API_GROUP.BACKEND,
   },
   {
     label: 'Quran.com',
-    value: '/qdc',
+    value: '/quran.com/qdc',
     group: API_GROUP.BACKEND,
   }
 ]
@@ -34,12 +34,12 @@ const backendList = [
 const authList = [
   {
     label: 'V1 APIs',
-    value: '/qdc-auth-v1',
+    value: '/auth/v1',
     group: API_GROUP.AUTH,
   },
   {
     label: 'Scopes',
-    value: '/guides/scopes',
+    value: '/auth/guides/scopes',
     group: API_GROUP.AUTH,
   },
 ]

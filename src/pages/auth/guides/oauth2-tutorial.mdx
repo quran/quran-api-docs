@@ -51,13 +51,13 @@ import { GuideLayout } from '@/components/guide-layout'
 
 ## Accessing resources from Quran.com’s  Resources Server
 
-- You can explore the list of all available APIs [here](/qdc-auth-v1).
-- For example, to add a collection to your profile, you can use our interactive [collection API](/qdc-auth-v1/paths/v1-collections/post)
+- You can explore the list of all available APIs [here](/auth/v1).
+- For example, to add a collection to your profile, you can use our interactive [collection API](/auth/v1/paths/v1-collections/post)
   - Put the `access_token` value in `o_t_h` header.
   - And add the name of the collection’s inside `name` JSON parameter.
   - Click `Send API Request` button.
     ![Untitled](/oauth2-tutorial/Untitled.png)
-- Now, to make sure it was added, you can make a call to [get all collections API](/qdc-auth-v1/paths/v1-collections/get):
+- Now, to make sure it was added, you can make a call to [get all collections API](/auth/v1/paths/v1-collections/get):
   - Put the `access_token` value in `o_t_h` header.
   - Set the value of `first` parameter to `10` for example.
   - Click `Send API Request` button.
@@ -150,7 +150,7 @@ const authorizationUri = client.authorizeURL({
 ```
 
 - `redirect_uri` is where Quran.com's authorization server will redirect the user back to once a user successfully authorizes the example app and it should be set to our example app's url `[http://localhost:3000](http://localhost:3000)`.
-- `scope` value will come from `.env` file. You can read more about all the available scopes [here](/guides/scopes).
+- `scope` value will come from `.env` file. You can read more about all the available scopes [here](/auth/guides/scopes).
 - `state` is an optional randomly generated value whose purpose is to prevent CSRF (Cross-Site Request Forgery) attacks. The client app that initiates the OAuth2 flow sends it to the authorization server. The authorization server returns this state parameter to the client as part of the redirect URI. The client should validate it upon receiving it.
 
 ### Defining `/` endpoint.

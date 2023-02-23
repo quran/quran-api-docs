@@ -1,7 +1,7 @@
 import dynamic from 'next/dynamic'
 import Head from 'next/head'
 
-const APIDocs = dynamic(() => import('../components/api-docs'), {
+const APIDocs = dynamic(() => import('../../components/api-docs'), {
   ssr: false,
 })
 
@@ -12,8 +12,8 @@ export default function Home() {
         <title>Quran Foundation Auth V1 APIs</title>
       </Head>
       <APIDocs
-        basePath="/qdc-auth-v1"
-        apiDescriptionUrl="/auth/qdc-auth-v1-api.json"
+        basePath="/auth/v1"
+        apiDescriptionUrl="/auth/v1.json"
       />
     </div>
   )
