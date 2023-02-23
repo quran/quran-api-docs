@@ -10,11 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://localhost:3000",
-      "description": "Development"
-    },
-    {
-      "url": "http://qreflect.com",
+      "url": "https://quranreflect.com",
       "description": "Production"
     }
   ],
