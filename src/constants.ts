@@ -46,11 +46,6 @@ const authList = [
 
 const quranReflectList = [
   {
-    label: 'Getting started with APIs',
-    value: '/quranreflect/guides/getting-started',
-    group: API_GROUP.QURANREFLECT,
-  },
-  {
     label: 'V1 APIs',
     value: '/quranreflect/v1',
     group: API_GROUP.QURANREFLECT,
