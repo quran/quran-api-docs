@@ -1,6 +1,4 @@
----
-stoplight-id: yb1c7g4m9egq6
----
+import { GuideLayout } from '@/components/guide-layout'
 
 # Required headers for user's specific apis
 
@@ -15,3 +13,9 @@ All user specific apis(e.g creating post) will need following headers:
 
 
 > You'll get values of `access-token`, `client`, `expiry`, and `uid` headers in response of "Sign in" api.
+
+export default ({ children }) => (
+  <GuideLayout title="Getting started with Quran.com's OAuth2">
+    {children}
+  </GuideLayout>
+)
