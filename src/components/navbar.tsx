@@ -1,6 +1,7 @@
 import Select from 'react-select'
 import { APIGroups, APIs, websiteName } from '@/constants'
 import { useRouter } from 'next/router'
+import CustomSelectGroupHeader from './CustomSelectGroupHeader'
 
 type Props = { basePath?: string }
 export const Navbar = (props: Props) => {
@@ -14,6 +15,9 @@ export const Navbar = (props: Props) => {
         options={APIGroups}
         defaultValue={APIs.find((option) => option.value === props.basePath)}
         placeholder="Select API docs"
+        components={{
+          GroupHeading: CustomSelectGroupHeader
+        }}
         onChange={(val) => {
           const path = val?.value
           if (path) {
