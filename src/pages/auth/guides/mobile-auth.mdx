@@ -1,3 +1,5 @@
+import { GuideLayout } from '@/components/guide-layout'
+
 # OAuth2 with Quran.com
 
 ## Requesting client id and client secret
@@ -8,3 +10,7 @@ We'll setup the client id that support PKCE
 ## Example repo (React Native)
 
 Example repo can be found here: https://github.com/muhajirdev/quran-react-native-auth
+
+export default ({ children }) => (
+  <GuideLayout title="OAuth2 Tutorial">{children}</GuideLayout>
+)
