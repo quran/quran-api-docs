@@ -1,4 +1,4 @@
-import Select from 'react-select'
+import Select, { OnChangeValue } from 'react-select'
 import { APIGroups, APIs, websiteName } from '@/constants'
 import { useRouter } from 'next/router'
 import CustomSelectGroupHeader from './CustomSelectGroupHeader'
@@ -18,7 +18,7 @@ export const Navbar = (props: Props) => {
         components={{
           GroupHeading: CustomSelectGroupHeader
         }}
-        onChange={(val) => {
+        onChange={(val: OnChangeValue<any, boolean>) => {
           const path = val?.value
           if (path) {
             router.push(path)
