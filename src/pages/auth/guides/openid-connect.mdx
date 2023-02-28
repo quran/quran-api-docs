@@ -1,9 +1,37 @@
 import { GuideLayout } from '@/components/guide-layout'
 
-Content will be added
+Quran.com's OAuth 2.0 APIs can be used for both authentication and authorization.
+This document describes our OAuth 2.0 implementation for authentication.
+
+In this [tutorial](/auth/guides/oauth2-tutorial),
+we explained a full tutorial on how to use Quran.com's OAuth as authentiacation and authorization.
+
+In the tutorial you will notice that we include `openid` as one of the scope.
+And you will see that we have `access_token` and `id_token` jwt in the response callback.
+That can be used to authenticate and identify the user.
+
+Try to decode the `id_token`, you will see that it contains information about the users. Here's an example
+
+```
+{
+  "at_hash": "tGJSmRygf5HXuZx1YDP1",
+  "aud": [
+    "quran-demo"
+  ],
+  "auth_time": 1675234788,
+  "email": "muhajirframe@gmail.com",
+  "exp": 1677591803,
+  "first_name": "Muhammad",
+  "iat": 1677588203,
+  "iss": "https://oauth2.quran.com/",
+  "jti": "a144b79e-3e50-40b8-8053c462000",
+  "last_name": "Muhajir",
+  "rat": 1677588190,
+  "sid": "ce2ae21b-87ed-40fb-b4c24dc898df7",
+  "sub": "a4f5a01a-a641-4b23-ba002b704bfaa"
+}
+```
 
 export default ({ children }) => (
-  <GuideLayout title="OpenId Connect">
-    {children}
-  </GuideLayout>
+  <GuideLayout title="OpenId Connect">{children}</GuideLayout>
 )
