@@ -1,15 +1,16 @@
 import { GuideLayout } from '@/components/guide-layout'
 
-# OAuth2 with Quran.com
+# OAuth2 with Quran.com using a mobile app
 
-## Requesting client id and client secret
+Please make sure to read our guide on how to get started with [OAuth2 integration](/auth/guides/getting-started-with-oauth2).
 
-When emailing osama@quran.com, make sure you mention that you're going to use it for mobile authentication.
-We'll setup the client id that support PKCE
+## Obtaining OAuth 2.0 client credentials
 
-## Example repo (React Native)
+As we mentioned in the guide, to obtain your client credentials, you need to contact [us](mailto:osama@quran.com). Please make sure to mention that it's meant for usage on mobile apps so we enable [PKCE](https://oauth.net/2/pkce/) support.
 
-Example repo can be found here: https://github.com/muhajirdev/quran-react-native-auth
+## Example
+
+We have created an [Example](https://github.com/quran/oauth2-react-native-client-example) OAuth2 React Native client that connects to Quran.com Authorization server.
 
 export default ({ children }) => (
   <GuideLayout title="OAuth2 Tutorial">{children}</GuideLayout>
