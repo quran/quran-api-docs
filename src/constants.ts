@@ -12,6 +12,11 @@ const oAuth2List = [
     group: API_GROUP.OAUTH2,
   },
   {
+    label: 'OpenId Connect',
+    value: '/auth/guides/openid-connect',
+    group: API_GROUP.OAUTH2,
+  },
+  {
     label: 'Mobile Auth',
     value: '/auth/guides/mobile-auth',
     group: API_GROUP.OAUTH2,
