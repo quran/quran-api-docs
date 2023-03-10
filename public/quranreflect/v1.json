@@ -1099,16 +1099,14 @@
             "in": "header",
             "schema": {
               "type": "string"
-            },
-            "example": "_GuLneikkY9bthNdFE391w"
+            }
           },
           {
             "name": "client",
             "in": "header",
             "schema": {
               "type": "string"
-            },
-            "example": "wK9V1wZwug9eTHpuTEfBPw"
+            }
           },
           {
             "name": "expiry",
@@ -8604,7 +8602,7 @@
     },
     "/v1/users/{username}": {
       "get": {
-        "summary": "Get user profile detail",
+        "summary": "Get logged in user profile and posts",
         "responses": {
           "200": {
             "$ref": "#/components/responses/user-profile-response"
@@ -8645,8 +8643,8 @@
         "tags": [
           "Users"
         ],
-        "operationId": "get-user-profile",
-        "description": "This API endpoint allows retrieving the profile details of a specific user, identified by their username.",
+        "operationId": "get-user-profile-posts",
+        "description": "This API endpoint allows retrieving the profile details of a logged in user, user's posts, pages, followers count etc. \n\nThe `tab` parameter is used in the API to allow users to customize their results. By passing different values to tab in the API endpoint, users can fetch posts that meet specific criteria, such as the most popular or latest posts, or posts created by a specific user. Following table explain the tab value and expected results.\n\nFor some `tab` value, user need to be logged in otherwise system will return an empty array. \n\n \n tab value | Explanation | Required user login\n---------|----------|---------\n newest  | recents posts at top | No\n following | return reflections of authors that current user is following | Yes\n draft | returns current user's privte notes | Yes\n favorite | returns current user's favorite posts | Yes\n most_popular | `default` tab value. Return most popular posts | No \n\n",
         "parameters": [
           {
             "schema": {
@@ -8703,6 +8701,20 @@
             "name": "client_auth_token",
             "description": "api key",
             "required": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "enum": [
+                "draft",
+                "following",
+                "favorite",
+                "newest",
+                "most_popular"
+              ]
+            },
+            "in": "query",
+            "name": "tab"
           }
         ]
       },
@@ -8878,6 +8890,326 @@
         }
       ]
     },
+    "/v1/users/{username}/follow": {
+      "post": {
+        "summary": "Toggle Follow for user",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "0x-9zg-9HZOnNoKEOsj4tg",
+            "description": "user access token",
+            "required": true
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "c2GmXm1CEabSDgz8AB7yJg",
+            "description": "client access token",
+            "required": true
+          },
+          {
+            "name": "expiry",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1537100004",
+            "description": "timestamp of access token expiry date",
+            "required": true
+          },
+          {
+            "name": "token-type",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "Bearer",
+              "example": "Bearer"
+            },
+            "example": "Bearer",
+            "description": "token type",
+            "required": true
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "abuse1@mailinator.com",
+            "description": "user uid",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "client_auth_token",
+            "description": "api key",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfull response",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "followed": {
+                      "type": "boolean"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "followed": false
+                    }
+                  }
+                },
+                "example": {
+                  "success": true
+                },
+                "examples": {
+                  "follow": {
+                    "value": {
+                      "followed": true
+                    }
+                  },
+                  "unfollow": {
+                    "value": {
+                      "followed": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/missing-apikey-response"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "success": false,
+                      "message": "Invalid User"
+                    }
+                  }
+                },
+                "examples": {
+                  "Not found": {
+                    "value": {
+                      "success": false,
+                      "message": "Invalid Usersss"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "operationId": "users-follow",
+        "description": "This API endpoint allows the authenticated user to toggle their follow status for another user by sending a POST request with the target user's username. If the user is already following the target user, sending the same request will unfollow the user, and vice versa.\n\nSystem will render not found error if target user is not found. "
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "username",
+          "in": "path",
+          "required": true,
+          "description": "10"
+        }
+      ]
+    },
+    "/v1/users/{username}/unfollow": {
+      "post": {
+        "summary": "Un-follow user api",
+        "parameters": [
+          {
+            "name": "access-token",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "0x-9zg-9HZOnNoKEOsj4tg",
+            "description": "user access token",
+            "required": true
+          },
+          {
+            "name": "client",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "c2GmXm1CEabSDgz8AB7yJg",
+            "description": "client access token",
+            "required": true
+          },
+          {
+            "name": "expiry",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "1537100004",
+            "description": "timestamp of access token expiry date",
+            "required": true
+          },
+          {
+            "name": "token-type",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "default": "Bearer",
+              "example": "Bearer"
+            },
+            "example": "Bearer",
+            "description": "token type",
+            "required": true
+          },
+          {
+            "name": "uid",
+            "in": "header",
+            "schema": {
+              "type": "string"
+            },
+            "example": "abuse1@mailinator.com",
+            "description": "user uid",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "client_auth_token",
+            "description": "api key",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfull response",
+            "headers": {},
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "followed": {
+                      "type": "boolean"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "followed": false
+                    }
+                  }
+                },
+                "example": {
+                  "success": true
+                },
+                "examples": {
+                  "follow": {
+                    "value": {
+                      "followed": true
+                    }
+                  },
+                  "unfollow": {
+                    "value": {
+                      "followed": false
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "403": {
+            "$ref": "#/components/responses/missing-apikey-response"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "success": false,
+                      "message": "Invalid User"
+                    }
+                  }
+                },
+                "examples": {
+                  "Not found": {
+                    "value": {
+                      "success": false,
+                      "message": "Invalid Usersss"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Users"
+        ],
+        "operationId": "users-un-follow",
+        "description": "This API endpoint allows the authenticated user to toggle their follow status for another user by sending a POST request with the target user's username. If the user is already following the target user, sending the same request will unfollow the user, and vice versa.\n\nSystem will render not found error if target user is not found. "
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "username",
+          "in": "path",
+          "required": true,
+          "description": "10"
+        }
+      ]
+    },
     "/v1/groups/{group_id}/assign_as_admin": {
       "post": {
         "summary": "Assign as admin in group settings API",
@@ -8897,16 +9229,14 @@
             "in": "header",
             "schema": {
               "type": "string"
-            },
-            "example": "_GuLneikkY9bthNdFE391w"
+            }
           },
           {
             "name": "client",
             "in": "header",
             "schema": {
               "type": "string"
-            },
-            "example": "wK9V1wZwug9eTHpuTEfBPw"
+            }
           },
           {
             "name": "expiry",
@@ -10321,13 +10651,60 @@
         "summary": "Commet Create API",
         "requestBody": {
           "content": {
-            "multipart/form-data": {
+            "application/json": {
               "schema": {
                 "type": "object",
-                "properties": {}
+                "x-examples": {
+                  "Example 1": {
+                    "comment": {
+                      "body": "test comment ",
+                      "post_id": "173",
+                      "is_private": "false"
+                    }
+                  }
+                },
+                "properties": {
+                  "comment": {
+                    "type": "object",
+                    "properties": {
+                      "body": {
+                        "type": "string",
+                        "description": "comment body"
+                      },
+                      "post_id": {
+                        "type": "integer",
+                        "description": "post id, optional"
+                      },
+                      "is_private": {
+                        "type": "boolean",
+                        "description": "Set this to true if this is a private comment"
+                      },
+                      "parent_id": {
+                        "type": "integer",
+                        "description": "Set the parent comment ID is this is a reply to another comment.\n"
+                      }
+                    },
+                    "required": [
+                      "body"
+                    ]
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "comment": {
+                      "body": "string",
+                      "post_id": 1,
+                      "is_private": true,
+                      "parent_id": 0
+                    }
+                  }
+                }
               }
             }
-          }
+          },
+          "description": "Sample request body, `parent_id` is optional, set this if user is replying to another comment. Either `post_id` or `parent_id` should be present."
         },
         "parameters": [
           {
@@ -10336,7 +10713,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "_GuLneikkY9bthNdFE391w"
+            "required": true
           },
           {
             "name": "client",
@@ -10344,7 +10721,7 @@
             "schema": {
               "type": "string"
             },
-            "example": "wK9V1wZwug9eTHpuTEfBPw"
+            "required": true
           },
           {
             "name": "expiry",
@@ -10352,7 +10729,8 @@
             "schema": {
               "type": "string"
             },
-            "example": "1531315250"
+            "example": "1531315250",
+            "required": true
           },
           {
             "name": "token-type",
@@ -10360,7 +10738,8 @@
             "schema": {
               "type": "string"
             },
-            "example": "Bearer"
+            "example": "Bearer",
+            "required": true
           },
           {
             "name": "uid",
@@ -10368,74 +10747,49 @@
             "schema": {
               "type": "string"
             },
-            "example": "qr_test_1@mailinator.com"
+            "example": "qr_test_1@mailinator.com",
+            "required": true
           },
           {
-            "name": "Content-Type",
-            "in": "header",
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "in": "query",
+            "name": "client_auth_token",
+            "description": "api key",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "Content-Type",
+            "description": "application/json"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "headers": {
-              "Cache-Control": {
-                "schema": {
-                  "type": "string",
-                  "example": "max-age=0, private, must-revalidate"
-                }
-              },
-              "Content-Type": {
-                "schema": {
-                  "type": "string",
-                  "example": "application/json; charset=utf-8"
-                }
-              },
-              "ETag": {
-                "schema": {
-                  "type": "string",
-                  "example": "W/\"28f92293742452a435f6298b4e602d3f\""
-                }
-              },
-              "Transfer-Encoding": {
-                "schema": {
-                  "type": "string",
-                  "example": "chunked"
-                }
-              },
-              "X-Content-Type-Options": {
-                "schema": {
-                  "type": "string",
-                  "example": "nosniff"
-                }
-              },
-              "X-Frame-Options": {
-                "schema": {
-                  "type": "string",
-                  "example": "SAMEORIGIN"
-                }
-              },
-              "X-Request-Id": {
-                "schema": {
-                  "type": "string",
-                  "example": "b5201236-154f-4717-956c-b8ae8989a845"
-                }
-              },
-              "X-XSS-Protection": {
-                "schema": {
-                  "type": "string",
-                  "example": "1; mode=block"
-                }
-              }
-            },
+            "description": "Comment created",
+            "headers": {},
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "success": true,
+                      "message": "Comment created successfully"
+                    }
+                  }
                 },
                 "examples": {
                   "example-0": {
@@ -10455,11 +10809,19 @@
                 }
               }
             }
+          },
+          "400": {
+            "$ref": "#/components/responses/400"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
           }
         },
         "tags": [
           "Comments"
-        ]
+        ],
+        "description": "Creates a new comment on a specific post.\n\n",
+        "operationId": "comments-create"
       }
     },
     "/v1/comments/{comment_id}": {
@@ -10467,13 +10829,51 @@
         "summary": "Comment Update API",
         "requestBody": {
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
-                "type": "string",
-                "example": "\"{\\n\\t\\\"comment\\\": {\\n\\t\\t\\\"body\\\":\\\"test comment\\\"\\n\\t}\\n}\""
+                "type": "object",
+                "x-examples": {
+                  "Example 1": {
+                    "comment": {
+                      "body": "test comment ",
+                      "post_id": "173",
+                      "is_private": "false"
+                    }
+                  }
+                },
+                "properties": {
+                  "comment": {
+                    "type": "object",
+                    "properties": {
+                      "body": {
+                        "type": "string"
+                      },
+                      "is_private": {
+                        "type": "boolean"
+                      }
+                    }
+                  }
+                }
+              },
+              "examples": {
+                "Example 1": {
+                  "value": {
+                    "comment": {
+                      "body": "string",
+                      "is_private": "string"
+                    }
+                  }
+                }
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "object",
+                "properties": {}
               }
             }
-          }
+          },
+          "description": ""
         },
         "parameters": [
           {
@@ -10482,7 +10882,8 @@
             "schema": {
               "type": "string"
             },
-            "example": "_GuLneikkY9bthNdFE391w"
+            "example": "_GuLneikkY9bthNdFE391w",
+            "required": true
           },
           {
             "name": "client",
@@ -10490,7 +10891,8 @@
             "schema": {
               "type": "string"
             },
-            "example": "wK9V1wZwug9eTHpuTEfBPw"
+            "example": "wK9V1wZwug9eTHpuTEfBPw",
+            "required": true
           },
           {
             "name": "expiry",
@@ -10498,7 +10900,8 @@
             "schema": {
               "type": "string"
             },
-            "example": "1531315250"
+            "example": "1531315250",
+            "required": true
           },
           {
             "name": "token-type",
@@ -10506,7 +10909,8 @@
             "schema": {
               "type": "string"
             },
-            "example": "Bearer"
+            "example": "Bearer",
+            "required": true
           },
           {
             "name": "uid",
@@ -10514,88 +10918,69 @@
             "schema": {
               "type": "string"
             },
-            "example": "qr_test_1@mailinator.com"
+            "example": "qr_test_1@mailinator.com",
+            "required": true
           },
           {
-            "name": "Content-Type",
-            "in": "header",
             "schema": {
               "type": "string"
             },
-            "example": "application/json"
+            "in": "query",
+            "description": "api key",
+            "name": "client_auth_token",
+            "required": true
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "headers": {
-              "X-Frame-Options": {
-                "schema": {
-                  "type": "string",
-                  "example": "SAMEORIGIN"
-                }
-              },
-              "X-XSS-Protection": {
-                "schema": {
-                  "type": "string",
-                  "example": "1; mode=block"
-                }
-              },
-              "X-Content-Type-Options": {
-                "schema": {
-                  "type": "string",
-                  "example": "nosniff"
-                }
-              },
-              "Content-Type": {
-                "schema": {
-                  "type": "string",
-                  "example": "application/json; charset=utf-8"
-                }
-              },
-              "ETag": {
-                "schema": {
-                  "type": "string",
-                  "example": "W/\"0d9a72ea2c997fd1362054c83b2dbfeb\""
-                }
-              },
-              "Cache-Control": {
-                "schema": {
-                  "type": "string",
-                  "example": "max-age=0, private, must-revalidate"
-                }
-              },
-              "X-Request-Id": {
-                "schema": {
-                  "type": "string",
-                  "example": "81ab7e2e-2bf3-4bc2-a8c7-7473565d7e3e"
-                }
-              },
-              "Transfer-Encoding": {
-                "schema": {
-                  "type": "string",
-                  "example": "chunked"
-                }
-              }
-            },
+            "headers": {},
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "success": true,
+                      "message": "Comment is updated successfully"
+                    }
+                  }
                 },
                 "example": {
                   "success": true,
                   "message": "Comment is updated successfully"
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "success": true,
+                      "message": "Comment is updated successfully"
+                    }
+                  }
                 }
               }
             }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
           }
         },
-        "operationId": "comment-remve",
+        "operationId": "comment-update",
         "tags": [
           "Comments"
         ],
-        "description": "Remove author's comment"
+        "description": "Updates an existing comment/or reply on a specific post.\n\n"
       },
       "parameters": [
         {
@@ -10604,7 +10989,8 @@
           },
           "name": "comment_id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "The id of the comment to be updated"
         }
       ]
     },
@@ -10735,7 +11121,9 @@
         },
         "tags": [
           "Comments"
-        ]
+        ],
+        "operationId": "comments-delete",
+        "description": ""
       },
       "parameters": [
         {
@@ -12837,6 +13225,317 @@
         ],
         "description": "Search translations"
       }
+    },
+    "/v1/users/{username}/profile": {
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "username",
+          "in": "path",
+          "required": true,
+          "description": "username of user"
+        }
+      ],
+      "get": {
+        "summary": "Get user profile detail",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "user_info": {
+                      "type": "object",
+                      "properties": {
+                        "id": {
+                          "type": "integer"
+                        },
+                        "username": {
+                          "type": "string"
+                        },
+                        "name": {
+                          "type": "string"
+                        },
+                        "first_name": {
+                          "type": "string"
+                        },
+                        "last_name": {
+                          "type": "string"
+                        },
+                        "verified": {
+                          "type": "boolean"
+                        },
+                        "profile_img": {
+                          "type": "null"
+                        },
+                        "followed": {
+                          "type": "boolean"
+                        },
+                        "original_profile_img": {
+                          "type": "null"
+                        },
+                        "rooms_list": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {}
+                          }
+                        },
+                        "display_name": {
+                          "type": "string"
+                        },
+                        "user_type": {
+                          "type": "string"
+                        },
+                        "user_notifications_settings": {
+                          "type": "array",
+                          "items": {
+                            "type": "object",
+                            "properties": {
+                              "id": {
+                                "type": "integer"
+                              },
+                              "emails_disabled": {
+                                "type": "boolean"
+                              },
+                              "follow_notification": {
+                                "type": "boolean"
+                              },
+                              "followed_user_added_post_notification": {
+                                "type": "boolean"
+                              },
+                              "post_commented_notification": {
+                                "type": "boolean"
+                              },
+                              "post_liked_notification": {
+                                "type": "boolean"
+                              },
+                              "mention_notification": {
+                                "type": "boolean"
+                              },
+                              "added_post_in_group_notification": {
+                                "type": "boolean"
+                              },
+                              "follow_push_notification": {
+                                "type": "boolean"
+                              },
+                              "followed_user_added_post_push_notification": {
+                                "type": "boolean"
+                              },
+                              "post_commented_push_notification": {
+                                "type": "boolean"
+                              },
+                              "post_liked_push_notification": {
+                                "type": "boolean"
+                              },
+                              "mention_push_notification": {
+                                "type": "boolean"
+                              },
+                              "added_post_in_group_push_notification": {
+                                "type": "boolean"
+                              }
+                            }
+                          }
+                        }
+                      }
+                    },
+                    "followers": {
+                      "type": "integer"
+                    },
+                    "followees": {
+                      "type": "integer"
+                    }
+                  },
+                  "x-examples": {
+                    "Example 1": {
+                      "success": true,
+                      "user_info": {
+                        "id": 1885,
+                        "username": "naveed",
+                        "name": "Naveed String",
+                        "first_name": "naveed",
+                        "last_name": "string",
+                        "verified": false,
+                        "profile_img": null,
+                        "followed": false,
+                        "original_profile_img": null,
+                        "rooms_list": [],
+                        "display_name": "Naveed String",
+                        "user_type": "scholar",
+                        "user_notifications_settings": [
+                          {
+                            "id": 2159,
+                            "emails_disabled": true,
+                            "follow_notification": true,
+                            "followed_user_added_post_notification": true,
+                            "post_commented_notification": true,
+                            "post_liked_notification": true,
+                            "mention_notification": true,
+                            "added_post_in_group_notification": true,
+                            "follow_push_notification": true,
+                            "followed_user_added_post_push_notification": true,
+                            "post_commented_push_notification": true,
+                            "post_liked_push_notification": true,
+                            "mention_push_notification": true,
+                            "added_post_in_group_push_notification": true
+                          }
+                        ]
+                      },
+                      "followers": 7,
+                      "followees": 24
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "success": true,
+                      "user_info": {
+                        "id": 1885,
+                        "username": "naveed",
+                        "name": "Naveed Ahmad",
+                        "first_name": "naveed",
+                        "last_name": "ahmad",
+                        "verified": false,
+                        "profile_img": null,
+                        "followed": false,
+                        "original_profile_img": null,
+                        "rooms_list": [],
+                        "display_name": "Naveed Ahmad",
+                        "user_type": "scholar",
+                        "user_notifications_settings": [
+                          {
+                            "id": 2159,
+                            "emails_disabled": true,
+                            "follow_notification": true,
+                            "followed_user_added_post_notification": true,
+                            "post_commented_notification": true,
+                            "post_liked_notification": true,
+                            "mention_notification": true,
+                            "added_post_in_group_notification": true,
+                            "follow_push_notification": true,
+                            "followed_user_added_post_push_notification": true,
+                            "post_commented_push_notification": true,
+                            "post_liked_push_notification": true,
+                            "mention_push_notification": true,
+                            "added_post_in_group_push_notification": true
+                          }
+                        ]
+                      },
+                      "followers": 7,
+                      "followees": 24
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "$ref": "#/components/responses/401"
+          },
+          "404": {
+            "description": "Invalid user ",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "x-examples": {
+                    "Example 1": {
+                      "success": false,
+                      "message": "Invalid User"
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "default": false
+                    },
+                    "message": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "examples": {
+                  "Example 1": {
+                    "value": {
+                      "success": false,
+                      "message": "Invalid user"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "$ref": "#/components/responses/500"
+          }
+        },
+        "operationId": "get-v1-users-profile-info",
+        "description": "This API endpoint allows retrieving the profile details of a specific user, identified by their username. ",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "client_auth_token",
+            "description": "api key"
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "access-token",
+            "description": "user access token",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "client",
+            "description": "client access token",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "expiry",
+            "description": "timestamp of token expiry date"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "Bearer",
+              "default": "Bearer"
+            },
+            "in": "header",
+            "name": "token-type",
+            "description": "token type",
+            "required": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header",
+            "name": "uid",
+            "description": "user uid"
+          }
+        ]
+      }
     }
   },
   "x-internal": false,
@@ -12849,6 +13548,46 @@
       }
     },
     "responses": {
+      "400": {
+        "description": "Example response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "x-examples": {
+                "Example 1": {
+                  "success": false,
+                  "errors": [
+                    "string"
+                  ],
+                  "status": "error"
+                }
+              },
+              "properties": {
+                "success": {
+                  "type": "boolean"
+                },
+                "errors": {
+                  "type": "string"
+                },
+                "status": {
+                  "type": "string",
+                  "description": "will be 400 ( bad request )"
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "success": true,
+                  "errors": "Bad request, required params are missing or have invalid value.",
+                  "status": "string"
+                }
+              }
+            }
+          }
+        }
+      },
       "401": {
         "description": "Example response",
         "content": {
@@ -12913,6 +13652,17 @@
                 "status": {
                   "type": "string",
                   "default": "error"
+                }
+              }
+            },
+            "examples": {
+              "Example 1": {
+                "value": {
+                  "success": false,
+                  "errors": [
+                    "string"
+                  ],
+                  "status": "error"
                 }
               }
             }
