@@ -1,7 +1,7 @@
 {
   "openapi": "3.0.0",
   "x-stoplight": {
-    "id": "xz5mqc56supyq"
+    "id": "mqcpve7qbnic5"
   },
   "info": {
     "title": "QuranReflect V1 API",
@@ -29,7 +29,7 @@
             },
             "in": "query",
             "name": "client_auth_token",
-            "description": "api key",
+            "description": "The API key",
             "required": true
           }
         ],
@@ -116,7 +116,7 @@
         "tags": [
           "Users"
         ],
-        "description": "This API endpoint allows authenticated access by verifying user credentials. To sign in, the client sends a POST request to this endpoint with the user's email and password in the request body. Upon successful authentication, the server returns(in headers) an `access token`, `uid`, `client token`, and `Authorization` info , which can be used for authorized access to protected resources. In case of an unsuccessful authentication attempt, an error message is returned.",
+        "description": "This API endpoint allows authenticated access by verifying user credentials. To sign in, the client sends a POST request to this endpoint with the user's email and password in the request body. Upon successful authentication, the server returns (in headers) an `access token`, `uid`, `client token`, and `Authorization` info , which can be used for authorized access to protected resources. In case of an unsuccessful authentication attempt, an error message is returned.",
         "operationId": "user-signin",
         "requestBody": {
           "content": {
@@ -136,9 +136,14 @@
                     "description": "email or username"
                   },
                   "password": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "The password"
                   }
-                }
+                },
+                "required": [
+                  "email",
+                  "password"
+                ]
               },
               "examples": {
                 "Example 1": {
@@ -198,7 +203,7 @@
             },
             "in": "query",
             "name": "client_auth_token",
-            "description": "api key",
+            "description": "The API key",
             "required": true
           }
         ],
@@ -400,7 +405,7 @@
             },
             "in": "query",
             "name": "client_auth_token",
-            "description": "api key",
+            "description": "The API key",
             "required": true
           }
         ],
@@ -511,7 +516,7 @@
         "tags": [
           "Users"
         ],
-        "description": "Get list of users, you can apply filters using the 'username' or 'email' parameters. Please note that at least one of these parameters must be provided in order to receive any results.",
+        "description": "Get list of users, you can apply filters using the `username` or `email` parameters. Please note that at least one of these parameters must be provided in order to receive any results.",
         "parameters": [
           {
             "schema": {
@@ -535,7 +540,7 @@
             },
             "in": "query",
             "name": "client_auth_token",
-            "description": "api key",
+            "description": "The API key",
             "required": true
           }
         ]
@@ -552,7 +557,7 @@
             "in": "query",
             "name": "client_auth_token",
             "required": true,
-            "description": "api key"
+            "description": "The API key"
           }
         ],
         "responses": {
@@ -598,7 +603,7 @@
         "tags": [
           "Users"
         ],
-        "description": "Reset user password, user will get an email with a link to page where they can update the password.",
+        "description": "Reset user password, user will get an email with a link to a   page where they can update the password.",
         "operationId": "user-resetpassword",
         "requestBody": {
           "content": {
@@ -634,7 +639,7 @@
             },
             "in": "query",
             "name": "client_auth_token",
-            "description": "api key",
+            "description": "The API key",
             "required": true
           }
         ],
@@ -837,7 +842,7 @@
             },
             "in": "query",
             "name": "client_auth_token",
-            "description": "api key"
+            "description": "The API key"
           }
         ],
         "responses": {
@@ -1138,7 +1143,7 @@
             },
             "in": "query",
             "name": "client_auth_token",
-            "description": "api key",
+            "description": "The API key",
             "required": true
           },
           {
@@ -1831,7 +1836,10 @@
             "$ref": "#/components/responses/get-post-response"
           }
         },
-        "description": "Get detail of single post using post Id."
+        "description": "Get detail of single post using post Id.",
+        "tags": [
+          "Posts"
+        ]
       }
     },
     "/v1/posts/{post_id}/report": {
@@ -2130,7 +2138,7 @@
             },
             "in": "query",
             "name": "client_auth_token",
-            "description": "api key",
+            "description": "The API key",
             "required": true
           },
           {
@@ -2223,7 +2231,7 @@
             },
             "in": "query",
             "name": "client_auth_token",
-            "description": "api key",
+            "description": "The API key",
             "required": true
           }
         ],
@@ -2383,7 +2391,7 @@
             },
             "in": "query",
             "name": "client_auth_token",
-            "description": "api key",
+            "description": "The API key",
             "required": true
           }
         ],
@@ -2543,7 +2551,7 @@
             },
             "in": "query",
             "name": "client_auth_token",
-            "description": "api key",
+            "description": "The API key",
             "required": true
           }
         ],
@@ -4187,7 +4195,7 @@
             },
             "in": "query",
             "name": "client_auth_token",
-            "description": "api key",
+            "description": "The API key",
             "required": true
           },
           {
@@ -4357,7 +4365,7 @@
               "type": "string"
             },
             "in": "query",
-            "description": "api key",
+            "description": "The API key",
             "name": "client_auth_token",
             "required": true
           }
@@ -6496,7 +6504,7 @@
         ]
       }
     },
-    "/v1/posts/272/toggle_save": {
+    "/v1/posts/{post_id}/toggle_save": {
       "post": {
         "summary": "Toggle Save Post API",
         "requestBody": {
@@ -6630,7 +6638,18 @@
         "tags": [
           "Posts"
         ]
-      }
+      },
+      "parameters": [
+        {
+          "schema": {
+            "type": "string"
+          },
+          "name": "post_id",
+          "in": "path",
+          "required": true,
+          "description": "The id of the post."
+        }
+      ]
     },
     "/v1/citation_texts": {
       "get": {
@@ -6671,7 +6690,9 @@
       ],
       "get": {
         "summary": "Get user profile detail",
-        "tags": [],
+        "tags": [
+          "Users"
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -6918,7 +6939,7 @@
             },
             "in": "query",
             "name": "client_auth_token",
-            "description": "api key"
+            "description": "The API key"
           },
           {
             "schema": {
@@ -7503,22 +7524,6 @@
           "application/json": {
             "schema": {
               "type": "object",
-              "properties": {
-                "items": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "id": {
-                        "type": "integer"
-                      },
-                      "username": {
-                        "type": "string"
-                      }
-                    }
-                  }
-                }
-              },
               "x-examples": {
                 "Example 1": {
                   "items": [
@@ -7527,6 +7532,28 @@
                       "username": "naveed"
                     }
                   ]
+                }
+              },
+              "properties": {
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "id": {
+                        "type": "integer",
+                        "description": "The id of the user"
+                      },
+                      "username": {
+                        "type": "string",
+                        "description": "The username of the user"
+                      }
+                    },
+                    "required": [
+                      "id",
+                      "username"
+                    ]
+                  }
                 }
               }
             },
@@ -9358,7 +9385,7 @@
         "type": "object",
         "x-examples": {
           "Example 1": {
-            "id": 442,
+            "id": 123,
             "body": "i love #allah and #quran",
             "likes": 0,
             "draft": false,
@@ -9459,25 +9486,33 @@
             ]
           }
         },
+        "title": "Post",
+        "description": "Post/Reflection model",
         "properties": {
           "id": {
-            "type": "integer"
+            "type": "integer",
+            "description": "The ID of the post.",
+            "example": 123
           },
           "body": {
             "type": "string",
-            "description": "the post text\n"
+            "description": "the post text\n",
+            "example": "This is a reflection example!"
           },
           "likes": {
-            "type": "integer"
+            "type": "integer",
+            "description": "The number of likes."
           },
           "draft": {
             "type": "boolean",
             "description": "true if this is author's private note.\n"
           },
           "published_at": {
-            "type": "string"
+            "type": "string",
+            "description": "The date the post was published at. Format of the date is` MMMM dd, yyyy HH:mm`"
           },
           "room_id": {
+            "type": "integer",
             "nullable": true
           },
           "global": {
@@ -9571,8 +9606,14 @@
             }
           }
         },
-        "title": "Post",
-        "description": "Post/Reflection model"
+        "required": [
+          "id",
+          "body",
+          "likes",
+          "draft",
+          "published_at",
+          "room_id"
+        ]
       }
     },
     "examples": {
