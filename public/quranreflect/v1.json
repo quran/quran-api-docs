@@ -567,18 +567,19 @@
               "application/json": {
                 "schema": {
                   "type": "object",
-                  "properties": {
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "message": {
-                      "type": "string"
-                    }
-                  },
                   "x-examples": {
                     "Example 1": {
                       "success": true,
                       "message": "If your email address exists in our database, you will receive a password recovery link at your email address in a few minutes."
+                    }
+                  },
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "description": "true"
+                    },
+                    "message": {
+                      "type": "string"
                     }
                   }
                 },
@@ -604,7 +605,7 @@
           "Users"
         ],
         "description": "Reset user password, user will get an email with a link to a   page where they can update the password.",
-        "operationId": "user-resetpassword",
+        "operationId": "user-reset-password",
         "requestBody": {
           "content": {
             "application/json": {
@@ -619,9 +620,12 @@
                 "properties": {
                   "email": {
                     "type": "string",
-                    "description": "user email"
+                    "description": "The email to send the reset password email to."
                   }
-                }
+                },
+                "required": [
+                  "email"
+                ]
               },
               "examples": {}
             }
@@ -757,14 +761,20 @@
                 "properties": {
                   "user": {
                     "type": "object",
+                    "required": [
+                      "email"
+                    ],
                     "properties": {
                       "email": {
                         "type": "string",
-                        "description": "user email"
+                        "description": "The email to send the confirmation email to."
                       }
                     }
                   }
-                }
+                },
+                "required": [
+                  "user"
+                ]
               },
               "examples": {
                 "Example 1": {
@@ -858,7 +868,10 @@
                       "type": "boolean",
                       "default": true
                     }
-                  }
+                  },
+                  "required": [
+                    "success"
+                  ]
                 },
                 "example": {
                   "success": true
@@ -916,7 +929,7 @@
         "tags": [
           "Users"
         ],
-        "description": "This API endpoint allows logging out the authenticated user, clearing the access token and session from the server-side. \nUser will have to login again for getting new access token, client token etc.",
+        "description": "This API endpoint allows logging out the authenticated user, clearing the access token and session from the server. \nUser will have to login again to get new access token, client token etc.",
         "operationId": "user-logout"
       }
     },
@@ -1097,7 +1110,7 @@
       },
       "get": {
         "summary": "Get posts",
-        "description": "This API endpoint allows retrieving the list of reflections/post.\n \nBy using different query string, users can fetch posts that meet specific criteria, such as the most popular or latest posts, or posts created by a specific user. Some of these query strings are explained below:\n\n\n- `tab` query string, following table explain the `tab` value and expected results. \n\n> NOTE: For some `tab` value, user need to be logged in otherwise system will return an empty array. \n\n \n tab value | Explanation | Required user login\n---------|----------|---------\n newest  | recents posts at top | No\n following | return reflections of authors that current user is following | Yes\n draft | returns current user's privte notes | Yes\n favorite | returns current user's favorite posts | Yes\n most_popular | `default` tab value. Return most popular posts | No \n only_room_members | Send posts that are posted by current room members | No\n public | Include public posts of privte rooms | No\n feed | `feed` is special tab value, this will ignore most filters(See below) and send verified posts(if `verified` is true), posts that are reviewed by scholars, posts from author current user is following(if user is logged in) etc | No \n \n`q` parameter is used for futhor customizing the results, you can fetch posts of specific members, post that have specific tags, post for specific surah, ayah range or single ayah etc. \n\n**Filter by Tags**\n`q[tag_ids]` is array query string, you can include multiple tags using following format:\n\n`q[tag_ids][]=11&q[tag_ids][]=33`\n\n**Filter by specific ayah or range**\n- `q[filters_attributes][0][chapter_id]=1` -> Reflection of first surah\n\n- `q[filters_attributes][0][from]=1&q[filters_attributes][0][to]: 3` -> Filter down reflection to first 3 ayah of first surah\n\nYou can use multile `filters_attributes` to tailor results to your needs.\n\n**Logical operation for filters**\n- q[filters_operation]= `OR` or `AND`. OR will send results that matches any filters. AND will perform inclusive operation, i.e return results that mathces all conditions.\n- q[tags_operation]= `OR` or `AND`",
+        "description": "This API endpoint allows retrieving the list of reflections/posts.\n \nBy using different query strings, clients can fetch posts that meet specific criteria, such as the most popular or latest posts, or posts created by a specific user. Some of these query strings are explained below:\n\n\n- `tab`: The following table explains the `tab` value and expected results. \n\n> NOTE: For some `tab` value, user need to be logged in otherwise system will return an empty array. \n\n \n tab value | Explanation | Required user login\n---------|----------|---------\n newest  | Recent posts will be at the top | No\n following | Get posts of authors the current user is following | Yes\n draft | Get current user's private posts | Yes\n favorite | Get current user's favorite posts | Yes\n most_popular | `default` tab value. Get most popular posts | No \n only_room_members | Get posts that are posted by current room members | No\n public | Include public posts of private rooms | No\n feed | When passed, this will ignore most passed filters and send verified posts (if `verified` = true), posts by scholars and student of` knowledge, verified posts, posts from author the user is following | No \n \n- `q` parameter is used for futhor customizing the results, you can fetch posts of specific members, post that have specific tags, post for specific surah, ayah range or single ayah etc. \n\n**Filter by Tags**\n`q[tag_ids]` is array query string, you can include multiple tags using following format:\n\n`q[tag_ids][]=11&q[tag_ids][]=33`\n\n**Filter by specific ayah or range**\n- `q[filters_attributes][0][chapter_id]=1` -> Reflection of first surah\n\n- `q[filters_attributes][0][from]=1&q[filters_attributes][0][to]: 3` -> Filter down reflection to first 3 ayah of first surah\n\nYou can use multile `filters_attributes` to tailor results to your needs.\n\n**Logical operation for filters**\n- q[filters_operation]= `OR` or `AND`. OR will send results that matches any filters. AND will perform inclusive operation, i.e return results that mathces all conditions.\n- q[tags_operation]= `OR` or `AND`",
         "parameters": [
           {
             "name": "access-token",
@@ -1153,16 +1166,17 @@
             },
             "in": "query",
             "name": "verified",
-            "description": "If `true` system will send verified reflections"
+            "description": "Include verified posts"
           },
           {
             "schema": {
               "type": "string",
-              "default": "en"
+              "default": "en",
+              "example": "en,ar"
             },
             "in": "query",
             "name": "lang",
-            "description": "Comma seperated list of iso codes of languages, use this if you want to fetch posts in specific language."
+            "description": "Comma-separated language iso codes, to fetch posts in a specific language(s)."
           },
           {
             "schema": {
@@ -1170,7 +1184,7 @@
             },
             "in": "query",
             "name": "updated_since",
-            "description": "Get posts that are updated after given date"
+            "description": "Get posts that are updated after the given date (inclusive)."
           },
           {
             "schema": {
@@ -1195,7 +1209,7 @@
             },
             "in": "query",
             "name": "q",
-            "description": "See above description "
+            "description": "Further customize the results, you can fetch posts of specific members, post that have specific tags, post for specific surah, ayah range or single ayah etc."
           },
           {
             "schema": {
@@ -1203,7 +1217,7 @@
             },
             "in": "query",
             "name": "scholar",
-            "description": "Include scholars post"
+            "description": "Include posts of scholars"
           },
           {
             "schema": {
@@ -1211,7 +1225,7 @@
             },
             "in": "query",
             "name": "student",
-            "description": "Include student of knowledge member's post"
+            "description": "Include posts of students of knowledge"
           },
           {
             "schema": {
@@ -1242,7 +1256,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "",
             "headers": {},
             "content": {
               "application/json": {
@@ -1375,10 +1389,10 @@
         "tags": [
           "Posts"
         ],
-        "operationId": "post-list"
+        "operationId": "get-posts"
       }
     },
-    "/v1/posts/{id}": {
+    "/v1/posts/{post_id}": {
       "put": {
         "summary": "Update Post API",
         "requestBody": {
@@ -1823,105 +1837,55 @@
           "schema": {
             "type": "string"
           },
-          "name": "id",
+          "name": "post_id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "The Id of the post"
         }
       ],
       "get": {
         "summary": "Get post detail",
-        "operationId": "get-v1-posts-post_id",
+        "operationId": "get-post",
         "responses": {
           "200": {
             "$ref": "#/components/responses/get-post-response"
           }
         },
-        "description": "Get detail of single post using post Id.",
+        "description": "Get details of a single post by post Id.",
         "tags": [
           "Posts"
+        ],
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "header"
+          }
         ]
       }
     },
     "/v1/posts/{post_id}/report": {
       "post": {
         "summary": "Report Post API",
-        "requestBody": {
-          "content": {
-            "*/*": {
-              "schema": {
-                "type": "string",
-                "example": "\"{\\n\\t\\\"report\\\":{\\n\\t\\t\\\"abuse\\\":\\\"Offensive language\\\",\\n\\t\\t\\\"comments\\\":\\\"report this post\\\"\\n\\t}\\n}\""
-              }
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "Content-Type",
-            "in": "header",
-            "schema": {
-              "type": "string"
-            },
-            "example": "application/json"
-          }
-        ],
+        "parameters": [],
         "responses": {
           "200": {
             "description": "OK",
-            "headers": {
-              "cache-control": {
-                "schema": {
-                  "type": "string",
-                  "example": "max-age=0, private, must-revalidate"
-                }
-              },
-              "content-type": {
-                "schema": {
-                  "type": "string",
-                  "example": "application/json; charset=utf-8"
-                }
-              },
-              "etag": {
-                "schema": {
-                  "type": "string",
-                  "example": "W/\"2eefed67f78d4a00b004a7ac17c1161e\""
-                }
-              },
-              "transfer-encoding": {
-                "schema": {
-                  "type": "string",
-                  "example": "chunked"
-                }
-              },
-              "x-content-type-options": {
-                "schema": {
-                  "type": "string",
-                  "example": "nosniff"
-                }
-              },
-              "x-frame-options": {
-                "schema": {
-                  "type": "string",
-                  "example": "SAMEORIGIN"
-                }
-              },
-              "x-request-id": {
-                "schema": {
-                  "type": "string",
-                  "example": "1f5793b4-6903-4282-8bf7-578871ff01a0"
-                }
-              },
-              "x-xss-protection": {
-                "schema": {
-                  "type": "string",
-                  "example": "1; mode=block"
-                }
-              }
-            },
+            "headers": {},
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "object"
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "The post was reported successfully."
+                    }
+                  }
                 },
                 "examples": {
                   "example-0": {
@@ -1946,8 +1910,44 @@
         "tags": [
           "Posts"
         ],
-        "operationId": "post-report",
-        "description": ""
+        "operationId": "report-post",
+        "description": "Report a post for violation",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "report": {
+                    "type": "object",
+                    "required": [
+                      "abuse"
+                    ],
+                    "properties": {
+                      "abuse": {
+                        "type": "string",
+                        "example": "Offensive language",
+                        "description": "The report abuse type",
+                        "enum": [
+                          "Offensive language",
+                          "Inappropriate content",
+                          "Other"
+                        ]
+                      },
+                      "comments": {
+                        "type": "string",
+                        "description": "Report description/details."
+                      }
+                    }
+                  }
+                },
+                "required": [
+                  "report"
+                ]
+              }
+            }
+          }
+        }
       },
       "parameters": [
         {
@@ -1956,7 +1956,8 @@
           },
           "name": "post_id",
           "in": "path",
-          "required": true
+          "required": true,
+          "description": "The id of the post."
         }
       ]
     },
@@ -1966,56 +1967,7 @@
         "responses": {
           "200": {
             "description": "OK",
-            "headers": {
-              "cache-control": {
-                "schema": {
-                  "type": "string",
-                  "example": "max-age=0, private, must-revalidate"
-                }
-              },
-              "content-type": {
-                "schema": {
-                  "type": "string",
-                  "example": "application/json; charset=utf-8"
-                }
-              },
-              "etag": {
-                "schema": {
-                  "type": "string",
-                  "example": "W/\"39822d67483650309d209f1aad923867\""
-                }
-              },
-              "transfer-encoding": {
-                "schema": {
-                  "type": "string",
-                  "example": "chunked"
-                }
-              },
-              "x-content-type-options": {
-                "schema": {
-                  "type": "string",
-                  "example": "nosniff"
-                }
-              },
-              "x-frame-options": {
-                "schema": {
-                  "type": "string",
-                  "example": "SAMEORIGIN"
-                }
-              },
-              "x-request-id": {
-                "schema": {
-                  "type": "string",
-                  "example": "b67dce62-8aea-4a09-b212-8dac17ee02bb"
-                }
-              },
-              "x-xss-protection": {
-                "schema": {
-                  "type": "string",
-                  "example": "1; mode=block"
-                }
-              }
-            },
+            "headers": {},
             "content": {
               "application/json": {
                 "schema": {
@@ -2036,7 +1988,7 @@
         "tags": [
           "Posts"
         ],
-        "operationId": "post-report-option"
+        "operationId": "post-report-options"
       }
     },
     "/v1/users/{username}": {
@@ -7146,7 +7098,7 @@
         }
       },
       "signin-respnse": {
-        "description": "Signin response",
+        "description": "",
         "content": {
           "application/json": {
             "schema": {
@@ -9513,19 +9465,24 @@
           },
           "room_id": {
             "type": "integer",
+            "description": "The Id of the room the post belongs to.",
             "nullable": true
           },
           "global": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether the post is global or not. A post inside a room can be set to global and becomes visible to everyone."
           },
           "editable": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether the post is editable or not. It will be true if the post belongs to the current user."
           },
           "deletable": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether the post is deletable or not. It will be true if the post belongs to the current user."
           },
           "reportable": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether the current user can report the post or not."
           },
           "citation_texts": {
             "type": "array",
@@ -9534,18 +9491,25 @@
             }
           },
           "language": {
-            "type": "string"
+            "type": "string",
+            "description": "The language of the post.",
+            "example": "ENGLISH"
           },
           "detected_translation": {
             "type": "integer"
           },
           "views": {
-            "type": "integer"
+            "type": "integer",
+            "description": "The number of views."
           },
           "group": {
+            "type": "string",
+            "description": "The name of the group the post belongs to. Will be null it the post does not belong to a group.",
             "nullable": true
           },
           "group_link": {
+            "type": "string",
+            "description": "The link to the group the post belongs to. Will be null it the post does not belong to a group.",
             "nullable": true
           },
           "comments": {
@@ -9555,7 +9519,8 @@
             }
           },
           "liked": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "Whether the post was liked by the current user or not."
           },
           "author": {
             "type": "object",
@@ -9612,7 +9577,14 @@
           "likes",
           "draft",
           "published_at",
-          "room_id"
+          "room_id",
+          "global",
+          "editable",
+          "deletable",
+          "reportable",
+          "views",
+          "group",
+          "group_link"
         ]
       }
     },
